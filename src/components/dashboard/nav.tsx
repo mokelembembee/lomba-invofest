@@ -1,7 +1,7 @@
 'use client'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
-import { Compass, Compass3, Home, ImageUser, UserCircle, Users, Users2, Users3 } from "iconest-react"
+import { Home } from "iconest-react"
 import { ChefHat, Dumbbell } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -9,63 +9,64 @@ import { usePathname } from "next/navigation"
 const DashboardNav = () => {
     const navigations = [{
         title: 'Beranda',
-        url: '/dashboard',
+        url: '/home',
         icon: Home
     }, {
         title: 'Masak',
-        url: '/dashboard/cook',
+        url: '/cook',
         icon: ChefHat
     }, {
-        title: 'Teman',
-        url: '/dashboard/social',
+        title: 'Olahraga',
+        url: '/sport',
         icon: Dumbbell
     }]
 
     const pathname = usePathname()
     
     return (
-        <TooltipProvider delayDuration={100}>
-            <div className = "p-6 bg-gray-100 flex flex-col justify-center">
-                <nav className = "flex flex-col gap-6 mt-auto">
-                    {navigations.map((nav) => {
-                        const isActive = (nav.url === '/dashboard')
-                            ? pathname === nav.url
-                            : pathname.startsWith(nav.url)
+        <TooltipProvider delayDuration = { 100 }>
+            <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col justify-between h-full`}>
+                <div className = {`flex flex-col gap-12`}>
+                    <button>
+                        <img className = {`rounded-full size-12`} src = {`https://img.freepik.com/free-vector/charity-logo-hands-supporting-heart-icon-flat-design-vector-illustration_53876-136266.jpg?semt=ais_hybrid&w=740&q=80`} />
+                    </button>
+                    
+                    <nav className = {`flex flex-col gap-4`}>
+                        {navigations.map((nav) => {
+                            const isActive = pathname === nav.url
 
-                        return (
-                            <Tooltip key={nav.url}>
-                                <TooltipTrigger asChild>
-                                    <Link href={nav.url}> 
-                                        <button
-                                            className={`rounded-full p-2.5 ${
-                                                isActive
-                                                    ? 'bg-primary text-primary-foreground transition-all duration-150'
-                                                    : 'text-gray-600'
-                                            }`}
-                                        >
-                                            <nav.icon
-                                                className={`size-5.5 transition-all duration-100 ${
-                                                    isActive ? 'fill-white text-primary' : 'fill transparent'
+                            return (
+                                <Tooltip key = { nav.url }>
+                                    <TooltipTrigger asChild>
+                                        <Link href = { nav.url }> 
+                                            <button className = {`rounded-lg p-3 transition-all duration-100 ${
+                                                    isActive ? 'bg-gray-300' : 'text-gray-600'
                                                 }`}
-                                            />
-                                        </button>
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent 
-                                    side="right" 
-                                    align="center" 
-                                    sideOffset={32}
-                                    className="z-10 bg-white text-sm text-gray-800 px-4 py-1.5 rounded-full"
-                                >
-                                    <p>{nav.title}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        )
-                    })}
-                </nav> 
+                                            >
+                                                <nav.icon
+                                                    className = {`size-6 transition-all duration-100 ${
+                                                        isActive ? 'fill-black' : 'fill transparent'
+                                                    }`}
+                                                />
+                                            </button>
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent 
+                                        side="right" 
+                                        align="center" 
+                                        sideOffset={32}
+                                        className="z-10 bg-white text-sm text-gray-800 px-4 py-1.5 rounded-full"
+                                    >
+                                        <p>{nav.title}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            )
+                        })}
+                    </nav>
+                </div>
 
-                <button className = "mt-auto">
-                    <img className = "rounded-full size-10 mt-auto" src = "https://media-cgk2-1.cdn.whatsapp.net/v/t61.24694-24/569354245_839797792057289_4133156723757990270_n.jpg?ccb=11-4&oh=01_Q5Aa2wES15oo33uIOvs3NUQFhqZr9sFBN4M8oUJn2_1Cn9LlrA&oe=690576AF&_nc_sid=5e03e0&_nc_cat=108"/>    
+                <button>
+                    <img className = {`rounded-full size-12`} src = {`https://media-cgk2-1.cdn.whatsapp.net/v/t61.24694-24/569354245_839797792057289_4133156723757990270_n.jpg?ccb=11-4&oh=01_Q5Aa2wES15oo33uIOvs3NUQFhqZr9sFBN4M8oUJn2_1Cn9LlrA&oe=690576AF&_nc_sid=5e03e0&_nc_cat=108`}/>    
                 </button> 
             </div>
         </TooltipProvider>

@@ -178,7 +178,12 @@ const Page = () => {
 
                                     <div className="flex flex-col w-full justify-between">
                                         <div className="flex justify-between mb-2">
-                                            <div className={`flex px-1 py-0.5 rounded font-semibold text-gray-700 items-center gap-1 ${menu.difficulty === 'Easy' ? 'bg-btn-easy' : 'bg-white'}`}>
+                                            <div className={`flex px-4 rounded font-semibold items-center gap-1 
+                                            ${menu.difficulty === 'Mudah' ? 'bg-primary text-primary-foreground' : 
+                                            menu.difficulty === 'Sedang' ? 'bg-btn-medium text-white' : 
+                                            menu.difficulty === 'Sulit' ? 'bg-btn-hard text-white' : 
+                                            'bg-white text-gray-700'
+                                            }`}>
                                                 <BarChart10 size={12} />
                                                 <span className="text-xs">{menu.difficulty}</span>
                                             </div>

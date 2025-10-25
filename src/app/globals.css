@@ -34,6 +34,9 @@
   --color-primary: var(--primary);
   --color-primary-shade: var(--primary-shade);
   --color-btn-easy: var(--btn-easy);
+  --color-btn-medium: var(--btn-medium);
+  --color-btn-hard: var(--btn-hard);
+
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);

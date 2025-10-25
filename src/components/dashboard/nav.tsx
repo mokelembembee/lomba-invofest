@@ -2,7 +2,7 @@
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { Home } from "iconest-react"
-import { ChefHat, Dumbbell } from "lucide-react"
+import { ChefHat, Dumbbell, BookOpenText } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -19,12 +19,17 @@ const DashboardNav = () => {
         title: 'Olahraga',
         url: '/sport',
         icon: Dumbbell
+    }, {
+        title: 'Artikel',
+        url: '/article',
+        icon: BookOpenText
     }]
 
     const pathname = usePathname()
     
     return (
         <TooltipProvider delayDuration = { 100 }>
+            <div className = "w-[85px]"/>
             <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col justify-between h-full`}>
                 <div className = {`flex flex-col gap-12`}>
                     <button>
@@ -39,13 +44,13 @@ const DashboardNav = () => {
                                 <Tooltip key = { nav.url }>
                                     <TooltipTrigger asChild>
                                         <Link href = { nav.url }> 
-                                            <button className = {`rounded-lg p-3 transition-all duration-100 ${
-                                                    isActive ? 'bg-gray-300' : 'text-gray-600'
+                                            <button className = {`rounded-full p-3 transition-all duration-100 ${
+                                                    isActive ? 'bg-primary' : 'text-gray-500'
                                                 }`}
                                             >
                                                 <nav.icon
                                                     className = {`size-6 transition-all duration-100 ${
-                                                        isActive ? 'fill-black' : 'fill transparent'
+                                                        isActive ? 'fill-primary text-white' : 'fill transparent'
                                                     }`}
                                                 />
                                             </button>

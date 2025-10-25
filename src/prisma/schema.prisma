@@ -1,0 +1,49 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model recipes {
+  id                 String   @id @unique @default(cuid())
+  name               String
+  description        String?
+  ingredients        String[]
+  steps              String[]
+  caloric_value      Float
+  fat                Float
+  saturated_fats     Float
+  monosaturated_fats Float
+  polysaturated_fats Float
+  carbohydrates      Float
+  sugars             Float
+  protein            Float
+  dietary_fiber      Float
+  cholesterol        Float
+  sodium             Float
+  water              Float
+  vitamin_a          Float
+  vitamin_b1         Float
+  vitamin_b11        Float
+  vitamin_b2         Float
+  vitamin_b3         Float
+  vitamin_b5         Float
+  vitamin_b6         Float
+  vitamin_c          Float
+  vitamin_d          Float
+  vitamin_e          Float
+  vitamin_k          Float
+  calcium            Float
+  copper             Float
+  iron               Float
+  magnesium          Float
+  manganese          Float
+  phosporus          Float
+  potassium          Float
+  selenium           Float
+  zinc               Float
+  nutrition_density  Float
+}

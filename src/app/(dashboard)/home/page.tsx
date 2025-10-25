@@ -3,8 +3,11 @@
 import CharacterScene from "@/components/dashboard/character"
 import SideSection from "@/components/dashboard/side"
 import Footer from "@/components/footer"
-import { MessageCircle2 } from "iconest-react"
+import TypingAnimation from "@/components/dashboard/typinganimation";
+import { ArrowRight, Calendar, MessageCircle2, User } from "iconest-react"
+import { Dumbbell } from "lucide-react"
 import { useState } from "react"
+import Link from "next/link"
 
 const Page = () => {
     const statsTab = [{
@@ -28,18 +31,14 @@ const Page = () => {
     const [selectedStat, setSelectedStat] = useState(statsTab[0].route)
 
     return (
-        <div className="flex w-full min-h-screen ml-20">
+        <div className="flex w-full">
             <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-
-                    {/* Greeting */}
                     <div className="space-y-1">
-                        <h1 className="text-4xl font-semibold text-gray-700">
+                        <h1 className="text-4xl font-medium text-gray-700">
                             Selamat datang, <strong className="text-gray-800">Salman!</strong>
                         </h1>
-                        <span className="text-lg font-medium text-gray-600">
-                            Sudah siap hidup sehat hari ini?
-                        </span>
+                        <TypingAnimation />
                     </div>
 
                     {/* Avatar & Stats */}
@@ -53,48 +52,89 @@ const Page = () => {
                         </div>
                     </div>
 
+                    <div className="space-y-1 mt-4">
+                        <h2 className="text-4xl font-semibold text-gray-800">
+                            Statistik
+                        </h2>
+                        
+                        <span className="text-lg font-medium text-gray-600">
+                            Sudah sejauh apa perjalanan sehatmu?
+                        </span>
+                    </div>
+
                     {/* Full Stats */}
                     <div className="flex flex-col items-center gap-2">
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 w-full border-b">
                             { statsTab.map((tab) => (
                                 <div
                                     key={ tab.route }
                                     onClick={() => setSelectedStat(tab.route)}
-                                    className={`flex w-30 px-3 py-1 shadow rounded-full justify-center ${
-                                        selectedStat === tab.route ? 'bg-red-500 text-white' : 'text-gray-700'
+                                    className={`flex px-4 pb-2.5 font-semibold cursor-default ${
+                                        selectedStat === tab.route ? 'border-b-3 border-primary text-gray-800' : 'text-gray-500'
                                     }`}
                                 >
                                     <span className="font-medium">{ tab.title }</span>
                                 </div>
                             ))}
                         </div>
-                        <span className="font-semibold text-gray-700">
-                            Kamu sudah melakukan hal yang baik. Pertahankan ya!
-                        </span>
-                        <div className="flex w-full h-50 bg-red-500 items-center rounded-xl justify-center">
+                        
+                        <div className="flex w-full h-64 bg-slate-100 rounded-xl mt-2 p-6 flex-col gap-4">
+                            <span className="font-semibold text-gray-700">
+                                Kamu sudah melakukan hal yang baik. Pertahankan ya!
+                            </span>
+                            
                             { statsTab.find(tab => tab.route === selectedStat)?.content }
                         </div>
                     </div>
 
-                    {/* Facts */}
-                    <div className="flex flex-col w-full h-fit p-4 bg-gray-200 rounded-xl items-center gap-4">
-                        <h2 className="text-xl font-semibold text-gray-700">
-                            Fakta kesehatan menarik hari ini
+                    <div className="space-y-1 mt-4">
+                        <h2 className="text-4xl font-semibold text-gray-800">
+                            Fakta kesehatan
                         </h2>
-                        <div className="flex gap-2">
-                            {Array.from({ length: 4 }).map((_, i) => (
-                                <div key={ i } className="flex flex-col p-2 text-justify bg-white rounded-lg gap-1">
-                                    <h3 className="font-medium text-gray-600">
-                                        Judul Fakta Kesehatan
+                        
+                        <span className="text-lg font-medium text-gray-600">
+                            Temukan fakta-fakta menarik seputar kesehatan
+                        </span>
+                    </div>
+
+                    {/* Facts */}
+                    <div className="grid grid-cols-3 gap-2">
+                        {Array.from({ length: 3 }).map((_, i) => (
+                            <div key={ i } className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1">
+                                <div className = "bg-gray-900 w-full h-48 rounded-md relative rounded-md overflow-hidden flex">
+                                    <img src = "https://media.tenor.com/j2zxNjGok-oAAAAe/squidward-ass.png" className = "absolute w-full h-full object-cover mask-b-from-50%"/>
+                                
+                                    <h3 className="font-semibold text-gray-700 text-white relative p-4 mt-auto">
+                                        Manfaat Konsumsi Salman Goreng
                                     </h3>
-                                    <p className="text-sm text-gray-500">
+
+                                    <div className = "rounded-full bg-white flex size-10 text-gray-700 absolute top-4 right-4">
+                                        <Dumbbell className = "m-auto size-5"/>
+                                    </div>
+                                </div>
+
+                                <div className = "px-4 py-2 bg-slate-100 text-gray-600 text-sm flex gap-2 items-center">
+                                    <User className = "size-4"/>
+                                    <span className = "font-medium">Salmanicus Javanicus</span>
+
+                                    <Calendar className = "size-4 ml-2"/>
+                                    <span className = "font-medium whitespace-nowrap">26 Sept 2025</span>
+                                </div>
+
+                                <div className = "p-3 pt-1">
+                                    <p className="text-sm text-gray-600">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                     </p>
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
+
+                <Link href="/article" className = "ml-auto text-gray-600 font-medium flex items-center gap-2">
+                    <span>Lihat selengkapnya</span>
+                    <ArrowRight className = "size-5"/>
+                </Link>
 
                 <Footer />
             </main>

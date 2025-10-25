@@ -8,7 +8,7 @@ const Footer = () => {
         <footer className = "flex w-full border-t pt-4 text-xs justify-between items-center">
             <div className = "flex gap-3">
                 <span className = "font-bold">
-                    Copyright © 2024 Salmander
+                    Copyright © 2025 Salmander
                 </span>
                 <a className = "text-gray-500">
                     Privacy Policy

@@ -1,3 +1,5 @@
+'use client'
+
 import SideSection from "@/components/dashboard/side"
 import Footer from "@/components/footer"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -5,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ArrowRight, BarChart10, ChevronDown, Clock, Star } from "iconest-react"
 import { Filter, Flame, Search, SearchIcon } from "lucide-react"
+import { useState } from "react"
 
 const Page = () => {
     const recMenus = [{
@@ -29,6 +32,17 @@ const Page = () => {
         calories: 500,
         prepTime: 30
     }]
+
+    const [activeDifficulty, setActiveDifficulty] = useState('Semua');
+    const difficultyFilters = ['Semua', 'Mudah', 'Sedang', 'Sulit'];
+
+    const filteredMenus = recMenus.filter(menu => {
+        if (activeDifficulty === 'Semua') {
+            return true;
+        }
+        return menu.difficulty === activeDifficulty;
+    });
+    
 
     return (
         <div className="w-full h-full flex">
@@ -205,7 +219,7 @@ const Page = () => {
                                         <div className="flex justify-between">
                                             <div className="flex px-1 py-0.5 rounded font-semibold items-center gap-3">
                                                 <div className="flex items-center gap-2 text-slate-600">
-                                                    <Flame size={12} />
+                                                    <Flame size={12} className="text-yellow-500"/>
                                                     <span className="text-xs">{menu.calories} kkal</span>
                                                 </div>
 
@@ -218,7 +232,7 @@ const Page = () => {
                                             </div>
                                             <div className="flex gap-1">
                                                 <div className="flex px-1 py-0.5 text-gray-700 items-center">
-                                                    <Star size={17} />
+                                                    <Star size={20} />
                                                 </div>
 
                                                 <button className="flex bg-primary px-4 text-sm py-1.5 text-slate-100 rounded-md font-semibold text-gray-700 items-center gap-1">
@@ -249,12 +263,36 @@ const Page = () => {
                         </div>
                         <div className = "flex justify-between items-center">
                             <div className="flex gap-2">
-                                <div className="flex px-3 py-2 bg-gray-200 items-center text-gray-700 rounded-lg gap-6">
-                                    <span className="text-xs font-medium ">Semua</span>
-                                    <span className="text-xs font-medium">Mudah</span>
-                                    <span className="text-xs font-medium">Sedang</span>
-                                    <span className="text-xs font-medium">Sulit</span>
-                                </div>
+                                {difficultyFilters.map((filter) => {
+                                    const isActive = activeDifficulty === filter;
+                                    let colorClasses = '';
+                                    if (isActive) {
+                                        switch (filter) {
+                                            case 'Mudah':
+                                                colorClasses = 'bg-primary text-primary-foreground';
+                                                break;
+                                            case 'Sedang':
+                                                colorClasses = 'bg-btn-medium text-white';
+                                                break;
+                                            case 'Sulit':
+                                                colorClasses = 'bg-btn-hard text-white';
+                                                break;
+                                            default:
+                                                colorClasses = 'bg-gray-800 text-white';
+                                        }
+                                    } else {
+                                        colorClasses = 'bg-gray-200 text-gray-700 hover:bg-gray-300';
+                                    }
+                                    return (
+                                        <button
+                                            key={filter}
+                                            onClick={() => setActiveDifficulty(filter)}
+                                            className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${colorClasses}`}
+                                        >
+                                            {filter}
+                                        </button>
+                                    );
+                                })}
                             </div>
                             <div className="flex gap-2 items-center">
                                 <p className="text-gray-600 text-sm">Sort by:</p>
@@ -265,7 +303,7 @@ const Page = () => {
                             </div>
                         </div>
                         <div className = "flex flex-col gap-2">
-                            {recMenus.map((menu, i) => (
+                            {filteredMenus.map((menu, i) => (
                                 <div key={ i } className = "flex p-3 text-justify bg-[#B5ABAB] rounded-lg gap-3">
                                     <div className="rounded-xl w-1/3 h-25 overflow-hidden">
                                         <img src={menu.image} className="object-cover w-full h-full" />
@@ -298,8 +336,8 @@ const Page = () => {
                                         <div className="flex justify-between">
                                             <div className="flex px-1 py-0.5 bg-white rounded font-semibold text-gray-700 items-center gap-1.5">
                                                 <div className="flex items-center gap-0.5">
-                                                    <Flame size={12} />
-                                                    <span className="text-xs">{menu.calories} kkal</span>
+                                                    <Flame size={12} className="text-yellow-500" />
+                                                    <span className="text-xs ">{menu.calories} kkal</span>
                                                 </div>
                                                 <div className="w-[1px] h-full bg-gray-300" />
                                                 <div className="flex items-center gap-0.5">
@@ -308,8 +346,8 @@ const Page = () => {
                                                 </div>
                                             </div>
                                             <div className="flex gap-1">
-                                                <div className="flex px-1 py-0.5 bg-white rounded text-gray-700 items-center">
-                                                    <Star size={17} />
+                                                <div className="flex px-1 py-0.5 rounded text-gray-700 items-center">
+                                                    <Star size={20} />
                                                 </div>
                                                 <div className="flex bg-primary text-slate-100 rounded-md font-semibold text-gray-700 items-center gap-1">
                                                     <span className="text-sm px-3 py-1">Lihat</span>
@@ -319,6 +357,13 @@ const Page = () => {
                                     </div>
                                 </div>
                             ))}
+                            {/* error handling */}
+                            {filteredMenus.length === 0&& (
+                                <div className="flex flex-col items-center justify-center p-10 bg-gray-100 rounded-lg">
+                                    <span className="font-semibold text-gray-700">Tidak ada menu ditemukan</span>
+                                    <span className="text-gray-500">Ganti filter Salman Anda.</span>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

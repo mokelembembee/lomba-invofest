@@ -36,20 +36,29 @@ const Page = () => {
 
     return (
         <div className="w-full h-full flex">
-            <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">
+            <main className="flex flex-col w-full h-full gap-8 justify-between">
                 <div className="flex flex-col gap-8">
 
                     {/* Title and Searchbar */}
-                    <div className="flex justify-between items-center">
-                        <h1 className="text-4xl font-bold text-gray-800">Olahraga</h1>
-                        <div className="flex gap-2">
-                            <div className="flex px-2 py-1 items-center border border-gray-300 rounded-xl gap-1">
-                                <Search className="text-gray-400" />
-                                <input type="text" id="search" placeholder="Cari bahan..." className="p-1 outline-none" />
-                            </div>
-                            <button className="px-4 bg-green-500 text-white rounded-xl hover:bg-green-600 transition">Pilih Bahan</button>
+                <div className = "bg-black rounded-b-3xl p-4 relative overflow-hidden min-h-108 flex">
+                    <img src = "/images/gym.jpeg" className = "absolute -top-1/2 left-0 w-full h-auto mask-b-from-50%"/>
+                    <div className = "absolute w-full h-full bg-black/10 top-0 left-0 mask-t-from-0% backdrop-blur-[2px]"/>
+
+                    <div className = "p-8 flex flex-col gap-4 bg-white relative mt-auto h-fit w-full rounded-2xl">
+                        <div className="space-y-1">
+                            <h2 className="text-4xl font-semibold text-gray-800">
+                                Menu
+                            </h2>
+                            
+                            <span className="text-lg font-medium text-gray-600">
+                                Lorem ipsum dolor sit amet
+                            </span>
+                        </div>
+
+                        <div className = "bg-slate-100 rounded-3xl p-4 flex flex-col">
                         </div>
                     </div>
+                </div>
 
                     {/* Recommendation */}
                     <div className = {`flex flex-col w-full p-4 bg-gray-200 rounded-xl gap-4`}>

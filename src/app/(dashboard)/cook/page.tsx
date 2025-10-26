@@ -47,9 +47,9 @@ const Page = () => {
     return (
         <div className="w-full h-full flex">
             <main className="flex flex-col w-full h-full gap-8 justify-between">
-                <div className = "bg-black rounded-b-3xl p-4 relative overflow-hidden min-h-96 flex">
-                    <img src = "https://www.shutterstock.com/image-photo/fresh-clean-veetables-being-put-260nw-1678756072.jpg" className = "absolute top-0 left-0 w-full h-auto mask-b-from-50%"/>
-                    <div className = "absolute w-full h-full bg-black/10 top-0 left-0 mask-t-from-0% backdrop-blur-sm"/>
+                <div className = "bg-black rounded-b-3xl p-4 relative overflow-hidden min-h-108 flex">
+                    <img src = "/images/dapur.jpeg" className = "absolute -top-1/2 left-0 w-full h-auto mask-b-from-50%"/>
+                    <div className = "absolute w-full h-full bg-black/10 top-0 left-0 mask-t-from-0% backdrop-blur-[2px]"/>
 
                     <div className = "p-8 flex flex-col gap-4 bg-white relative mt-auto h-fit w-full rounded-2xl">
                         <div className="space-y-1">
@@ -58,7 +58,7 @@ const Page = () => {
                             </h2>
                             
                             <span className="text-lg font-medium text-gray-600">
-                                Lorem ipsum dolor sit amet
+                                Jelajahi resep-resep menarik disini
                             </span>
                         </div>
 
@@ -171,7 +171,7 @@ const Page = () => {
                     </h2>
                     
                     <span className="font-medium text-gray-600">
-                        Temukan fakta-fakta menarik seputar kesehatan
+                        Menu-menu yang kami sarankan khusus untuk anda
                     </span>
                 </div>
 
@@ -250,11 +250,11 @@ const Page = () => {
                     {/* All Menu */}
                     <div className = {`flex flex-col w-full gap-2`}>
                         <div className = "flex justify-between items-center">
-                            <h2 className = "text-xl font-semibold text-gray-700">
+                            <h2 className = "text-2xl font-semibold text-gray-700">
                                 Semua Menu
                             </h2>
                             <div className="flex gap-2">
-                                <div className="flex p-2 bg-gray-200 items-center text-gray-700 rounded-lg gap-1">
+                                <div className="flex p-2 bg-white items-center text-gray-700 rounded-lg gap-1">
                                     <Filter size={15} />
                                     <span className="text-xs font-medium">Filter</span>
                                     <ChevronDown size={15} />
@@ -304,7 +304,7 @@ const Page = () => {
                         </div>
                         <div className = "flex flex-col gap-2">
                             {filteredMenus.map((menu, i) => (
-                                <div key={ i } className = "flex p-3 text-justify bg-[#B5ABAB] rounded-lg gap-3">
+                                <div key={ i } className = "flex p-3 text-justify bg-slat rounded-lg gap-3">
                                     <div className="rounded-xl w-1/3 h-25 overflow-hidden">
                                         <img src={menu.image} className="object-cover w-full h-full" />
                                     </div>

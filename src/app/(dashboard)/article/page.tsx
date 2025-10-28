@@ -4,34 +4,22 @@ import { BarChart10, ChevronDown, Clock, Star, Calendar } from "iconest-react"
 import { Filter, Flame, Search, Info } from "lucide-react"
 
 const Page = () => {
-    const recSports = [{
+    const articles = [{
         title: 'Salman Goreng',
         image: '/images/user1.png',
-        difficulty: 'Mudah',
-        area: "Upper Body",
-        calories: 350,
-        prepTime: 15
+        description: 'Resep mudah dan lezat untuk membuat salmon goreng renyah dengan bumbu sederhana.',
     }, {
         title: 'Nebula Bakar',
         image: '/images/user1.png',
-        difficulty: 'Sedang',
-        area: "Lower Body",
-        calories: 400,
-        prepTime: 20
+        description: 'Resep mudah dan lezat untuk membuat nebula bakar dengan bumbu sederhana.',
     }, {
         title: 'Salman Bakar',
         image: '/images/user1.png',
-        difficulty: 'Sulit',
-        area: "Full Body",
-        calories: 500,
-        prepTime: 30
+        description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
     }, {
         title: 'Nebula Goreng',
         image: '/images/user1.png',
-        difficulty: 'Sulit',
-        area: "Core",
-        calories: 450,
-        prepTime: 25
+        description: 'Resep mudah dan lezat untuk membuat nebula goreng dengan bumbu sederhana.',
     }]
 
     return (
@@ -52,54 +40,22 @@ const Page = () => {
                     </div>
 
                     {/* Article List */}
-                    <div className = "grid grid-cols-2 gap-2">
-                        {recSports.map((exercise, i) => (
-                            <div key={ i } className="flex p-2 text-justify bg-[#B5ABAB] rounded-lg gap-3">
-                                <div className="rounded-xl w-1/2 ratio-1/1 overflow-hidden">
-                                    <img src={exercise.image} className="object-cover w-full h-full" />
-                                </div>
-                                <div className="flex flex-col w-full justify-between">
-                                    <div className="flex justify-between">
-                                        <div className="flex text-gray-700 items-center gap-1">
-                                            <Calendar size={15} />
-                                            <span className="text-sm">{exercise.difficulty}</span>
-                                        </div>
-                                        <div className="flex px-1 py-0.5 bg-white rounded font-semibold text-gray-700 items-center gap-1">
-                                            <span className="text-xs">{exercise.area}</span>
-                                            <Info size={10} />
-                                        </div>
-                                    </div>
-                                    <h3 className="text-lg font-semibold text-gray-800">
-                                        {exercise.title}
-                                    </h3>
-                                    <div className="flex justify-between">
-                                        <div className="flex px-1 py-0.5 bg-white rounded font-semibold text-gray-700 items-center gap-1.5">
-                                            <div className="flex items-center gap-0.5">
-                                                <Flame size={12} />
-                                                <span className="text-xs">{exercise.calories} kkal</span>
-                                            </div>
-                                            <div className="w-[1px] h-full bg-gray-300" />
-                                            <div className="flex items-center gap-0.5">
-                                                <Clock size={12} />
-                                                <span className="text-xs">{exercise.prepTime} menit</span>
-                                            </div>
-                                        </div>
-                                        <div className="flex gap-1">
-                                            <div className="flex px-1 py-0.5 bg-white rounded text-gray-700 items-center">
-                                                <Star size={12} />
-                                            </div>
-                                            <div className="flex px-1 py-0.5 bg-green-300 rounded font-semibold text-gray-700 items-center gap-1">
-                                                <span className="text-xs">Lihat</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div className = "grid grid-cols-3 gap-2">
+                        {articles.map((article, i) => (
+                            <div key={ i } className={`relative flex-shrink-0 h-60 overflow-hidden rounded-lg col-span-${ (i % 4 == 1 || i % 4 == 2) ? 2 : 1 }`}>
+                                <img src={article.image} alt={article.title} className="object-cover w-full h-full grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+                                <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+
+                                <div className="absolute bottom-0 left-0 p-4 text-white">
+                                    <h3 className="text-lg font-semibold">{article.title}</h3>
+                                    <p className="text-sm text-gray-300">{article.description}</p>
                                 </div>
                             </div>
                         ))}
                     </div>
 
-                    {/* All Sport */}
-                    <div className = {`flex flex-col w-full gap-2`}>
+                    {/* All Sports */}
+                    {/* <div className = {`flex flex-col w-full gap-2`}>
                         <div className = "flex justify-between items-center">
                             <h2 className = "text-xl font-semibold text-gray-700">
                                 Semua Olahraga
@@ -128,8 +84,8 @@ const Page = () => {
                                     <ChevronDown size={15} />
                                 </div>
                             </div>
-                        </div>
-                        <div className = "flex flex-col gap-2">
+                        </div> 
+                         <div className = "flex flex-col gap-2">
                             {recSports.map((exercise, i) => (
                                 <div key={ i } className = "flex p-3 text-justify bg-[#B5ABAB] rounded-lg gap-3">
                                     <div className="rounded-xl w-1/3 h-25 overflow-hidden">
@@ -174,7 +130,7 @@ const Page = () => {
                                 </div>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <Footer />

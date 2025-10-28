@@ -34,14 +34,23 @@ const Page = () => {
         <div className="flex w-full">
             <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-                    <div className="space-y-1">
-                        <h1 className="text-4xl font-medium text-gray-700">
-                            Selamat datang, <strong className="text-gray-800">Salman!</strong>
-                        </h1>
-                        <TypingAnimation />
+                    <div className = "flex w-full items-center p-8 border-b pb-16 relative h-72">
+                        <div className = "flex flex-col space-y-2">
+                            <span className="text-xl font-medium text-gray-500">
+                                Halo, Salman
+                            </span>
+                        
+                            <h2 className="text-4xl font-semibold text-gray-700">
+                                Sudah Siap Mulai Hidup Sehat?
+                            </h2>
+                        </div>
+
+                        <div className = "ml-auto absolute top-0 right-0 h-full w-1/3 aspect-square rounded-3xl flex flex-col ml-auto">
+                            <span>Karakter disini</span>
+                        </div>
                     </div>
 
-                    {/* Avatar & Stats */}
+                    {/*
                     <div className="grid grid-cols-6 h-100 gap-2">
                         <div className="bg-red-500 col-span-4 rounded-xl">
                             <CharacterScene />
@@ -51,19 +60,20 @@ const Page = () => {
                             { "<StatAvatar />" }
                         </div>
                     </div>
+                    */}
 
-                    <div className="space-y-1 mt-4">
-                        <h2 className="text-4xl font-semibold text-gray-800">
+                    <div className="space-y-1 px-8"> 
+                        <h2 className="text-2xl font-semibold text-gray-800">
                             Statistik
                         </h2>
                         
-                        <span className="text-lg font-medium text-gray-600">
-                            Sudah sejauh apa perjalanan sehatmu?
+                        <span className="font-medium text-gray-600">
+                            Lihat perjalanan sehatmu disini
                         </span>
                     </div>
 
                     {/* Full Stats */}
-                    <div className="flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center gap-2 p-4 pt-0">
                         <div className="flex gap-2 w-full border-b">
                             { statsTab.map((tab) => (
                                 <div
@@ -139,6 +149,7 @@ const Page = () => {
                 <Footer />
             </main>
 
+            {/*
             <SideSection>
                 <h2 className="text-xl font-semibold text-gray-700">Teman</h2>
 
@@ -189,6 +200,7 @@ const Page = () => {
                     </div>
                 </div>
             </SideSection>
+            */}
         </div>
     )
 }

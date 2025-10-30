@@ -44,7 +44,7 @@ const Page = () => {
                         {articles.map((article, i) => (
                             <div key={ i } className={`relative flex-shrink-0 h-60 overflow-hidden rounded-lg col-span-${ (i % 4 == 1 || i % 4 == 2) ? 2 : 1 }`}>
                                 <img src={article.image} alt={article.title} className="object-cover w-full h-full grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
-                                <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                                <div className="absolute inset-0 pointer-events-none bg-[" />
 
                                 <div className="absolute bottom-0 left-0 p-4 text-white">
                                     <h3 className="text-lg font-semibold">{article.title}</h3>

@@ -29,7 +29,7 @@ const DashboardNav = () => {
     return (
         <TooltipProvider delayDuration = { 100 }>
             <div className = "w-[85px]"/>
-            <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col items-center justify-between h-full`}>
+            <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col items-center justify-between h-full z-50`}>
                 <button>
                     <img className = {`rounded-full size-12`} src = {`https://img.freepik.com/free-vector/charity-logo-hands-supporting-heart-icon-flat-design-vector-illustration_53876-136266.jpg?semt=ais_hybrid&w=740&q=80`} />
                 </button>

@@ -1,9 +1,9 @@
 'use client'
 
-import { BarChart10, Clock, Star } from "iconest-react";
-import { Flame, Info } from "lucide-react";
+import { BarChart10, Clock } from "iconest-react";
+import { Flame, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Menu } from "@/types";
+import { Sport } from "@/types";
 
 import { 
     Dialog, 
@@ -14,64 +14,56 @@ import {
     DialogFooter 
 } from "@/components/ui/dialog";
 
-interface FeaturedMenuCardProps {
-    menu: Menu;
+interface FeaturedSportCardProps {
+    sport: Sport;
 }
 
-const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
+const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport }) => {
     return (
         <div className="col-span-1 bg-white rounded-xl flex flex-col border h-full">
             <div className="relative w-full h-48 bg-gray-200 rounded-t-xl overflow-hidden">
                 <img 
-                    src={menu.image} 
-                    alt={menu.title} 
-                    className="w-full h-full object-cover" 
+                    src={sport.image} 
+                    alt={sport.title} 
+                    className="w-full h-full object-cover"
                 />
                 <span className="absolute top-3 left-3 bg-yellow-400 text-gray-900 text-xs font-semibold px-2 py-1 rounded-full">
-                    Pilihan Kami
+                    Pilihan Hari Ini
                 </span>
             </div>
-
-            <div className="p-4 flex flex-col gap-3">
+            
+            <div className="p-4 flex flex-col gap-3 flex-1">
                 <h3 className="text-xl font-semibold text-gray-800 leading-tight">
-                    {menu.title}
+                    {sport.title}
                 </h3>
-
-                <div className="flex items-center text-sm text-gray-600">
-                    <Star size={16} className="text-yellow-400 mr-1" fill="currentColor"/>
-                    <span>{menu.rating}/10 ({menu.calories} review)</span>
-                </div>
                 
-                <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="grid grid-cols-2 gap-3 text-sm mt-2">
                     <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
                         <BarChart10 size={16} className="text-gray-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500">Kesulitan</span>
-                            <span className="font-medium text-gray-800">{menu.difficulty}</span>
+                            <span className="font-medium text-gray-800">{sport.difficulty}</span>
                         </div>
                     </div>
-
                     <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
                         <Flame size={16} className="text-red-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500">Kalori</span>
-                            <span className="font-medium text-gray-800">{menu.calories} kkal</span>
+                            <span className="font-medium text-gray-800">{sport.calories} kkal</span>
                         </div>
                     </div>
-
                     <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
                         <Clock size={16} className="text-blue-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500">Durasi</span>
-                            <span className="font-medium text-gray-800">{menu.prepTime} menit</span>
+                            <span className="font-medium text-gray-800">{sport.prepTime} menit</span>
                         </div>
                     </div>
-
                     <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
-                        <Info size={16} className="text-green-500" /> 
+                        <Target size={16} className="text-purple-500" /> 
                         <div className="flex flex-col">
-                            <span className="text-gray-500">Langkah</span>
-                            <span className="font-medium text-gray-800">{menu.steps} langkah</span>
+                            <span className="text-gray-500">Area</span>
+                            <span className="font-medium text-gray-800">{sport.area}</span>
                         </div>
                     </div>
                 </div>
@@ -83,14 +75,14 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                     <DialogContent>
 
                     <DialogHeader>
-                        <DialogTitle>{menu.title}</DialogTitle>
+                        <DialogTitle>{sport.title}</DialogTitle>
                     </DialogHeader>
                     <div className="space-y-2">
-                        <img src={menu.image} alt={menu.title} className="rounded-lg w-full object-cover" />
-                        <p>Kesulitan: {menu.difficulty}</p>
-                        <p>Kalori: {menu.calories} kkal</p>
-                        <p>Langkah: {menu.steps} langkah</p>
-                        <p>Waktu Persiapan: {menu.prepTime} menit</p>
+                        <img src={sport.image} alt={sport.title} className="rounded-lg w-full object-cover" />
+                        <p>Kesulitan: {sport.difficulty}</p>
+                        <p>Kalori: {sport.calories} kkal</p>
+                        <p>Area: {sport.area}</p>
+                        <p>Waktu Persiapan: {sport.prepTime} menit</p>
                     </div>
                     <DialogFooter>
                         <Button type="submit">Mulai Memasak</Button>
@@ -102,4 +94,4 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
     );
 }
 
-export default FeaturedMenuCard;
+export default FeaturedSportCard;

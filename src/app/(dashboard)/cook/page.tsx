@@ -14,7 +14,7 @@ import MenuCard from "@/components/dashboard/menuCard"
 const Page = () => {
     const recMenus: Menu[] = [{
         title: 'Salman Goreng',
-        image: '/images/user1.png',
+        image: '/images/dapur.jpeg',
         difficulty: 'Mudah',
         rating: 9,
         calories: 350,
@@ -36,7 +36,17 @@ const Page = () => {
         calories: 500,
         steps: 11,
         prepTime: 30
-    }]
+    },
+    {
+    title: 'Sup Daging Salman Pedas',
+    image: '/images/user1.webp',
+    difficulty: 'Sedang',
+    rating: 9,
+    calories: 480,
+    steps: 8,
+    prepTime: 25
+    }
+]
 
     const [activeDifficulty, setActiveDifficulty] = useState('Semua');
     const difficultyFilters = ['Semua', 'Mudah', 'Sedang', 'Sulit'];
@@ -73,8 +83,8 @@ const Page = () => {
                                             <Search className="text-gray-400 ml-6" />
                                             <input type="text" id="search" placeholder="Cari resep..." className="p px-4 py-2 pr-6 outline-none w-full"/>
                                         
-                                            <AccordionTrigger className = "mr-4 !space-y-0">
-                                                <button className = "ml-auto flex !space-y-0 items-center gap-2 text whitespace-nowrap">
+                                            <AccordionTrigger className = "mr-4 space-y-0!">
+                                                <button className = "ml-auto flex space-y-0! items-center gap-2 text whitespace-nowrap">
                                                     <span className = "text-gray-600 font-medium">Filter tambahan</span>
                                                 </button>
                                             </AccordionTrigger>
@@ -87,25 +97,21 @@ const Page = () => {
                                         <div className = "p-5 border rounded-lg flex w-full gap-4">
                                             <div className = "w-full border-r pr-4 flex flex-col">
                                                 <h2 className = "font-medium text-xl">Bahan </h2>
-
                                                 <span className = "text-gray-600">Belum ada bahan</span>
                                             
                                                 <Button className = "w-full mt-auto">Tambah</Button>
                                             </div>
-
                                             <div className = "w-full flex flex-col gap-4">
                                                 <div className = "flex items-center">
                                                     <div>
                                                         <h2 className = "font-medium text-xl">Sajian </h2>
                                                         <span className = "text-gray-600">Jumlah sajian per satu kali masak</span>
                                                     </div>
-
                                                     <div className = "flex gap-2 items-center ml-auto">
                                                         <Input className = "w-10 ml-auto text-center" defaultValue="1"/>
                                                         <span>sajian</span>
                                                     </div>
                                                 </div>
-
                                                 <div className = "flex items-center">
                                                     <div>
                                                         <h2 className = "font-medium text-xl">Salman </h2>
@@ -223,7 +229,7 @@ const Page = () => {
                     </div>
 
                     <div className = "flex flex-col col-span-2 gap-2 sticky top-4 self-start h-fit">
-                        <div className = "p-6 h-40 rounded-2xl bg-gradient-to-r from-primary to-primary-shade overflow-hidden relative flex text-slate-100 relative">
+                        <div className = "p-6 h-40 rounded-2xl bg-gradient-to-r from-primary to-primary-shade overflow-hidden flex text-slate-100 relative">
                             <h3 className = "text-xl font-semibold mt-auto">Bahan Makanan</h3>
 
                             <img className = "absolute top-0 -right-16 size-56 -rotate-24" src = "https://cdn3d.iconscout.com/3d/premium/thumb/vegetables-3d-icon-png-download-6478875.png"/>

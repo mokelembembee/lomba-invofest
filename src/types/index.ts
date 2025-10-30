@@ -7,3 +7,11 @@ export interface Menu {
     steps: number;
     prepTime: number;
 }
+export interface Sport {
+    title: string;
+    image: string;
+    difficulty: 'Mudah' | 'Sedang' | 'Sulit';
+    area: string;
+    calories: number;
+    prepTime: number;
+}

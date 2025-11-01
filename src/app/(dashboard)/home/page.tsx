@@ -30,6 +30,7 @@ const Page = () => {
 
     const [selectedStat, setSelectedStat] = useState(statsTab[0].route)
 
+    
     return (
         <div className="flex w-full">
             <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">

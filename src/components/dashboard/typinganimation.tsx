@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 
 const TYPINGPHRASES = [
@@ -46,12 +48,12 @@ const TypingAnimation = () => {
     }, [displayedText, isDeleting, phraseIndex]);
 
     return (
-        <span className="text-lg font-medium text-gray-600">
+        <h2 className="text-4xl font-semibold text-gray-700">
             <span>
                 {displayedText}
             </span>
             <span className="cursor-blink">|</span>
-        </span>
+        </h2>
     );
 }
 

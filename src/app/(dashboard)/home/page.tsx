@@ -41,9 +41,12 @@ const Page = () => {
                                 Halo, Salman
                             </span>
                         
-                            <h2 className="text-4xl font-semibold text-gray-700">
+                            {/* <h2 className="text-4xl font-semibold text-gray-700">
                                 Sudah Siap Mulai Hidup Sehat?
-                            </h2>
+                            </h2> */}
+
+                            <TypingAnimation />
+                            
                         </div>
 
                         <div className = "ml-auto absolute top-0 right-0 h-full w-1/3 aspect-square rounded-3xl flex flex-col ml-auto">

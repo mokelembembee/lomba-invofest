@@ -92,13 +92,13 @@ const Page = () => {
                                 <AccordionContent>
                                     <div className = "bg-white p-1 mt-2 rounded-xl mx-6 flex">
                                         <div className = "p-5 border rounded-lg flex w-full gap-4">
-                                            {/* Filter Area Tubuh */}
+                                            {/* filter area tubuh */}
                                             <div className = "w-full border-r pr-4 flex flex-col">
                                                 <h2 className = "font-medium text-xl">Area Tubuh</h2>
                                                 <span className = "text-gray-600">Pilih area fokus</span>
                                                 <Button className = "w-full mt-auto">Terapkan</Button>
                                             </div>
-                                            {/* Filter Durasi & Kalori */}
+                                            {/* filter durasi & kalori */}
                                             <div className = "w-full flex flex-col gap-4">
                                                 <div className = "flex items-center">
                                                     <div>
@@ -244,11 +244,33 @@ const Page = () => {
                             <div className = "bg-slate-100 p-4 rounded-xl text-sm">
                                 Core
                             </div>
-                             <div className = "bg-slate-100 p-4 rounded-xl text-sm">
-                                Full Body
-                            </div>
                         </div>
                         <Button className = "mt-2">Pilih Area</Button>
+
+                        {/* program latihan yang diambil (todo)*/}
+                        <div className="flex flex-col gap-2 mt-6">
+                            <h3 className="text-xl font-semibold text-gray-700">
+                                To Do List
+                            </h3>
+                            <div className="border p-4 rounded-2xl flex flex-col gap-3">
+                                <div className="bg-slate-100 p-4 rounded-xl">
+                                    <span className="font-medium text-xs text-gray-800 block">Hari ini</span>
+                                    <hr className=" border-gray-300 my-1" />
+                                    <span className="font-medium text-sm text-gray-800">Bench Press</span>
+                                    <span className="text-xs text-gray-600 block">3 set x 10 repetisi</span>
+                                </div>
+                                <div className="bg-slate-100 p-4 rounded-xl">
+                                    <span className="font-medium text-sm text-gray-800">Plank</span>
+                                    <span className="text-xs text-gray-600 block">3 set x 60 detik</span>
+                                </div>
+                                <div className="bg-slate-100 p-4 rounded-xl">
+                                    <span className="font-medium text-xs text-gray-800 block">21 September 2069</span>
+                                    <hr className=" border-gray-300 my-1" />
+                                    <span className="font-medium text-sm text-gray-800">Bench Press</span>
+                                    <span className="text-xs text-gray-600 block">3 set x 10 repetisi</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <Footer />

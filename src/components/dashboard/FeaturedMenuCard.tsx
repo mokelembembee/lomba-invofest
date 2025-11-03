@@ -20,19 +20,20 @@ interface FeaturedMenuCardProps {
 
 const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
     return (
-        <div className="col-span-1 bg-white rounded-xl flex flex-col border h-full">
-            <div className="relative w-full h-48 bg-gray-200 rounded-t-xl overflow-hidden">
+        <div className="col-span-1 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
+            <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
                 <img 
                     src={menu.image} 
                     alt={menu.title} 
                     className="w-full h-full object-cover" 
                 />
+
                 <span className="absolute top-3 left-3 bg-yellow-400 text-gray-900 text-xs font-semibold px-2 py-1 rounded-full">
                     Pilihan Kami
                 </span>
             </div>
 
-            <div className="p-4 flex flex-col gap-3">
+            <div className="flex flex-col gap-2 p-2">
                 <h3 className="text-xl font-semibold text-gray-800 leading-tight">
                     {menu.title}
                 </h3>
@@ -42,42 +43,43 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                     <span>{menu.rating}/10 ({menu.calories} review)</span>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                    <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
+                <div className="grid grid-cols-2 gap-3 text-sm bg-white rounded-lg p-4 my-2">
+                    <div className="flex items-center gap-3 rounded-lg">
                         <BarChart10 size={16} className="text-gray-500" />
                         <div className="flex flex-col">
-                            <span className="text-gray-500">Kesulitan</span>
-                            <span className="font-medium text-gray-800">{menu.difficulty}</span>
+                            <span className="text-gray-500 text-xs">Kesulitan</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.difficulty}</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
+                    <div className="flex items-center gap-3 rounded-lg">
                         <Flame size={16} className="text-red-500" />
                         <div className="flex flex-col">
-                            <span className="text-gray-500">Kalori</span>
-                            <span className="font-medium text-gray-800">{menu.calories} kkal</span>
+                            <span className="text-gray-500 text-xs">Kalori</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.calories} kkal</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
+                    <div className="flex items-center gap-3 rounded-lg">
                         <Clock size={16} className="text-blue-500" />
                         <div className="flex flex-col">
-                            <span className="text-gray-500">Durasi</span>
-                            <span className="font-medium text-gray-800">{menu.prepTime} menit</span>
+                            <span className="text-gray-500 text-xs">Durasi</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-2 bg-gray-100 p-2 rounded-lg">
+                    <div className="flex items-center gap-3 rounded-lg">
                         <Info size={16} className="text-green-500" /> 
                         <div className="flex flex-col">
-                            <span className="text-gray-500">Langkah</span>
-                            <span className="font-medium text-gray-800">{menu.steps} langkah</span>
+                            <span className="text-gray-500 text-xs">Langkah</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.steps} langkah</span>
                         </div>
                     </div>
                 </div>
+
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-1 h-auto">Lihat Detail</Button>
+                        <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-2 h-auto rounded-md">Lihat Detail</Button>
                     </DialogTrigger>
                     
                     <DialogContent>

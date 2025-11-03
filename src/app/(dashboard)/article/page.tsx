@@ -1,24 +1,25 @@
 import SideSection from "@/components/dashboard/side"
 import Footer from "@/components/footer"
+import { ProgressiveBlur } from "@/components/ui/progressive-blur"
 import { BarChart10, ChevronDown, Clock, Star, Calendar } from "iconest-react"
 import { Filter, Flame, Search, Info } from "lucide-react"
 
 const Page = () => {
     const articles = [{
         title: 'Salman Goreng',
-        image: '/images/user1.png',
+        image: '/images/dapur.jpeg',
         description: 'Resep mudah dan lezat untuk membuat salmon goreng renyah dengan bumbu sederhana.',
     }, {
         title: 'Nebula Bakar',
-        image: '/images/user1.png',
+        image: '/images/dapur.jpeg',
         description: 'Resep mudah dan lezat untuk membuat nebula bakar dengan bumbu sederhana.',
     }, {
         title: 'Salman Bakar',
-        image: '/images/user1.png',
+        image: '/images/dapur.jpeg',
         description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
     }, {
         title: 'Nebula Goreng',
-        image: '/images/user1.png',
+        image: '/images/dapur.jpeg',
         description: 'Resep mudah dan lezat untuk membuat nebula goreng dengan bumbu sederhana.',
     }]
 
@@ -42,13 +43,14 @@ const Page = () => {
                     {/* Article List */}
                     <div className = "grid grid-cols-3 gap-2">
                         {articles.map((article, i) => (
-                            <div key={ i } className={`relative flex-shrink-0 h-60 overflow-hidden rounded-lg col-span-${ (i % 4 == 1 || i % 4 == 2) ? 2 : 1 }`}>
-                                <img src={article.image} alt={article.title} className="object-cover w-full h-full grayscale hover:grayscale-0 hover:scale-105 transition duration-300" />
+                            <div key={ i } className={`relative flex-shrink-0 h-60 overflow-hidden rounded-lg bg-black col-span-${ (i % 4 == 1 || i % 4 == 2) ? 2 : 1 }`}>
+                                <img src={article.image} alt={article.title} className="object-cover w-full h-full hover:blur-none hover:scale-105 transition duration-300 mask-b-from-50%" />
                                 <div className="absolute inset-0 pointer-events-none bg-[" />
 
-                                <div className="absolute bottom-0 left-0 p-4 text-white">
+                                <ProgressiveBlur height="40%"/>
+                                    <div className="absolute bottom-0 left-0 p-4 text-white z-10 flex flex-col justify-end">
                                     <h3 className="text-lg font-semibold">{article.title}</h3>
-                                    <p className="text-sm text-gray-300">{article.description}</p>
+                                    <p className={`text-sm text-gray-300 line-clamp-2 h-10 ${!(i == 0 || i == 3) && 'max-w-3/4'}`}>{article.description}</p>
                                 </div>
                             </div>
                         ))}

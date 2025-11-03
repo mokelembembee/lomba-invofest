@@ -4,8 +4,8 @@ import Footer from "@/components/footer"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ChevronDown } from "iconest-react"
-import { Search } from "lucide-react"
+import { BarChart10, ChevronDown, Clock, Star } from "iconest-react"
+import { Flame, Info, Search } from "lucide-react"
 import { useState } from "react"
 import { Menu } from "@/types" 
 import FeaturedMenuCard from "@/components/dashboard/FeaturedMenuCard"
@@ -74,7 +74,7 @@ const Page = () => {
                         </h2>
                     </div>
 
-                    <div className = "bg-slate-100 w-full rounded-3xl p-4 flex flex-col h-fit ml-auto">
+                    <div className = "bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
                         <Accordion type="single" collapsible>
                             <AccordionItem value="item-1">
                                 <div className = "w-full flex gap-2 items-center">
@@ -83,11 +83,9 @@ const Page = () => {
                                             <Search className="text-gray-400 ml-6" />
                                             <input type="text" id="search" placeholder="Cari resep..." className="p px-4 py-2 pr-6 outline-none w-full"/>
                                         
-                                            <AccordionTrigger className = "mr-4 space-y-0!">
-                                                <button className = "ml-auto flex space-y-0! items-center gap-2 text whitespace-nowrap">
+                                                <button className = "ml-auto text-sm mx-8 flex space-y-0! items-center gap-2 text whitespace-nowrap">
                                                     <span className = "text-gray-600 font-medium">Filter tambahan</span>
                                                 </button>
-                                            </AccordionTrigger>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +127,8 @@ const Page = () => {
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
+
+                        <button className="text-sm mt-2 ml-auto mr-4">Tampilkan Favorit</button>
                     </div>
                 </div>
                 
@@ -149,10 +149,66 @@ const Page = () => {
                                 
                                 <FeaturedMenuCard menu={mainRecommendation} />
 
-                                <div className = "col-span-2 flex flex-col gap-2">
-                                {recMenus.slice(1).map((menu, i) => (
-                                    <MenuCard key={i} menu={menu} />
-                                ))}
+                                <div className = "w-full col-span-2 bg-slate-100 p-2 rounded-xl flex flex-col gap-2">
+                                    <div className = "h-48 w-full bg-red-500 rounded-lg"></div>
+                                    
+                                    <div className = "p-2 flex flex-col gap-2">
+                                        <h3 className="text-xl font-semibold text-gray-800 leading-tight">
+                                            Lorem ipsum
+                                        </h3>
+
+                                        <div className="flex items-center text-sm text-gray-600">
+                                            <Star size={16} className="text-yellow-400 mr-1" fill="currentColor"/>
+                                            <span>10/10 (100 review)</span>
+                                        </div>
+                                        
+                                        <div className = "flex gap-2">
+                                            <div className = "text-sm mr-auto w-1/2 mt-2 text-gray-800 flex flex-col mb-2">
+                                                <span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed doloremque expedita iure quas veritatis! Omnis maiores.</span>
+                                            
+                                                <div className = "bg-white p-2 rounded-xl mt-auto w-full gap-2">
+                                                    <Star className = "size-5"/>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 gap-3 text-sm bg-white rounded-lg p-4 my-2 w-1/2">
+                                                <div className="flex items-center gap-3 rounded-lg">
+                                                    <BarChart10 size={16} className="text-gray-500" />
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-500 text-xs">Kesulitan</span>
+                                                        <span className="font-medium text-gray-800 text-sm"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 rounded-lg">
+                                                    <Flame size={16} className="text-red-500" />
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-500 text-xs">Kalori</span>
+                                                        <span className="font-medium text-gray-800 text-sm">kkal</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 rounded-lg">
+                                                    <Clock size={16} className="text-blue-500" />
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-500 text-xs">Durasi</span>
+                                                        <span className="font-medium text-gray-800 text-sm">menit</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center gap-3 rounded-lg">
+                                                    <Info size={16} className="text-green-500" /> 
+                                                    <div className="flex flex-col">
+                                                        <span className="text-gray-500 text-xs">Langkah</span>
+                                                        <span className="font-medium text-gray-800 text-sm">langkah</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-2 h-auto rounded-md">Lihat Detail</Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

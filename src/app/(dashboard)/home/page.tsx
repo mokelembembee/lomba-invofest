@@ -4,8 +4,8 @@ import CharacterScene from "@/components/dashboard/character"
 import SideSection from "@/components/dashboard/side"
 import Footer from "@/components/footer"
 import TypingAnimation from "@/components/dashboard/typinganimation";
-import { ArrowRight, Calendar, MessageCircle2, User } from "iconest-react"
-import { Dumbbell } from "lucide-react"
+import { ArrowRight, Calendar, Camera, MessageCircle2, User } from "iconest-react"
+import { Dumbbell, Flame, Shirt } from "lucide-react"
 import { useState } from "react"
 import Link from "next/link"
 
@@ -29,28 +29,46 @@ const Page = () => {
     }]
 
     const [selectedStat, setSelectedStat] = useState(statsTab[0].route)
-
     
     return (
         <div className="flex w-full">
-            <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">
+            <main className="flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-                    <div className = "flex w-full items-center p-8 border-b pb-16 relative h-72">
-                        <div className = "flex flex-col space-y-2">
-                            <span className="text-xl font-medium text-gray-500">
-                                Halo, Salman
-                            </span>
-                        
-                            {/* <h2 className="text-4xl font-semibold text-gray-700">
-                                Sudah Siap Mulai Hidup Sehat?
-                            </h2> */}
+                    <div className = "flex w-full items-center border-b relative h-96">
+                        <div className = "flex flex-col space-y-4 w-2/5 p-8 pt-16">
+                            <div className = "flex items-center gap-4 ">
+                                <span className="text-xl font-medium text-gray-500">
+                                    Halo, Salman
+                                </span>
+
+                                <div className = "flex gap-2 items-center bg-gradient-to-r from-orange-400 to-yellow-500 w-fit text-slate-100 py-2 px-4 rounded-full">
+                                    <Flame className = "size-4"/>
+                                    <span className = "font-semibold">10</span>
+                                </div>
+                            </div>
 
                             <TypingAnimation />
-                            
                         </div>
 
-                        <div className = "ml-auto absolute top-0 right-0 h-full w-1/3 aspect-square rounded-3xl flex flex-col ml-auto">
-                            <span>Karakter disini</span>
+                        <div className = "translate-x-8 relative h-full w-3/5">
+                            <div className = "relative h-full bg-blue-200">
+                                <div className = "flex flex-col absolute bottom-24 left-1/2 -translate-x-1/2 items-center gap-2 h-fit">
+                                    <span className = "rounded-full bg-white translate-y-10 px-4 py-1.5 text-sm w-fit">Salman</span>
+                                    <img src = "/images/tuyul.svg" className = "h-50 w-fit"/>
+                                </div>
+                            
+                                <img src = "/images/land.png" className = "absolute w-full h-auto bottom-0"/>
+                            
+                                <div className = "flex flex-col absolute top-4 left-4 gap-1.5 bg-white px-1.5 py-2 rounded-full">
+                                    <div className = "bg-primary w-fit rounded-full text-slate-100 p-3">
+                                        <Camera/>
+                                    </div>
+
+                                    <div className = "bg-primary w-fit rounded-full text-slate-100 p-3">
+                                        <Shirt/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

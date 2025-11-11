@@ -11,6 +11,7 @@ import { useState } from "react"
 import { Sport } from "@/types"
 import FeaturedSportCard from "@/components/dashboard/FeaturedSportCard"
 import SportCard from "@/components/dashboard/sportCard"
+import LongFeaturedSportCard from "@/components/dashboard/LongFeaturedSportCard"
 
 const Page = () => {
     const recSports: Sport[] = [{
@@ -132,7 +133,7 @@ const Page = () => {
                 <div className = "grid grid-cols-7 p-4 pt-0 gap-4 relative">
                     <div className="flex flex-col gap-8 col-span-5">
                         
-                        {/* Rekomendasi */}
+                        {/* rekomendasi */}
                         <div className="space-y-1 px-4"> 
                             <h2 className="text-2xl font-semibold text-gray-800">
                                 Rekomendasi
@@ -145,12 +146,7 @@ const Page = () => {
                         <div className = {`flex flex-col w-full p-2 border rounded-2xl gap-4`}>
                             <div className = "grid grid-cols-3 gap-2">
                                 <FeaturedSportCard sport={mainRecommendation} />
-
-                                <div className = "col-span-2 flex flex-col gap-2">
-                                {recSports.slice(1).map((sport, i) => (
-                                    <SportCard key={i} sport={sport} />
-                                ))}
-                                </div>
+                                <LongFeaturedSportCard sport={recSports[1]} />
                             </div>
                         </div>
 

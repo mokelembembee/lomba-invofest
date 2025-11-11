@@ -83,10 +83,9 @@ const Page = () => {
                                         <div className="flex bg-white items-center border border-gray-300 rounded-full w-full">
                                             <Search className="text-gray-400 ml-6" />
                                             <input type="text" id="search" placeholder="Cari resep..." className="p px-4 py-2 pr-6 outline-none w-full"/>
-                                        
-                                                <button className = "ml-auto text-sm mx-8 flex space-y-0! items-center gap-2 text whitespace-nowrap">
-                                                    <span className = "text-gray-600 font-medium">Filter tambahan</span>
-                                                </button>
+                                            <AccordionTrigger className="mr-4 !space-y-0 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                                <span className="text-gray-600 font-medium">Filter tambahan</span>
+                                            </AccordionTrigger>
                                         </div>
                                     </div>
                                 </div>

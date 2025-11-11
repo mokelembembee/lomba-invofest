@@ -37,6 +37,9 @@ const Page = () => {
 
     return (
         <div className="flex w-full">
+            <img src="/images/tuyul.svg"alt="Character shadow"
+            className="absolute top-0 right-0 w-80 opacity-20 rotate-[15deg] select-none pointer-events-none translate-x-8 -translate-y-15"
+            />
             <main className="flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
                     <div className="flex w-full items-center border-b pb-8">
@@ -53,7 +56,8 @@ const Page = () => {
                             <TypingAnimation />
                         </div>
                     </div>
-                    {/* STATISTIK */}
+
+
                     <div className="space-y-1 px-8">
                         <h2 className="text-2xl font-semibold text-gray-800">Statistik</h2>
                         <span className="font-medium text-gray-600">

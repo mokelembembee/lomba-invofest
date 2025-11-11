@@ -147,10 +147,8 @@ const Page = () => {
 
                         <div className = {`flex flex-col w-full p-2 border rounded-2xl gap-4`}>
                             <div className = "grid grid-cols-3 gap-2">
-                                
                                 <FeaturedMenuCard menu={mainRecommendation} />
-
-                                <MenuCardLong menu={recMenus[1]} />
+                                <MenuCardLong menu={mainRecommendation} />
                             </div>
                         </div>
 

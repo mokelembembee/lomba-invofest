@@ -142,7 +142,7 @@ const Page = () => {
                                 Latihan yang kami sarankan khusus untuk anda
                             </span>
                         </div>
-
+                        
                         <div className = {`flex flex-col w-full p-2 border rounded-2xl gap-4`}>
                             <div className = "grid grid-cols-3 gap-2">
                                 <FeaturedSportCard sport={mainRecommendation} />

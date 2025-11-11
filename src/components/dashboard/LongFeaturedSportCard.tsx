@@ -25,10 +25,9 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
                 <img
                     src={sport.image}
                     alt={sport.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-xl"
                 />
             </div>
-
             <div className="p-2 flex flex-col gap-2">
                 <h3 className="text-xl font-semibold text-gray-800 leading-tight">
                     {sport.title}
@@ -42,12 +41,12 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
                 <div className="flex gap-2">
                     <div className="text-sm mr-auto w-1/2 mt-2 text-gray-800 flex flex-col mb-2">
                         <span>
-                            Aktivitas {sport.title} dengan tingkat kesulitan {sport.difficulty.toLowerCase()},
-                            durasi sekitar {sport.prepTime} menit, dan membakar sekitar {sport.calories} kalori.
+                            Aktivitas {sport.title} berfokus pada area {sport.area.toLowerCase()}, 
+                            dengan tingkat kesulitan {sport.difficulty.toLowerCase()} dan estimasi waktu sekitar {sport.prepTime} menit.
                         </span>
 
                         <div className="bg-white p-2 rounded-xl mt-auto w-full gap-2 flex items-center">
-                            <Target className="size-5 text-purple-500" />
+                            <Target size={20} className="text-purple-500" />
                             <span className="text-sm text-gray-700">Rekomendasi</span>
                         </div>
                     </div>
@@ -112,7 +111,7 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
                         </div>
 
                         <DialogFooter>
-                            <Button type="button">Mulai Aktivitas</Button>
+                            <Button type="button">Mulai Latihan</Button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>

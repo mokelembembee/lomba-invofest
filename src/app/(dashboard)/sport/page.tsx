@@ -80,10 +80,8 @@ const Page = () => {
                                             <input type="text" id="search" placeholder="Cari latihan..." className="p px-4 py-2 pr-6 outline-none w-full"/>
 
                                             {/* filter ini */}
-                                            <AccordionTrigger className = "mr-4 !space-y-0">
-                                                <button className = "ml-auto flex !space-y-0 items-center gap-2 text whitespace-nowrap">
-                                                    <span className = "text-gray-600 font-medium">Filter tambahan</span>
-                                                </button>
+                                            <AccordionTrigger className="mr-4 !space-y-0 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                                <span className="text-gray-600 font-medium">Filter tambahan</span>
                                             </AccordionTrigger>
                                         </div>
                                     </div>
@@ -127,6 +125,7 @@ const Page = () => {
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
+                        <button className="text-sm mt-2 ml-auto mr-4">Tampilkan Favorit</button>
                     </div>
                 </div>
                 
@@ -142,7 +141,7 @@ const Page = () => {
                                 Latihan yang kami sarankan khusus untuk anda
                             </span>
                         </div>
-                        
+
                         <div className = {`flex flex-col w-full p-2 border rounded-2xl gap-4`}>
                             <div className = "grid grid-cols-3 gap-2">
                                 <FeaturedSportCard sport={mainRecommendation} />

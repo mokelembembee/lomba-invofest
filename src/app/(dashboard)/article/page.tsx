@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Search, Heart } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Input } from "@/components/ui/input"
+import { useState } from "react"
+
 import {
     Dialog,
     DialogTrigger,
@@ -60,6 +62,16 @@ const Page = () => {
             content: 'Cara membuat Salmon Bakar: 1. Marinasi salmon, 2. Bakar hingga permukaannya kecoklatan, 3. Sajikan dengan lalapan segar.',
         },
     ]
+
+const [likedArticles, setLikedArticles] = useState<string[]>([])
+
+const toggleLike = (title: string) => {
+    setLikedArticles((prev) =>
+    prev.includes(title)
+        ? prev.filter((t) => t !== title)
+        : [...prev, title]
+    )
+}
 
     return (
         <div className="w-full h-full flex">
@@ -172,10 +184,26 @@ const Page = () => {
                                                 <div className="text-gray-700 text-[15px] leading-relaxed space-y-3" dangerouslySetInnerHTML={{ __html: article.content }} />
                                             </div>
 
-                                            <DialogFooter>
-                                                <Button variant="outline" className="mt-4">
-                                                Tutup
+                                            <DialogFooter className="flex justify-between mt-4">
+                                                <Button
+                                                variant="ghost"
+                                                className={`flex items-center gap-2 ${
+                                                    likedArticles.includes(article.title)
+                                                    ? 'text-red-500'
+                                                    : 'text-gray-600'
+                                                }`}
+                                                onClick={() => toggleLike(article.title)}
+                                                >
+                                                <Heart
+                                                    size={18}
+                                                    fill={likedArticles.includes(article.title) ? 'red' : 'none'}
+                                                />
+                                                {likedArticles.includes(article.title)
+                                                    ? 'Disukai'
+                                                    : 'Suka'}
                                                 </Button>
+
+                                                <Button variant="outline">Tutup</Button>
                                             </DialogFooter>
                                         </DialogContent>
 

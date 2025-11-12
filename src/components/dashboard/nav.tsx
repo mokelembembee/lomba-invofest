@@ -2,7 +2,7 @@
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@radix-ui/react-tooltip"
 import { Home } from "iconest-react"
-import { ChefHat, Dumbbell, BookOpenText } from "lucide-react"
+import { ChefHat, Dumbbell, BookOpenText , MessageCircle} from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -23,6 +23,10 @@ const DashboardNav = () => {
         title: 'Artikel',
         url: '/article',
         icon: BookOpenText
+    },{
+        title: 'Social',
+        url: '/social',
+        icon: MessageCircle
     }]
 
     const pathname = usePathname()

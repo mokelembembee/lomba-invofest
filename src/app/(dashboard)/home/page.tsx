@@ -37,24 +37,29 @@ const Page = () => {
 
     return (
         <div className="flex w-full">
+            {/*
             <img src="/images/tuyul.svg"alt="Character shadow"
             className="absolute top-0 right-0 w-80 opacity-20 rotate-[15deg] select-none pointer-events-none translate-x-8 -translate-y-15"
             />
+            */}
             <main className="flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-                    <div className="flex w-full items-center border-b pb-8">
-                        <div className="flex flex-col space-y-4 w-full p-4">
-                            <div className="flex items-center gap-4 ">
-                                <span className="text-xl font-medium text-gray-500">
-                                    Halo, Salman
-                                </span>
-                                <div className="flex gap-2 items-center bg-gradient-to-r from-orange-400 to-yellow-500 w-fit text-slate-100 py-2 px-4 rounded-full">
-                                    <Flame className="size-4" />
-                                    <span className="font-semibold">10</span>
-                                </div>
-                            </div>
-                            <TypingAnimation />
+                    <div className = "flex w-full items-center px-8 border-b min-h-70">
+                        <div className = "flex flex-col space-y-2">
+                            <span className="text-xl font-medium text-gray-500">
+                                Menu
+                            </span>
+                        
+                            <h2 className="text-4xl font-semibold text-gray-700">
+                                Jelajahi resep-resep menarik disini
+                            </h2>
                         </div>
+
+                        {/*
+                        <div className = "bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
+
+                        </div>
+                        */}
                     </div>
 
 

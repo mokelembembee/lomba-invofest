@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { StackProvider, StackTheme } from "@stackframe/stack";
+import { stackClientApp } from "../stack/client";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 
@@ -22,9 +24,9 @@ export default function RootLayout({
     <html lang="en" className="h-screen w-screen">
       <body
         className={`${lexend.variable} antialiased`}
-      >
+      ><StackProvider app={stackClientApp}><StackTheme>
         {children}
-      </body>
+      </StackTheme></StackProvider></body>
     </html>
   );
 }

@@ -6,10 +6,25 @@ import Footer from "@/components/footer"
 import TypingAnimation from "@/components/dashboard/typinganimation";
 import { ArrowRight, Calendar, Camera, MessageCircle2, User } from "iconest-react"
 import { Dumbbell, Flame, Shirt } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
+import { useUser } from "@stackframe/stack";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+    const router = useRouter()
+    const user = useUser()
+
+    useEffect(() => {
+        if (!user) {
+            router.replace('/handler/sign-in')
+        }
+    }, [user, router])
+
+    if (!user) {
+        return null
+    }
+
     const statsTab = [
         {
             title: "Umum",
@@ -51,7 +66,7 @@ const Page = () => {
                             </span>
                         
                             <h2 className="text-4xl font-semibold text-gray-700">
-                                Jelajahi resep-resep menarik disini
+                                Halo, {user.displayName}. Sudah siap hidup sehat?
                             </h2>
                         </div>
 

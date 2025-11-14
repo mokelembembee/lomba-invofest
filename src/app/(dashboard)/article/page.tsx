@@ -42,25 +42,7 @@ const Page = () => {
             image: '/images/dapur.jpeg',
             description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
             content: 'Cara membuat Salmon Bakar: 1. Marinasi salmon, 2. Bakar hingga permukaannya kecoklatan, 3. Sajikan dengan lalapan segar.',
-        },
-        {
-            title: 'Salman Bakar',
-            image: '/images/dapur.jpeg',
-            description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
-            content: 'Cara membuat Salmon Bakar: 1. Marinasi salmon, 2. Bakar hingga permukaannya kecoklatan, 3. Sajikan dengan lalapan segar.',
-        },
-        {
-            title: 'Salman Bakar',
-            image: '/images/dapur.jpeg',
-            description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
-            content: 'Cara membuat Salmon Bakar: 1. Marinasi salmon, 2. Bakar hingga permukaannya kecoklatan, 3. Sajikan dengan lalapan segar.',
-        },
-        {
-            title: 'Salman Bakar',
-            image: '/images/dapur.jpeg',
-            description: 'Resep mudah dan lezat untuk membuat salmon bakar dengan bumbu sederhana.',
-            content: 'Cara membuat Salmon Bakar: 1. Marinasi salmon, 2. Bakar hingga permukaannya kecoklatan, 3. Sajikan dengan lalapan segar.',
-        },
+        }
     ]
 
 const [likedArticles, setLikedArticles] = useState<string[]>([])
@@ -160,7 +142,9 @@ const toggleLike = (title: string) => {
                                                 <img src={article.image} alt={article.title}
                                                 className="object-cover w-full h-full hover:blur-none hover:scale-105 transition duration-300 mask-b-from-50%"
                                                 />
-                                                <ProgressiveBlur height="40%" />
+
+                                                <div className = "w-full h-full absolute top-0 left-0 mask-t-to-60% mask-t-from-2% backdrop-blur-sm"></div>
+
                                                 <div className="absolute bottom-0 left-0 p-4 text-white z-10 flex flex-col justify-end">
                                                     <h3 className="text-lg font-semibold">{article.title}</h3>
                                                     <p className={`text-sm text-gray-300 line-clamp-2 h-10

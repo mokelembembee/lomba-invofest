@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -21,8 +21,23 @@ import {
     MapPin
 } from 'lucide-react'
 import { Clock, Send } from 'iconest-react'
+import { useRouter } from 'next/navigation'
+import { useUser } from '@stackframe/stack'
 
 const Page = () => {
+    const router = useRouter()
+    const user = useUser()
+
+    useEffect(() => {
+        if (!user) {
+            router.replace('/handler/sign-in')
+        }
+    }, [user, router])
+
+    if (!user) {
+        return null
+    }
+
     const [groups, setGroups] = useState([
         {
             id: 1,

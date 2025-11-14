@@ -40,8 +40,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
                 <div className="flex gap-2">
                     <div className="text-sm mr-auto w-1/2 mt-2 text-gray-800 flex flex-col mb-2">
                         <span>
-                            Resep {menu.title} dengan tingkat kesulitan {menu.difficulty.toLowerCase()}
-                            dan waktu pembuatan sekitar {menu.prepTime} menit.
+                            {menu.description}
                         </span>
                         <div className="bg-white p-2 rounded-xl mt-auto w-full gap-2 flex items-center">
                             <Star size={20} />
@@ -90,7 +89,11 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
                             <DialogTitle>{menu.title}</DialogTitle>
                         </DialogHeader>
                         <div className="space-y-2">
-                            <img src={menu.image} alt={menu.title} className="rounded-lg w-full object-cover"/>
+                            <div className = "flex flex-col mb-4">
+                                <img src={menu.image} alt={menu.title} className="rounded-lg w-full object-cover"/>
+                                <span className = "">{menu.description}</span>
+                            </div>
+                            
                             <p><strong>Kesulitan:</strong> {menu.difficulty}</p>
                             <p><strong>Kalori:</strong> {menu.calories} kkal</p>
                             <p><strong>Langkah:</strong> {menu.steps} langkah</p>

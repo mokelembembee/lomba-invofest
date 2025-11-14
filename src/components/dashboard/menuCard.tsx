@@ -22,7 +22,9 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu }) => {
     return (
         <div className="flex p-3 text-justify bg-slate-100 rounded-lg gap-3">
             <div className="rounded-xl w-1/3 h-24 overflow-hidden">
-                <img src={menu.image} alt={menu.title} className="object-cover w-full h-full" />
+                {menu?.image && (
+                    <img src={menu.image} alt={menu.title} className="object-cover w-full h-full" />
+                )}
             </div>
             <div className="flex flex-col w-full justify-between">
                 <div className="flex justify-between">

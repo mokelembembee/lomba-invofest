@@ -123,7 +123,6 @@ const toggleLike = (title: string) => {
                                     </AccordionContent>
                                 </AccordionItem>
                             </Accordion>
-                            <button className="text-sm mt-2 ml-auto mr-4">Tampilkan Favorit</button>
                         </div>
                     </div>
 
@@ -218,7 +217,7 @@ const toggleLike = (title: string) => {
 
                             <div className="flex flex-col gap-2 mt-6">
                                 <h3 className="text-xl font-semibold text-gray-700">Riwayat Baca</h3>
-                                <div className="border p-4 rounded-2xl flex flex-col gap-3">
+                                <div className="border p-2 rounded-2xl flex flex-col gap-2">
                                     <div className="bg-slate-100 p-4 rounded-xl">
                                         <span className="font-medium text-xs text-gray-800 block">Dibaca Hari Ini</span>
                                         <hr className="border-gray-300 my-1" />

@@ -48,6 +48,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu }) => {
                         </div>
                     </div>
                 </div>
+                
                 <h3 className="text-lg font-semibold text-gray-800">
                     {menu.title}
                 </h3>

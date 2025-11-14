@@ -72,7 +72,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         <Info size={16} className="text-green-500" /> 
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Langkah</span>
-                            <span className="font-medium text-gray-800 text-sm">{menu.steps} langkah</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.steps.length} langkah</span>
                         </div>
                     </div>
                 </div>
@@ -95,7 +95,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         <p>Waktu Persiapan: {menu.prepTime} menit</p>
                     </div>
                     <DialogFooter>
-                        <Button type="submit">Mulai Memasak</Button>
+                        <Button type="submit" className = "!text-base">Mulai Memasak</Button>
                     </DialogFooter>
                     </DialogContent>
                 </Dialog>

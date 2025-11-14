@@ -152,8 +152,6 @@ const Page = () => {
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-
-                        <button className="text-sm mt-2 ml-auto mr-4">Tampilkan Favorit</button>
                     </div>
                 </div>
 
@@ -244,8 +242,8 @@ const Page = () => {
                     {/* SIDEBAR */}
                     <div className="flex flex-col col-span-2 gap-2 sticky top-4 self-start h-fit">
                         <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-purple-500 to-purple-700 overflow-hidden flex text-slate-100 relative">
-                            <h3 className="text-xl font-semibold mt-auto">Area Fokus</h3>
-                            <Target className="absolute -top-4 -right-8 opacity-20" size={160} strokeWidth={1} />
+                            <h3 className="text-xl font-semibold mt-auto">Fokus Latihan</h3>
+                            <img className="absolute top-0 -right-16 size-48 rotate-24" src="https://cdn2.iconfinder.com/data/icons/fitness-vol-2-1/512/exercise-time-fitness-weightlifting-workout-gym-barbell-3d.png"/>
                         </div>
 
                         <div className="border p-2 rounded-2xl flex flex-col gap-2">

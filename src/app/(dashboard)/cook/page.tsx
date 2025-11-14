@@ -165,8 +165,6 @@ const Page = () => {
                                 </AccordionContent>
                             </AccordionItem>
                         </Accordion>
-
-                        <button className="text-sm mt-2 ml-auto mr-4">Tampilkan Favorit</button>
                     </div>
                 </div>
 
@@ -268,7 +266,7 @@ const Page = () => {
                             <div className="bg-slate-100 p-4 rounded-xl text-sm">Daging Salman</div>
                         </div>
 
-                        <Button className="mt-2">Tambah</Button>
+                        <Button className="mt-2 text-base">Tambah</Button>
                     </div>
                 </div>
 

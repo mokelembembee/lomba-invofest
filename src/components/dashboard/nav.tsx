@@ -35,7 +35,7 @@ const DashboardNav = () => {
             <div className = "w-[85px]"/>
             <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col items-center justify-between h-full z-50`}>
                 <button>
-                    <img className={`rounded-full size-12`} src={`/images/land.png`} />
+                    <img className={`rounded-full size-12 object-cover`} src={`/images/logo.png`} />
                 </button>
                 <nav className = {`flex flex-col gap-4`}>
                     {navigations.map((nav) => {

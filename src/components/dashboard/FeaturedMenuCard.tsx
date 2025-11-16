@@ -1,18 +1,19 @@
 'use client'
 
-import { BarChart10, Clock, Star } from "iconest-react";
-import { Flame, Info } from "lucide-react";
+import { BarChart10 } from "iconest-react";
+import { Clock, Flame, Info, Star, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Menu } from "@/types";
 
-import { 
-    Dialog, 
-    DialogTrigger, 
-    DialogContent, 
-    DialogHeader, 
-    DialogTitle, 
-    DialogFooter 
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
 } from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface FeaturedMenuCardProps {
     menu: Menu;
@@ -22,10 +23,10 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
     return (
         <div className="col-span-1 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
             <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
-                <img 
-                    src={menu.image} 
-                    alt={menu.title} 
-                    className="w-full h-full object-cover" 
+                <img
+                    src={menu.image}
+                    alt={menu.title}
+                    className="w-full h-full object-cover"
                 />
 
                 <span className="absolute top-3 left-3 bg-yellow-400 text-gray-900 text-xs font-semibold px-2 py-1 rounded-full">
@@ -39,12 +40,12 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                 </h3>
 
                 <div className="flex items-center text-sm text-gray-600">
-                    <Star size={16} className="text-yellow-400 mr-1" fill="currentColor"/>
-                    <span>{menu.rating}/10 ({menu.calories} review)</span>
+                    <Star size={16} className="text-yellow-400 mr-1" fill="currentColor" />
+                    <span>{menu.rating}/10</span>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-3 text-sm bg-white rounded-lg p-4 my-2">
-                    <div className="flex items-center gap-3 rounded-lg">
+                    <div className="flex items-center gap-3">
                         <BarChart10 size={16} className="text-gray-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Kesulitan</span>
@@ -52,7 +53,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-lg">
+                    <div className="flex items-center gap-3">
                         <Flame size={16} className="text-red-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Kalori</span>
@@ -60,7 +61,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-lg">
+                    <div className="flex items-center gap-3">
                         <Clock size={16} className="text-blue-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Durasi</span>
@@ -68,8 +69,8 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         </div>
                     </div>
 
-                    <div className="flex items-center gap-3 rounded-lg">
-                        <Info size={16} className="text-green-500" /> 
+                    <div className="flex items-center gap-3">
+                        <Info size={16} className="text-green-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Langkah</span>
                             <span className="font-medium text-gray-800 text-sm">{menu.steps.length} langkah</span>
@@ -79,29 +80,104 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
 
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-2 h-auto rounded-md">Lihat Detail</Button>
+                        <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-2 h-auto rounded-md">
+                            Lihat Detail
+                        </Button>
                     </DialogTrigger>
-                    
-                    <DialogContent>
 
-                    <DialogHeader>
-                        <DialogTitle>{menu.title}</DialogTitle>
-                    </DialogHeader>
-                    <div className="space-y-2">
-                        <img src={menu.image} alt={menu.title} className="rounded-lg w-full object-cover" />
-                        <p>Kesulitan: {menu.difficulty}</p>
-                        <p>Kalori: {menu.calories} kkal</p>
-                        <p>Langkah: {menu.steps} langkah</p>
-                        <p>Waktu Persiapan: {menu.prepTime} menit</p>
-                    </div>
-                    <DialogFooter>
-                        <Button type="submit" className = "!text-base">Mulai Memasak</Button>
-                    </DialogFooter>
+                    <DialogContent className="max-h-[75vh] overflow-y-auto min-w-[35vw] rounded-3xl p-0 !border-0">
+                        <DialogHeader className="p-4 h-72 bg-black relative">
+                            <img
+                                src={menu.image}
+                                alt={menu.title}
+                                className="w-full h-full object-cover absolute top-0 left-0 mask-b-from-50%"
+                            />
+
+                            <div className="absolute inset-0 mask-t-to-50% mask-t-from-5% backdrop-blur-md bg-black-10" />
+
+                            <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
+                                <DialogTitle className="text-2xl font-semibold">{menu.title}</DialogTitle>
+                                <DialogDescription className="text-slate-100/70 max-w-3/4">
+                                    {menu.description}
+                                </DialogDescription>
+                            </div>
+                        </DialogHeader>
+
+                        <div className="flex flex-col gap-2 px-6 py-2">
+                            <div className="grid grid-cols-3 gap-2 my-4">
+                                <div className="bg-slate-100 p-4 rounded-lg">
+                                    <div className="flex items-center gap-3">
+                                        <BarChart10 size={16} className="text-gray-500" />
+                                        <div className="flex flex-col">
+                                            <span className="text-gray-500 text-xs">Kesulitan</span>
+                                            <span className="font-medium text-gray-800 text-sm">{menu.difficulty}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-100 p-4 rounded-lg">
+                                    <div className="flex items-center gap-3">
+                                        <Flame size={16} className="text-red-500" />
+                                        <div className="flex flex-col">
+                                            <span className="text-gray-500 text-xs">Kalori</span>
+                                            <span className="font-medium text-gray-800 text-sm">{menu.calories} kkal</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-100 p-4 rounded-lg">
+                                    <div className="flex items-center gap-3">
+                                        <Clock size={16} className="text-blue-500" />
+                                        <div className="flex flex-col">
+                                            <span className="text-gray-500 text-xs">Durasi</span>
+                                            <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 className="text-2xl font-medium my-4">Bahan</h2>
+                            <div className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-1">
+                                {Object.keys(menu.ingredients).map((ingredient, index) => (
+                                    <div className="flex text-center" key={index}>
+                                        <span className="mr-auto text-gray-800 font-medium">{ingredient}</span>
+                                        <span className="text-sm text-gray-600">
+                                            {menu.ingredients[ingredient].humanValue}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
+
+                            <h2 className="text-2xl font-medium my-4">Langkah Memasak</h2>
+                            <ul className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-1">
+                                {menu.steps.map((step, index) => (
+                                    <div key={index} className="flex text-center gap-3 items-center">
+                                        <span className="text-gray-500 text-sm select-none">{index + 1}.</span>
+                                        <li>{step}</li>
+                                    </div>
+                                ))}
+                            </ul>
+                        </div>
+
+                        <DialogFooter className="w-full px-6 pb-4 pt-0">
+                            <div className="flex w-full gap-2">
+                                <Button
+                                    type="button"
+                                    className="!text-base w-1/2 h-auto !bg-red-400 hover:!bg-red-500"
+                                >
+                                    <Heart size={16} className="mr-1" fill="currentColor" />
+                                    Tambahkan Suka
+                                </Button>
+                                <Button type="button" className="!text-base w-1/2 h-auto">
+                                    Mulai Memasak
+                                </Button>
+                            </div>
+                        </DialogFooter>
                     </DialogContent>
                 </Dialog>
             </div>
         </div>
     );
-}
+};
 
 export default FeaturedMenuCard;

@@ -1,7 +1,7 @@
 'use client'
 
 import { BarChart10 } from "iconest-react";
-import { Clock, Flame, Info, Star } from "lucide-react";
+import { Clock, Flame, Info, Star, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Menu } from "@/types";
 
@@ -171,7 +171,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
 
                         <DialogFooter className = "w-full px-6 pb-4 pt-0 w-full">
                             <div className = "flex w-full gap-2">
-                                <Button type="button" className = "!text-base w-1/2 h-auto">Mulai Memasak</Button>
+                                <Button type="button" className="!text-base w-1/2 h-auto !bg-red-400 hover:!bg-red-500"><Heart size={16} className="text-base mr-1" fill="currentColor" />Tambahkan Suka</Button>
                                 <Button type="button" className = "!text-base w-1/2 h-auto">Mulai Memasak</Button>
                             </div>
                         </DialogFooter>

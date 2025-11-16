@@ -70,7 +70,7 @@ const DashboardNav = () => {
                     })}
                 </nav>
                 <button>
-                    <img className = {`rounded-full size-12`} src = {`https://media-cgk2-1.cdn.whatsapp.net/v/t61.24694-24/569354245_839797792057289_4133156723757990270_n.jpg?ccb=11-4&oh=01_Q5Aa2wES15oo33uIOvs3NUQFhqZr9sFBN4M8oUJn2_1Cn9LlrA&oe=690576AF&_nc_sid=5e03e0&_nc_cat=108`}/>    
+                    <img className={`rounded-full size-12`} src={`/images/users/1.png`}/>    
                 </button> 
             </div>
         </TooltipProvider>

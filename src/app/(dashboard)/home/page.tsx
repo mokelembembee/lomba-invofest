@@ -41,22 +41,17 @@ const Page = () => {
             route: "olahraga",
             content: "<StatOlahraga />",
         },
-        {
-            title: "Jam Tidur",
-            route: "jam-tidur",
-            content: "<StatJamTidur />",
-        },
     ];
 
     const [selectedStat, setSelectedStat] = useState(statsTab[0].route);
 
     return (
         <div className="flex w-full">
-            {/*
-            <img src="/images/tuyul.svg"alt="Character shadow"
+            
+            {/* <img src="/images/rhone.svg"alt="Character shadow"
             className="absolute top-0 right-0 w-80 opacity-20 rotate-[15deg] select-none pointer-events-none translate-x-8 -translate-y-15"
-            />
-            */}
+            /> */}
+           
             <main className="flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
                     <div className = "flex w-full items-center px-8 border-b min-h-70">
@@ -108,7 +103,7 @@ const Page = () => {
                         </div>
 
                         <div className="flex flex-col w-full md:w-3/5 items-center gap-2 p-4 pt-0">
-                            <div className="flex gap-2 w-full border-b">
+                            <div className="flex gap-2 w-full border-b items-center justify-center">
                                 {statsTab.map((tab) => (
                                     <div
                                         key={tab.route}
@@ -134,16 +129,16 @@ const Page = () => {
                     </div>
 
                     {/* ARTIKEL */}
-                    <div className="space-y-1 mt-4">
-                        <h2 className="text-4xl font-semibold text-gray-800">
+                    <div className="space-y-1 px-8">
+                        <h2 className="text-2xl font-semibold text-gray-800">
                             Fakta kesehatan
                         </h2>
-                        <span className="text-lg font-medium text-gray-600">
+                        <span className="font-medium text-gray-600">
                             Temukan fakta-fakta menarik seputar kesehatan
                         </span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-2">
+                    <div className="grid grid-cols-3 gap-2 px-8">
                         {Array.from({ length: 3 }).map((_, i) => (
                             <div key={i} className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1" >
                                 <div className="bg-gray-900 w-full h-48 rounded-md relative overflow-hidden flex">
@@ -175,7 +170,7 @@ const Page = () => {
                     </div>
                 </div>
 
-                <Link href="/article" className="ml-auto text-gray-600 font-medium flex items-center gap-2">
+                <Link href="/article" className="ml-auto text-gray-600 font-medium flex items-center px-8 gap-2">
                     <span>Lihat selengkapnya</span>
                     <ArrowRight className="size-5" />
                 </Link>

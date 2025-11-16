@@ -13,23 +13,13 @@ import MenuCardLong from "@/components/dashboard/LongFeaturedMenuCard"
 import { useRouter } from "next/navigation"
 import { useUser } from "@stackframe/stack"
 
-// Jika struktur Recipe berbeda, sesuaikan di sini
-type Recipe = {
-    title: string
-    image: string
-    difficulty: "Mudah" | "Sedang" | "Sulit"
-    rating: number
-    calories: number
-    steps: number
-    prepTime: number
-}
 
 const Page = () => {
     const router = useRouter()
     const user = useUser()
 
     // State untuk data API
-    const [menus, setMenus] = useState<Recipe[]>([])
+    const [menus, setMenus] = useState<Menu[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -47,18 +37,30 @@ const Page = () => {
         const fetchRecipes = async () => {
             try {
                 const res = await fetch("/api/recipe", { method: "GET" })
-
                 if (!res.ok) throw new Error("Gagal memuat data resep")
-
+        
                 const json = await res.json()
-                setMenus(json.data)
+        
+                const mapped: Menu[] = json.data.map((item: any) => ({
+                title: item.title,
+                image: item.image,
+                description: item.description ?? "Tidak ada deskripsi",
+                difficulty: item.difficulty,
+                rating: item.rating,
+                calories: item.calories,
+                steps: Array.isArray(item.steps) ? item.steps : [],
+                prepTime: item.prepTime,
+                ingredients: item.ingredients ?? {},
+                liked: item.liked ?? false
+                }))
+        
+                setMenus(mapped)
             } catch (err: any) {
                 setError(err.message)
             } finally {
                 setLoading(false)
             }
         }
-
         fetchRecipes()
     }, [])
 
@@ -255,19 +257,55 @@ const Page = () => {
 
                     {/* Kolom Kanan */}
                     <div className="flex flex-col col-span-2 gap-2 sticky top-4 self-start h-fit">
+                        {/* HEADER */}
                         <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-primary to-primary-shade overflow-hidden flex text-slate-100 relative">
-                            <h3 className="text-xl font-semibold mt-auto">Bahan Makanan</h3>
-                            <img className="absolute top-0 -right-16 size-56 -rotate-24" src="https://cdn3d.iconscout.com/3d/premium/thumb/vegetables-3d-icon-png-download-6478875.png"/>
+                            <h3 className="text-xl font-semibold mt-auto z-10">Resep Favorit Kamu</h3>
+                            <img
+                                className="absolute top-0 -right-16 size-56 -rotate-24"
+                                src="https://cdn3d.iconscout.com/3d/premium/thumb/vegetables-3d-icon-png-download-6478875.png"
+                            />
                         </div>
 
-                        <div className="border p-2 rounded-2xl flex flex-col gap-2">
-                            <div className="bg-slate-100 p-4 rounded-xl text-sm">Bayam</div>
-                            <div className="bg-slate-100 p-4 rounded-xl text-sm">Wortel</div>
-                            <div className="bg-slate-100 p-4 rounded-xl text-sm">Daging Salman</div>
+                        {/* FAVORITE LIST */}
+                        <div className="border p-2 rounded-2xl flex flex-col gap-2 max-h-[52vh] overflow-y-auto">
+                            {menus.filter(m => m.liked).length > 0 ? (
+                                menus
+                                    .filter(m => m.liked)
+                                    .map((fav, i) => (
+                                        <button
+                                            key={i}
+                                            className="bg-slate-100 hover:bg-slate-200 transition p-4 rounded-xl text-sm flex items-center gap-3 text-left"
+                                            onClick={() => router.push(`/cook/${fav.title}`)}
+                                        >
+                                            <img
+                                                src={fav.image}
+                                                className="rounded-lg object-cover size-12"
+                                                alt={fav.title}
+                                            />
+                                            <div className="flex flex-col">
+                                                <span className="font-semibold text-gray-800">{fav.title}</span>
+                                                <span className="text-gray-500 text-xs">{fav.calories} kkal • {fav.prepTime} menit</span>
+                                            </div>
+                                        </button>
+                                    ))
+                            ) : (
+                                <div className="flex flex-col items-center justify-center p-4 bg-slate-100 rounded-xl">
+                                    <span className="font-medium text-gray-700 text-sm">
+                                        Belum ada resep favorit
+                                    </span>
+                                    <span className="text-gray-500 text-xs">
+                                        Klik “Tambahkan Suka” pada resep untuk menyimpan.
+                                    </span>
+                                </div>
+                            )}
                         </div>
 
-                        <Button className="mt-2 text-base">Tambah</Button>
+                        {/* CTA */}
+                        <Button className="mt-2 text-base" onClick={() => router.push('/cook')}>
+                            Jelajahi Resep
+                        </Button>
                     </div>
+
                 </div>
 
                 <Footer />

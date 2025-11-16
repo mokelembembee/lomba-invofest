@@ -47,30 +47,19 @@ const Page = () => {
 
     return (
         <div className="flex w-full">
-            
-            {/* <img src="/images/rhone.svg"alt="Character shadow"
-            className="absolute top-0 right-0 w-80 opacity-20 rotate-[15deg] select-none pointer-events-none translate-x-8 -translate-y-15"
-            /> */}
-           
-            <main className="flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
+            <main className="relative flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-                    <div className = "flex w-full items-center px-8 border-b min-h-70">
-                        <div className = "flex flex-col space-y-2">
-                            <span className="text-xl font-medium text-gray-500">
-                                Menu
-                            </span>
-                        
-                            <h2 className="text-4xl font-semibold text-gray-700">
-                                Halo, {user.displayName}. Sudah siap hidup sehat?
-                            </h2>
-                        </div>
-
-                        {/*
-                        <div className = "bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
-
-                        </div>
-                        */}
+                <div className="relative flex w-full items-center px-8 border-b min-h-50 overflow-hidden">
+                    <div className="absolute inset-0 bg-[url('/images/rhone.svg')] bg-left  bg-no-repeat opacity-75 pointer-events-none select-none">
                     </div>
+                    <div className="flex flex-col space-y-2 relative z-10">
+                        <span className="text-xl font-medium text-gray-500">Beranda</span>
+                        <h2 className="text-4xl font-semibold text-gray-700">
+                        Halo, {user.displayName}. Sudah siap hidup sehat?
+                        </h2>
+                    </div>
+                </div>
+
 
 
                     <div className="space-y-1 px-8">

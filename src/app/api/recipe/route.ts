@@ -15,12 +15,10 @@ export async function GET() {
         .from('Recipe')
         .select('*')
 
-    console.log(data)
-
     if (error) {
         return NextResponse.json({
             success: false,
-            message: 'Failed to fetch recipes',
+            message: 'Failed to fetch sports',
             error: error.message
         }, { status: 500 })
     }

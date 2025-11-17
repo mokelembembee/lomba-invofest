@@ -13,6 +13,12 @@ export interface Menu {
     steps: string[];
     prepTime: number;
     ingredients: Record<string, Ingredient>;
+    liked: boolean;
+}
+
+export interface SportProgram {
+    day: string;
+    activities: string[];
 }
 
 export interface Sport {
@@ -21,5 +27,30 @@ export interface Sport {
     difficulty: 'Mudah' | 'Sedang' | 'Sulit';
     area: string;
     calories: number;
-    prepTime: number;
+    duration: number;
+
+    programs: {
+        totalDays: number;
+        days: {
+        day: string;
+        exercises: {
+            name: string;
+            sets: number;
+            reps: string;
+            duration: string;
+        }[];
+        }[];
+    };
+}
+
+
+export interface Article {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+    content: string;
+    category: "health" | "sports" | "food";
+    read_time: number;
+    liked: boolean;
 }

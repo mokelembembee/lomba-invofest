@@ -112,7 +112,7 @@ const Page = () => {
                         <div className="relative w-full md:w-4/5 h-96 bg-blue-200 rounded-xl overflow-hidden">
                             <div className="flex flex-col absolute bottom-20 left-1/2 -translate-x-1/2 items-center gap-2 h-fit">
                                 <span className="rounded-full bg-white translate-y-10 px-4 py-1.5 text-sm w-fit">
-                                    Salman
+                                    {user.displayName}
                                 </span>
                                 <img src="/images/tuyul.svg" className="h-50 w-fit" />
                             </div>
@@ -180,7 +180,7 @@ const Page = () => {
                             articles.slice(0, 3).map((article, i) => (
                                 <Dialog key={article.id}>
                                     <DialogTrigger asChild>
-                                        <div className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1 cursor-pointer transition hover:shadow-md" >
+                                        <div className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1 cursor-pointer transition">
                                             <div className="bg-gray-900 w-full h-48 rounded-md relative overflow-hidden flex">
                                                 <img src={article.image} className="absolute w-full h-full object-cover" />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

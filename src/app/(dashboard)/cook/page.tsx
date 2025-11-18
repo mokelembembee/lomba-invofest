@@ -40,8 +40,31 @@ const Page = () => {
     const itemsPerPage = 7
 
     const referenceIngredients = [
+        // Awal
         "Salmon", "Tuna", "Bayam", "Wortel", "Brokoli", "Tomat", "Kubis", "Telur", "Ayam", "Daging", "Kentang",
-        "Keju", "Bawang Putih", "Bawang Merah", "Cabai", "Minyak Zaitun", "Mentega", "Garam", "Merica"
+        "Keju", "Bawang Putih", "Bawang Merah", "Cabai", "Minyak Zaitun", "Mentega", "Garam", "Merica","Apel",
+
+        // Tambahan Protein & Daging
+        "Udang", "Cumi-cumi", "Kerang", "Gurame", "Bandeng", "Kakap", "Kepiting", "Lobster", "Sarden",
+        "Bebek", "Kalkun", "Puyuh", "Sapi", "Kambing", "Iga", "Sosis", "Bacon", "Ham",
+
+        // Tambahan Sayuran
+        "Sawi", "Selada", "Pakcoy", "Kangkung", "Daun Bawang", "Seledri", "Daun Singkong",
+        "Ubi Jalar", "Singkong", "Lobak", "Bit", "Terong", "Labu Siam", "Timun", "Zukini", "Paprika", "Jagung", "Jamur Kancing", "Jamur Tiram",
+        "Buncis", "Kacang Panjang", "Edamame", "Kacang Polong",
+
+        // Biji-bijian & Karbohidrat
+        "Nasi Putih", "Beras Ketan", "Mie Telor", "Pasta Spaghetti", "Roti", "Gandum", "Oatmeal", "Quinoa",
+
+        // Produk Susu & Alternatif
+        "Susu Sapi", "Yoghurt", "Krim", "Santan", "Tahu", "Tempe",
+
+        // Rempah-rempah, Bumbu Dasar, & Perasa
+        "Jahe", "Kunyit", "Lengkuas", "Kencur", "Serai", "Daun Salam", "Ketumbar", "Jintan", "Kayu Manis", "Cengkeh", "Pala", "Kapulaga",
+        "Kecap Manis", "Kecap Asin", "Saus Tiram", "Saus Sambal", "Cuka", "Gula Pasir", "MSG",
+
+        // Minyak & Lemak
+        "Minyak Kelapa", "Minyak Sayur", "Margarin", "Minyak Wijen"
     ]
 
     const suggestions = referenceIngredients.filter(
@@ -96,8 +119,8 @@ const Page = () => {
     const startIndex = (page - 1) * itemsPerPage
     const paginatedMenus = filteredMenus.slice(startIndex, startIndex + itemsPerPage)
 
-    const mainRecommendation = menus[8]
-    const secondRecommendation = menus[9]
+    const mainRecommendation = menus[9]
+    const secondRecommendation = menus[8]
 
     const toggleLikeGlobal = (title: string) => {
         setMenus(prev =>
@@ -116,8 +139,8 @@ const Page = () => {
                         <h2 className="text-4xl font-semibold text-gray-700">Jelajahi resep-resep menarik disini</h2>
                     </div>
 
-                    <div className="bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
-                        <Accordion type="single" collapsible>
+                    <div className="bg-slate-100 w-full rounded-3xl flex flex-col gap-2 h-fit ml-auto">
+                        <Accordion type="single" collapsible className = "p-4">
                             <AccordionItem value="item-1">
                                 <div className="w-full flex gap-2 items-center">
                                     <div className="flex gap-2 bg-white p-1 rounded-full h-fit w-full">
@@ -138,7 +161,7 @@ const Page = () => {
                                 </div>
 
                                 <AccordionContent>
-                                    <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex">
+                                    <div className="bg-white p-1 mt-2 rounded-xl flex">
                                         <div className="p-5 border rounded-lg flex w-full gap-4">
                                             <div className="w-full flex flex-col gap-4">
                                                 <h2 className="font-medium text-xl">Bahan</h2>
@@ -264,14 +287,6 @@ const Page = () => {
                                         )
                                     })}
                                 </div>
-
-                                <div className="flex gap-2 items-center">
-                                    <p className="text-gray-600 text-sm">Sort by:</p>
-                                    <div className="flex p-2 bg-gray-200 items-center text-gray-700 rounded-lg gap-1">
-                                        <span className="text-xs font-medium">Calories</span>
-                                        <ChevronDown size={15} />
-                                    </div>
-                                </div>
                             </div>
 
                             <div className="flex flex-col gap-2">
@@ -293,8 +308,8 @@ const Page = () => {
                                         <button
                                             key={num}
                                             onClick={() => setPage(num)}
-                                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${page === num
-                                                    ? "bg-green-400 text-white shadow-md"
+                                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition aspect-square ${page === num
+                                                    ? "bg-green-400 text-white"
                                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                                 }`}
                                         >
@@ -344,11 +359,6 @@ const Page = () => {
                                 </div>
                             )}
                         </div>
-
-                        <Button className="mt-2 text-base" onClick={() => router.push('/cook')}>
-                            Cari Resep Baru
-                        </Button>
-
                     </div>
                 </div>
 

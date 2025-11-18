@@ -27,14 +27,14 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
     const toggleLike = () => setLiked(prev => !prev)
 
     return (
-        <div className="flex p-3 text-justify bg-slate-100 rounded-lg gap-3 w-full">
-            <div className="rounded-xl w-1/3 h-24 overflow-hidden">
+        <div className="flex p-3 text-justify bg-slate-100 rounded-lg gap-4 w-full">
+            <div className="rounded-xl w-1/3 h-32 overflow-hidden">
                 <img src={menu.image} alt={menu.title} className="object-cover w-full h-full" />
             </div>
 
             <div className="flex flex-col w-full justify-between">
                 <div className="flex justify-between items-start">
-                    <div className={`flex px-4 rounded font-semibold items-center gap-1 ${
+                    <div className={`flex px-3 py-1 rounded-full font-semibold items-center gap-1.5 ${
                         menu.difficulty === 'Mudah' ? 'bg-primary text-white' :
                         menu.difficulty === 'Sedang' ? 'bg-btn-medium text-white' :
                         menu.difficulty === 'Sulit' ? 'bg-btn-hard text-white' :
@@ -45,30 +45,31 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
                     </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-800">{menu.title}</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-1">{menu.title}</h3>
 
                 {/* === RATING === */}
-                <div className="flex items-center gap-2 mt-0.5">
+                <div className="flex items-center gap-2 mb-1">
                     <Star size={16} className="text-yellow-400" fill="currentColor" />
-                    <span className="text-xs font-medium text-gray-700">{menu.rating}/10</span>
+                    <span className="text-xs font-medium text-gray-700">{menu.rating}/5</span>
                     <div className="flex h-[10px] gap-0.5">
-                        {Array.from({ length: 10 }, (_, i) => (
+                        {/* {Array.from({ length: 5 }, (_, i) => (
                             <div
                                 key={i}
                                 className={`w-1.5 h-full rounded ${i < menu.rating ? "bg-yellow-400" : "bg-gray-300"}`}
                             />
-                        ))}
+                        ))} */}
                     </div>
                 </div>
 
-                <div className="flex justify-between items-center">
-                    <div className="flex px-1 py-0.5 bg-white rounded font-semibold text-gray-700 items-center gap-1.5">
-                        <div className="flex items-center gap-1">
+                <div className="flex justify-between items-center mt-2">
+                    <div className="flex px-2 py-1.5 bg-white rounded font-semibold text-gray-700 items-center gap-1.5">
+                        <div className="flex items-center gap-2">
                             <Flame size={12} className="text-yellow-500" />
                             <span className="text-xs">{menu.calories} kkal</span>
                         </div>
+
                         <div className="w-px h-full bg-gray-300" />
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center gap-2">
                             <Clock size={12} />
                             <span className="text-xs">{menu.duration} menit</span>
                         </div>
@@ -129,6 +130,71 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
                                     </div>
                                 </div>
 
+                                                        <div>
+                                <h2 className="text-2xl font-semibold mb-3 text-gray-800">Nilai Gizi</h2>
+                                <div className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Kalori</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Protein</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Karbohidrat</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Gula</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Natrium</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Lemak</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Serat Pangan</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Kolestrol</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
                                 <div>
                                     <h2 className="text-xl font-semibold mb-2">Langkah Memasak</h2>
                                     <ol className="bg-slate-100 p-4 rounded-2xl space-y-3 list-decimal list-inside text-left">
@@ -151,9 +217,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
                                 </Button>
 
 
-                                <Button className="w-1/2 text-base">
-                                    Mulai Memasak
-                                </Button>
+                        
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>

@@ -194,13 +194,12 @@ const Page = () => {
                         <div className="flex flex-col col-span-2 gap-2 sticky top-8 self-start h-fit">
                             <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-pink-500 to-pink-700 overflow-hidden flex text-slate-100 relative">
                                 <h3 className="text-xl font-semibold mt-auto">Artikel Disukai</h3>
-                                <Heart className="absolute -top-4 -right-8 opacity-20" size={160} strokeWidth={1} />
+                                <img src = "https://cdn3d.iconscout.com/3d/premium/thumb/like-notification-3d-icon-png-download-3811156.png" className = "absolute w-56 h-auto bottom-8 translate-y-1/3 -right-6 -rotate-32"/>
                             </div>
 
                             <div className="border p-2 rounded-2xl flex flex-col gap-2 max-h-[45vh] overflow-y-auto">
                                 {articles.filter(a => likedArticles.includes(a.id)).length > 0 ? (
                                     articles.filter(a => likedArticles.includes(a.id)).map(fav => (
-                                        
                                         <Dialog key={fav.id}>
                                             <DialogTrigger asChild>
                                                 <div className="bg-slate-100 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition">

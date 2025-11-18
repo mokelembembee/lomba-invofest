@@ -218,7 +218,7 @@ const Page = () => {
                                         <button
                                             key={num}
                                             onClick={() => setPage(num)}
-                                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${page === num ? "bg-purple-600 text-white shadow-md" : "bg-gray-200 text-gray-700"}`}
+                                            className={`px-4 py-1.5 aspect-square rounded-md text-sm font-medium transition ${page === num ? "bg-purple-600 text-white shadow-md" : "bg-gray-200 text-gray-700"}`}
                                         >{num}</button>
                                     ))}
                                 </div>
@@ -228,11 +228,11 @@ const Page = () => {
 
                     <div className="flex flex-col col-span-2 gap-4 sticky top-4 self-start h-fit">
                         <div className="p-6 rounded-2xl h-40 bg-gradient-to-r from-purple-500 to-purple-700 overflow-hidden flex flex-col justify-end text-white relative shadow-md">
-                            <h3 className="text-xl font-semibold leading-tight">Jadwal Latihan Minggu Ini</h3>
+                            <h3 className="text-xl font-semibold leading-tight z-10">Jadwal Latihan Minggu Ini</h3>
                             <img className="absolute top-0 -right-12 size-40 rotate-24 opacity-80" src="https://cdn2.iconfinder.com/data/icons/fitness-vol-2-1/512/exercise-time-fitness-weightlifting-workout-gym-barbell-3d.png" />
                         </div>
 
-                        <div className="border p-3 rounded-2xl flex flex-col gap-4 max-h-[50vh] overflow-y-auto shadow-sm bg-white">
+                        <div className="border p-2 rounded-2xl flex flex-col gap-2 max-h-[50vh] overflow-y-auto bg-white">
                             {programDaysWithDate
                                 .filter(d => {
                                     const today = new Date()
@@ -245,11 +245,10 @@ const Page = () => {
                                     <button
                                         key={`today-${index}`}
                                         onClick={() => { setSelectedDay(todayEntry); setOpenDayDialog(true) }}
-                                        className="bg-purple-500 rounded-xl p-4 flex flex-col gap-3 hover:bg-purple-700 transition text-left shadow text-white"
+                                        className="bg-purple-500 rounded-xl p-4 flex flex-col gap-1 hover:bg-purple-700 transition text-left shadow text-white"
                                     >
-                                        <span className="font-semibold text-base">Tugas Hari Ini</span>
-                                        <span className="font-semibold text-lg">{todayEntry.day}</span>
-                                        <span className="text-xs bg-white/30 px-2 py-0.5 rounded-full w-fit">Hari ini</span>
+                                        <span className="text-sm opacity-70">Tugas Hari Ini</span>
+                                        <span className="font-semibold text-base">{todayEntry.day}</span>
                                     </button>
                                 ))
                             }
@@ -276,7 +275,7 @@ const Page = () => {
                                         >
                                             <div className="flex justify-between items-center">
                                                 <span className="font-semibold text-gray-800 text-sm">{day.day}</span>
-                                                <span className="text-xs bg-purple-200 text-purple-700 px-2 py-0.5 rounded-full font-medium">{label}</span>
+                                                <span className="text-xs bg-purple-200 text-purple-700 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">{label}</span>
                                             </div>
                                         </button>
                                     )
@@ -284,7 +283,7 @@ const Page = () => {
                             }
 
                             {programDaysWithDate.length === 0 && (
-                                <span className="text-xs text-gray-500 px-2">Program belum dimulai</span>
+                                <span className="text-gray-500 p-6 text-center">Program belum dimulai.</span>
                             )}
                         </div>
                     </div>
@@ -296,13 +295,13 @@ const Page = () => {
                             <DialogTitle className="text-xl font-semibold">{selectedDay?.day}</DialogTitle>
                         </DialogHeader>
 
-                        <div className="flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-2 mt-3">
+                        <div className="flex flex-col gap-2 max-h-[60vh] overflow-y-auto mt-2 bg-slate-100 p-2 rounded-2xl">
                             {selectedDay && selectedDay.exercises
                                 .filter((_: any, i: number) => !(selectedDay.done ?? []).includes(i))
                                 .map((ex: any, i: number) => {
                                     const originalIndex = selectedDay.exercises.indexOf(ex)
                                     return (
-                                        <div key={originalIndex} className="flex justify-between items-center bg-slate-100 p-3 rounded-lg border">
+                                        <div key={originalIndex} className="flex justify-between items-center p-4 rounded-lg bg-white">
                                             <div className="flex flex-col">
                                                 <span className="font-semibold text-gray-800">{ex.name}</span>
                                                 <span className="text-gray-600 text-sm">{ex.sets} × {ex.reps}</span>
@@ -335,13 +334,13 @@ const Page = () => {
                             }
 
                             {(selectedDay?.done?.length ?? 0) === selectedDay?.exercises?.length && (
-                                <div className="text-center text-gray-700 font-medium bg-slate-100 p-4 rounded-lg">
-                                    Semua latihan selesai 🎉
+                                <div className="text-center text-gray-700 bg-slate-100 p-4 rounded-lg">
+                                    Semua latihan selesai.
                                 </div>
                             )}
                         </div>
 
-                        <DialogFooter className="mt-6">
+                        <DialogFooter>
                             <Button className="w-full !bg-purple-600" onClick={() => setOpenDayDialog(false)}>Tutup</Button>
                         </DialogFooter>
                     </DialogContent>

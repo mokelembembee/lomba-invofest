@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import Papa from 'papaparse'
 import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'

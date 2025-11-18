@@ -34,7 +34,7 @@ const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport, onStartPro
         </div>
 
         <div className="flex flex-col gap-2 p-2">
-            <h3 className="text-xl font-semibold text-gray-800 leading-tight">{sport.title}</h3>
+            <h3 className="text-xl font-semibold text-gray-800 leading-tight flex items-start h-[3.1rem]">{sport.title}</h3>
 
             <div className="flex items-center text-sm text-gray-600">
             <Target size={16} className="text-purple-500 mr-1" />
@@ -74,80 +74,94 @@ const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport, onStartPro
                 </div>
             </div>
             </div>
+            
+                    <Dialog>
+                        <DialogTrigger asChild>
+                            <Button className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-3 py-2 h-auto rounded-md">
+                                Lihat Detail
+                            </Button>
+                        </DialogTrigger>
 
-            <Dialog>
-            <DialogTrigger asChild>
-                <Button className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-3 py-2 h-auto rounded-md">
-                Lihat Detail
-                </Button>
-            </DialogTrigger>
+                        <DialogContent className="rounded-3xl p-0 !border-0 max-w-2xl max-h-[85vh] overflow-y-auto">
+                            <DialogHeader className="p-4 h-72 bg-black relative">
+                                <img
+                                    src={sport.image}
+                                    alt={sport.title}
+                                    className="w-full h-full object-cover absolute top-0 left-0 mask-b-from-50%"
+                                />
+                                <div className="absolute inset-0 mask-t-to-50% mask-t-from-5% backdrop-blur-md bg-black-10" />
+                                
+                                <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
+                                    <DialogTitle className="text-2xl font-bold">
+                                        {sport.title}
+                                    </DialogTitle>
+                                    <DialogDescription className="text-slate-100/70 max-w-3/4 text-base">
+                                        Latihan fokus area {sport.area} tingkat {sport.difficulty}
+                                    </DialogDescription>
+                                </div>
+                            </DialogHeader>
 
-            <DialogContent className="max-h-[75vh] overflow-y-auto min-w-[38vw] rounded-3xl p-0 !border-0">
-                <DialogHeader className="p-4 h-80 bg-black relative">
-                <img
-                    src={sport.image}
-                    alt={sport.title}
-                    className="w-full h-full object-cover absolute top-0 left-0 mask-b-from-50%"
-                />
-                <div className="absolute inset-0 mask-t-to-50% backdrop-blur-[2px] bg-black/20" />
-                <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
-                    <DialogTitle className="text-2xl font-semibold">{sport.title}</DialogTitle>
-                    <DialogDescription className="text-slate-100/70 max-w-3/4">
-                    Program latihan {sport.programs?.totalDays} hari — progresif & berfokus pada {sport.area}.
-                    </DialogDescription>
-                </div>
-                </DialogHeader>
+                            <div className="px-6 py-4 space-y-6">
+                                <div className="grid grid-cols-3 gap-2">
+                                    <div className="bg-slate-100 p-4 rounded-lg">
+                                        <span className="text-xs text-gray-500">Kesulitan</span>
+                                        <p className="font-medium text-gray-800">{sport.difficulty}</p>
+                                    </div>
+                                    <div className="bg-slate-100 p-4 rounded-lg">
+                                        <span className="text-xs text-gray-500">Kalori</span>
+                                        <p className="font-medium text-gray-800">{sport.calories} kkal</p>
+                                    </div>
+                                    <div className="bg-slate-100 p-4 rounded-lg">
+                                        <span className="text-xs text-gray-500">Durasi</span>
+                                        <p className="font-medium text-gray-800">{sport.duration} menit</p>
+                                    </div>
+                                </div>
 
-                <div className="flex flex-col gap-6 px-6 py-4">
-                <div className="grid grid-cols-3 gap-2">
-                    <div className="bg-slate-100 p-4 rounded-xl">
-                    <span className="text-gray-500 text-xs">Kesulitan</span>
-                    <p className="font-medium text-gray-800 mt-1">{sport.difficulty}</p>
-                    </div>
-                    <div className="bg-slate-100 p-4 rounded-xl">
-                    <span className="text-gray-500 text-xs">Kalori</span>
-                    <p className="font-medium text-gray-800 mt-1">{sport.calories} kkal / sesi</p>
-                    </div>
-                    <div className="bg-slate-100 p-4 rounded-xl">
-                    <span className="text-gray-500 text-xs">Durasi</span>
-                    <p className="font-medium text-gray-800 mt-1">{sport.duration} menit / sesi</p>
-                    </div>
-                </div>
+                                <div>
+                                    <h2 className="text-xl font-semibold mb-2">Program Latihan</h2>
+                                    <div className="space-y-2">
+                                        {sport.programs?.days?.map((day, index) => (
+                                            <div key={index} className="bg-slate-100 p-4 rounded-2xl">
+                                                <div className="flex items-center gap-2 mb-3 border-b border-slate-200 pb-2">
+                                                    <h3 className="font-bold text-gray-800 text-lg">{day.day}</h3>
+                                                </div>
+                                                
+                                                <div className="space-y-2">
+                                                    {day.exercises.map((ex, i) => (
+                                                        <div key={i} className="flex justify-between items-center text-sm bg-white p-4 rounded-xl">
+                                                            <span className="font-medium text-gray-800">{ex.name}</span>
+                                                            <div className="flex items-center gap-2 text-gray-500 text-xs">
+                                                                <span className="bg-slate-100 px-2 py-1 rounded">
+                                                                    {ex.sets} set x {ex.reps}
+                                                                </span>
+                                                                {ex.duration && (
+                                                                     <span className="bg-slate-100 px-2 py-1 rounded">
+                                                                        {ex.duration}
+                                                                     </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
 
-                <h2 className="text-2xl font-medium">Jadwal Program</h2>
-
-                {sport.programs?.days?.map((day, index) => (
-                    <div key={index} className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-2">
-                    <span className="font-semibold text-gray-800 text-lg">{day.day}</span>
-                    {day.exercises.map((ex, i) => (
-                        <div key={i} className="flex justify-between text-gray-700 text-sm border-b pb-1">
-                        <span className="font-medium">{ex.name}</span>
-                        <span>
-                            {ex.sets} set × {ex.reps} • {formatDuration(ex.duration)}
-                        </span>
-
-                        </div>
-                    ))}
-                    </div>
-                ))}
-                </div>
-
-                <DialogFooter className="w-full px-6 pb-4 pt-0">
-                    <div className="flex w-full gap-2">
-                        <DialogClose asChild>
-                        <Button
-                            type="button"
-                            className="!text-base w-1/2 h-auto ml-auto !bg-purple-600 hover:!bg-purple-500 text-white"
-                            onClick={() => onStartProgram(sport)}
-                        >
-                            Mulai Program
-                        </Button>
-                        </DialogClose>
-                    </div>
-                </DialogFooter>
-
-            </DialogContent>
-            </Dialog>
+                            <DialogFooter className="px-6 pb-4 gap-2">
+                                <DialogClose asChild>
+                                    <Button
+                                        type="button"
+                                        className="w-full text-base bg-purple-600 hover:bg-purple-500 text-white"
+                                        onClick={() => onStartProgram(sport)}
+                                    >
+                                        Mulai Program
+                                    </Button>
+                                </DialogClose>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
         </div>
         </div>
     );

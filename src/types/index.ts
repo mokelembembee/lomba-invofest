@@ -14,6 +14,7 @@ export interface Menu {
     duration: number;
     ingredients: Record<string, Ingredient>;
     liked: boolean;
+    portion:number;
 }
 
 export interface SportProgram {

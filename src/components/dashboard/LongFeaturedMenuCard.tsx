@@ -33,12 +33,12 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
             </div>
 
             <div className="p-2 flex flex-col gap-2">
-                <h3 className="text-xl font-semibold text-gray-800 leading-tight">
+                <h3 className="text-xl font-semibold text-gray-800 leading-tight whitespace-nowrap flex items-start h-[3.1rem]">
                     {menu.title}
                 </h3>
                 <div className="flex items-center text-sm text-gray-600">
                     <Star size={16} className="text-yellow-400 mr-1" fill="currentColor" />
-                    <span>{menu.rating}/10</span>
+                    <span>{menu.rating}/5</span>
                 </div>
                 <div className="flex gap-2">
                     <div className="text-sm mr-auto w-1/2 mt-2 text-gray-800 flex flex-col mb-2">
@@ -158,6 +158,71 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
                                 ))}
                             </div>
 
+                            <div>
+                                <h2 className="text-2xl font-semibold mb-3 text-gray-800">Nilai Gizi</h2>
+                                <div className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-2">
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Kalori</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Protein</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Karbohidrat</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Gula</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Natrium</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+                                
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Lemak</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Serat Pangan</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+
+
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-medium text-gray-800">Kolestrol</span>
+                                        <span className="text-sm text-gray-600">
+                                            500 kkcal
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <h2 className = "text-2xl font-medium my-4">Langkah Memasak</h2>
 
                             <ol className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-3 list-decimal list-inside text-left">
@@ -178,9 +243,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
                                 <Heart size={16} className="mr-1" fill="currentColor" />
                                 {menu.liked ? "Disukai" : "Tambahkan Suka"}
                             </Button>
-                                <Button type="button" className="!text-base w-1/2 h-auto">
-                                    Mulai Memasak
-                                </Button>
+        
                             </div>
                         </DialogFooter>
                     </DialogContent>

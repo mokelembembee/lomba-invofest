@@ -132,7 +132,7 @@ const SportCard: React.FC<SportCardProps> = ({ sport , onStartProgram}) => {
                                     <DialogClose asChild>
                                     <Button
                                         type="button"
-                                        className="!text-base w-1/2 h-auto ml-auto"
+                                        className="!text-base w-1/2 h-auto ml-auto !bg-purple-600 hover:!bg-purple-500 text-white"
                                         onClick={() => onStartProgram(sport)}
                                     >
                                         Mulai Program

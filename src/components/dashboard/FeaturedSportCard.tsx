@@ -12,6 +12,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter,
+    DialogClose,
 } from "@/components/ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
@@ -19,9 +20,10 @@ const formatDuration = (d: string) => d.includes("menit") ? d : `${d} menit`;
 
 interface FeaturedSportCardProps {
     sport: Sport;
+    onStartProgram: (sport: Sport) => void;
 }
 
-const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport }) => {
+const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport, onStartProgram }) => {
     return (
         <div className="col-span-1 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
         <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
@@ -131,12 +133,19 @@ const FeaturedSportCard: React.FC<FeaturedSportCardProps> = ({ sport }) => {
                 </div>
 
                 <DialogFooter className="w-full px-6 pb-4 pt-0">
-                <div className="flex w-full gap-2">
-                    <Button type="button" className="!text-base w-1/2 h-auto ml-auto">
-                    Mulai Program
-                    </Button>
-                </div>
+                    <div className="flex w-full gap-2">
+                        <DialogClose asChild>
+                        <Button
+                            type="button"
+                            className="!text-base w-1/2 h-auto ml-auto"
+                            onClick={() => onStartProgram(sport)}
+                        >
+                            Mulai Program
+                        </Button>
+                        </DialogClose>
+                    </div>
                 </DialogFooter>
+
             </DialogContent>
             </Dialog>
         </div>

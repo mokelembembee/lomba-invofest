@@ -10,16 +10,18 @@ import {
     DialogContent,
     DialogHeader,
     DialogTitle,
-    DialogFooter
+    DialogFooter,
+    DialogClose,
 } from "@/components/ui/dialog"
 import { DialogDescription } from "@radix-ui/react-dialog"
 import { Button } from "@/components/ui/button"
 
 interface SportCardProps {
     sport: Sport
+    onStartProgram: (sport: Sport) => void
 }
 
-const SportCard: React.FC<SportCardProps> = ({ sport }) => {
+const SportCard: React.FC<SportCardProps> = ({ sport , onStartProgram}) => {
     return (
         <div className="flex p-3 text-justify bg-slate-100 rounded-lg gap-3">
             <div className="rounded-xl w-1/3 h-24 overflow-hidden">
@@ -126,9 +128,17 @@ const SportCard: React.FC<SportCardProps> = ({ sport }) => {
                             </div>
 
                             <DialogFooter className="w-full px-6 pb-4 pt-0">
-                                <Button type="button" className="!text-base w-full h-auto">
-                                    Mulai Program
-                                </Button>
+                                <div className="flex w-full gap-2">
+                                    <DialogClose asChild>
+                                    <Button
+                                        type="button"
+                                        className="!text-base w-1/2 h-auto ml-auto"
+                                        onClick={() => onStartProgram(sport)}
+                                    >
+                                        Mulai Program
+                                    </Button>
+                                    </DialogClose>
+                                </div>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>

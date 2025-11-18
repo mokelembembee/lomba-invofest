@@ -12,6 +12,7 @@ import {
     DialogHeader,
     DialogTitle,
     DialogFooter,
+    DialogClose,
 } from "@/components/ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
@@ -19,9 +20,10 @@ const formatDuration = (d: string) => d.includes("menit") ? d : `${d} menit`;
 
 interface SportCardLongProps {
     sport: Sport;
+    onStartProgram: (sport: Sport) => void;
 }
 
-const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
+const SportCardLong: React.FC<SportCardLongProps> = ({ sport, onStartProgram }) => {
     return (
         <div className="w-full col-span-2 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
         <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
@@ -131,13 +133,15 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
 
                     <DialogFooter className="w-full px-6 pb-4 pt-0">
                         <div className="flex w-full gap-2">
-                            <Button type="button" className="!text-base w-1/2 h-auto !bg-red-400 hover:!bg-red-500">
-                            <Heart size={16} className="mr-1" fill="currentColor" />
-                            Tambahkan Suka
+                            <DialogClose asChild>
+                            <Button
+                                type="button"
+                                className="!text-base w-1/2 h-auto ml-auto"
+                                onClick={() => onStartProgram(sport)}
+                            >
+                                Mulai Program
                             </Button>
-                            <Button type="button" className="!text-base w-1/2 h-auto">
-                            Mulai Program
-                            </Button>
+                            </DialogClose>
                         </div>
                     </DialogFooter>
                 </DialogContent>

@@ -245,7 +245,7 @@ const Page = () => {
                                     <button
                                         key={`today-${index}`}
                                         onClick={() => { setSelectedDay(todayEntry); setOpenDayDialog(true) }}
-                                        className="bg-purple-600 rounded-xl p-4 flex flex-col gap-3 hover:bg-purple-700 transition text-left shadow text-white"
+                                        className="bg-purple-500 rounded-xl p-4 flex flex-col gap-3 hover:bg-purple-700 transition text-left shadow text-white"
                                     >
                                         <span className="font-semibold text-base">Tugas Hari Ini</span>
                                         <span className="font-semibold text-lg">{todayEntry.day}</span>

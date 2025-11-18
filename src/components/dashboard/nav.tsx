@@ -45,16 +45,29 @@ const DashboardNav = () => {
                             <Tooltip key = { nav.url }>
                                 <TooltipTrigger asChild>
                                     <Link href = { nav.url }> 
-                                        <button className = {`rounded-full p-3 transition-all duration-100 ${
-                                                isActive ? 'bg-primary' : 'text-gray-500'
+                                    <button 
+                                        className={`rounded-full p-3 transition-all duration-150 ${
+                                            isActive
+                                                ? nav.title === "Beranda"
+                                                    ? "bg-primary text-white shadow-md"
+                                                : nav.title === "Masak"
+                                                    ? "bg-primary text-white shadow-md"
+                                                : nav.title === "Olahraga"
+                                                    ? "bg-purple-600 text-white shadow-md"
+                                                : nav.title === "Artikel"
+                                                    ? "bg-pink-500 text-white shadow-md"
+                                                : nav.title === "Social"
+                                                    ? "bg-orange-400 text-white shadow-md"
+                                                : "bg-primary text-white"
+                                            : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                                        }`}
+                                    >
+                                        <nav.icon
+                                            className={`size-6 ${
+                                                isActive ? "text-white" : "text-gray-500"
                                             }`}
-                                        >
-                                            <nav.icon
-                                                className = {`size-6 transition-all duration-100 ${
-                                                    isActive ? 'fill-primary text-white' : 'fill transparent'
-                                                }`}
-                                            />
-                                        </button>
+                                        />
+                                    </button>
                                     </Link>
                                 </TooltipTrigger>
                                 <TooltipContent 

@@ -6,54 +6,73 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { ChevronDown, Search } from "lucide-react"
 import { useEffect, useState } from "react"
-import { Menu } from "@/types" 
+import { Menu } from "@/types"
 import FeaturedMenuCard from "@/components/dashboard/FeaturedMenuCard"
 import MenuCard from "@/components/dashboard/menuCard"
 import MenuCardLong from "@/components/dashboard/LongFeaturedMenuCard"
 import { useRouter } from "next/navigation"
 import { useUser } from "@stackframe/stack"
-
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+} from "@/components/ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 const Page = () => {
     const router = useRouter()
     const user = useUser()
 
-    // State untuk data API
+    const [search, setSearch] = useState("")
     const [menus, setMenus] = useState<Menu[]>([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    // Filtering
     const [activeDifficulty, setActiveDifficulty] = useState("Semua")
     const difficultyFilters = ["Semua", "Mudah", "Sedang", "Sulit"]
+    const [ingredients, setIngredients] = useState<string[]>([])
+    const [newIngredient, setNewIngredient] = useState("")
 
-    // Redirect jika belum login
+    const [page, setPage] = useState(1)
+    const itemsPerPage = 7
+
+    const referenceIngredients = [
+        "Salmon", "Tuna", "Bayam", "Wortel", "Brokoli", "Tomat", "Kubis", "Telur", "Ayam", "Daging", "Kentang",
+        "Keju", "Bawang Putih", "Bawang Merah", "Cabai", "Minyak Zaitun", "Mentega", "Garam", "Merica"
+    ]
+
+    const suggestions = referenceIngredients.filter(
+        ing =>
+            newIngredient &&
+            ing.toLowerCase().includes(newIngredient.toLowerCase()) &&
+            !ingredients.includes(ing)
+    )
+
     useEffect(() => {
         if (!user) router.replace("/handler/sign-in")
     }, [user, router])
 
-    // Fetch data resep dari API
     useEffect(() => {
         const fetchRecipes = async () => {
             try {
                 const res = await fetch("/api/recipe", { method: "GET" })
                 if (!res.ok) throw new Error("Gagal memuat data resep")
-        
                 const json = await res.json()
-        
                 const mapped: Menu[] = json.data.map((item: any) => ({
-                title: item.title,
-                image: item.image,
-                description: item.description ?? "Tidak ada deskripsi",
-                difficulty: item.difficulty,
-                rating: item.rating,
-                calories: item.calories,
-                steps: Array.isArray(item.steps) ? item.steps : [],
-                prepTime: item.prepTime,
-                ingredients: item.ingredients ?? {},
-                liked: item.liked ?? false
+                    title: item.title,
+                    image: item.image,
+                    description: item.description ?? "Tidak ada deskripsi",
+                    difficulty: item.difficulty,
+                    rating: item.rating,
+                    calories: item.calories,
+                    steps: Array.isArray(item.steps) ? item.steps : [],
+                    prepTime: item.prepTime,
+                    ingredients: item.ingredients ?? {},
+                    liked: item.liked ?? false
                 }))
-        
                 setMenus(mapped)
             } catch (err: any) {
                 setError(err.message)
@@ -65,45 +84,28 @@ const Page = () => {
     }, [])
 
     if (!user) return null
+    if (loading) return <div className="w-full h-full flex items-center justify-center"><span className="text-gray-600 text-lg">Memuat resep...</span></div>
+    if (error) return <div className="w-full h-full flex items-center justify-center"><span className="text-red-600 text-lg">{error}</span></div>
 
-    if (loading) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <span className="text-gray-600 text-lg">Memuat resep...</span>
-            </div>
-        )
-    }
-
-    if (error) {
-        return (
-            <div className="w-full h-full flex items-center justify-center">
-                <span className="text-red-600 text-lg">{error}</span>
-            </div>
-        )
-    }
-
-    // Data sudah siap
     const filteredMenus = menus.filter(menu => {
         if (activeDifficulty === "Semua") return true
         return menu.difficulty === activeDifficulty
     })
 
-    const mainRecommendation = menus[0]
+    const totalPages = Math.ceil(filteredMenus.length / itemsPerPage)
+    const startIndex = (page - 1) * itemsPerPage
+    const paginatedMenus = filteredMenus.slice(startIndex, startIndex + itemsPerPage)
+
+    const mainRecommendation = menus[8]
+    const secondRecommendation = menus[9]
 
     return (
         <div className="w-full h-full flex">
             <main className="flex flex-col w-full h-full gap-8 justify-between p-8">
-
-                {/* Header + Search */}
                 <div className="flex w-full items-center p-8 border-b pb-16">
                     <div className="flex flex-col space-y-2">
-                        <span className="text-xl font-medium text-gray-500">
-                            Menu
-                        </span>
-                    
-                        <h2 className="text-4xl font-semibold text-gray-700">
-                            Jelajahi resep-resep menarik disini
-                        </h2>
+                        <span className="text-xl font-medium text-gray-500">Menu</span>
+                        <h2 className="text-4xl font-semibold text-gray-700">Jelajahi resep-resep menarik disini</h2>
                     </div>
 
                     <div className="bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
@@ -115,12 +117,12 @@ const Page = () => {
                                             <Search className="text-gray-400 ml-6" />
                                             <input
                                                 type="text"
-                                                id="search"
                                                 placeholder="Cari resep..."
                                                 className="px-4 py-2 pr-6 outline-none w-full"
+                                                value={search}
+                                                onChange={e => setSearch(e.target.value)}
                                             />
-
-                                            <AccordionTrigger className="mr-4 !space-y-0 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                            <AccordionTrigger className="mr-4 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
                                                 <span className="text-gray-600 font-medium">Filter tambahan</span>
                                             </AccordionTrigger>
                                         </div>
@@ -130,37 +132,64 @@ const Page = () => {
                                 <AccordionContent>
                                     <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex">
                                         <div className="p-5 border rounded-lg flex w-full gap-4">
-                                            <div className="w-full border-r pr-4 flex flex-col">
-                                                <h2 className="font-medium text-xl">Bahan </h2>
-                                                <span className="text-gray-600">Belum ada bahan</span>
-                                            
-                                                <Button className="w-full mt-auto">Tambah</Button>
-                                            </div>
-
                                             <div className="w-full flex flex-col gap-4">
-                                                <div className="flex items-center">
-                                                    <div>
-                                                        <h2 className="font-medium text-xl">Sajian</h2>
-                                                        <span className="text-gray-600">Jumlah sajian per sekali masak</span>
-                                                    </div>
-
-                                                    <div className="flex gap-2 items-center ml-auto">
-                                                        <Input className="w-10 text-center" defaultValue="1" />
-                                                        <span>sajian</span>
-                                                    </div>
+                                                <h2 className="font-medium text-xl">Bahan</h2>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {ingredients.length === 0 && <span className="text-gray-400 text-sm">Belum ada bahan</span>}
+                                                    {ingredients.map((bahan, i) => (
+                                                        <span
+                                                            key={i}
+                                                            className="bg-slate-200 py-1 px-3 rounded-full text-gray-700 text-xs cursor-pointer hover:bg-slate-300"
+                                                            onClick={() => setIngredients(prev => prev.filter(x => x !== bahan))}
+                                                        >
+                                                            {bahan} ×
+                                                        </span>
+                                                    ))}
                                                 </div>
-
-                                                <div className="flex items-center">
-                                                    <div>
-                                                        <h2 className="font-medium text-xl">Salman</h2>
-                                                        <span className="text-gray-600">Jumlah salman</span>
-                                                    </div>
-
-                                                    <div className="flex gap-2 items-center ml-auto">
-                                                        <Input className="w-10 text-center" defaultValue="1" />
-                                                        <span>salman</span>
-                                                    </div>
-                                                </div>
+                                                <Dialog>
+                                                    <DialogTrigger asChild>
+                                                        <Button className="w-full">Tambah Bahan</Button>
+                                                    </DialogTrigger>
+                                                    <DialogContent className="rounded-xl">
+                                                        <DialogHeader><DialogTitle className="text-xl font-semibold">Tambah Bahan</DialogTitle></DialogHeader>
+                                                        <div className="flex flex-col gap-3 relative">
+                                                            <Input
+                                                                placeholder="Ketik bahan..."
+                                                                value={newIngredient}
+                                                                onChange={(e) => setNewIngredient(e.target.value)}
+                                                            />
+                                                            {suggestions.length > 0 && (
+                                                                <div className="absolute top-14 w-full bg-white border rounded-lg shadow-lg max-h-40 overflow-y-auto z-20">
+                                                                    {suggestions.map((item, idx) => (
+                                                                        <button
+                                                                            key={idx}
+                                                                            className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm"
+                                                                            onClick={() => {
+                                                                                setIngredients(prev => [...prev, item])
+                                                                                setNewIngredient("")
+                                                                            }}
+                                                                        >
+                                                                            {item}
+                                                                        </button>
+                                                                    ))}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        <DialogFooter>
+                                                            <Button
+                                                                className="w-full"
+                                                                onClick={() => {
+                                                                    if (newIngredient.trim() !== "" && !ingredients.includes(newIngredient.trim())) {
+                                                                        setIngredients(prev => [...prev, newIngredient.trim()])
+                                                                    }
+                                                                    setNewIngredient("")
+                                                                }}
+                                                            >
+                                                                Simpan
+                                                            </Button>
+                                                        </DialogFooter>
+                                                    </DialogContent>
+                                                </Dialog>
                                             </div>
                                         </div>
                                     </div>
@@ -170,12 +199,9 @@ const Page = () => {
                     </div>
                 </div>
 
-                {/* Grid Utama */}
                 <div className="grid grid-cols-7 p-4 pt-0 gap-4 relative">
-                    {/* Kolom Kiri */}
                     <div className="flex flex-col gap-8 col-span-5">
-                        {/* Rekomendasi */}
-                        <div className="space-y-1 px-4"> 
+                        <div className="space-y-1 px-4">
                             <h2 className="text-2xl font-semibold text-gray-800">Rekomendasi</h2>
                             <span className="font-medium text-gray-600">Menu-menu yang kami sarankan khusus untuk anda</span>
                         </div>
@@ -185,22 +211,20 @@ const Page = () => {
                                 {mainRecommendation && (
                                     <>
                                         <FeaturedMenuCard menu={mainRecommendation} />
-                                        <MenuCardLong menu={mainRecommendation} />
+                                        <MenuCardLong menu={secondRecommendation} />
                                     </>
                                 )}
                             </div>
                         </div>
 
-                        {/* Semua Menu */}
                         <div className="flex flex-col w-full gap-2">
                             <div className="flex justify-between items-center">
-                                <div className="space-y-1 px-4"> 
+                                <div className="space-y-1 px-4">
                                     <h2 className="text-2xl font-semibold text-gray-800">Semua Menu</h2>
                                     <span className="font-medium text-gray-600">Menu-menu berdasarkan preferensi anda</span>
                                 </div>
                             </div>
-                            
-                            {/* Filters */}
+
                             <div className="flex justify-between items-center mb-4 px-4">
                                 <div className="flex gap-2">
                                     {difficultyFilters.map(filter => {
@@ -221,7 +245,10 @@ const Page = () => {
                                         return (
                                             <button
                                                 key={filter}
-                                                onClick={() => setActiveDifficulty(filter)}
+                                                onClick={() => {
+                                                    setActiveDifficulty(filter)
+                                                    setPage(1)
+                                                }}
                                                 className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors ${colorClasses}`}
                                             >
                                                 {filter}
@@ -229,7 +256,7 @@ const Page = () => {
                                         )
                                     })}
                                 </div>
-                                
+
                                 <div className="flex gap-2 items-center">
                                     <p className="text-gray-600 text-sm">Sort by:</p>
                                     <div className="flex p-2 bg-gray-200 items-center text-gray-700 rounded-lg gap-1">
@@ -238,10 +265,9 @@ const Page = () => {
                                     </div>
                                 </div>
                             </div>
-                            
-                            {/* List Menu */}
+
                             <div className="flex flex-col gap-2">
-                                {filteredMenus.map((menu, i) => (
+                                {paginatedMenus.map((menu, i) => (
                                     <MenuCard key={i} menu={menu} />
                                 ))}
 
@@ -252,12 +278,28 @@ const Page = () => {
                                     </div>
                                 )}
                             </div>
+
+                            {totalPages > 1 && (
+                                <div className="flex gap-2 justify-center items-center mt-4">
+                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map(num => (
+                                        <button
+                                            key={num}
+                                            onClick={() => setPage(num)}
+                                            className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${page === num
+                                                    ? "bg-purple-600 text-white shadow-md"
+                                                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                                }`}
+                                        >
+                                            {num}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+
                         </div>
                     </div>
 
-                    {/* Kolom Kanan */}
                     <div className="flex flex-col col-span-2 gap-2 sticky top-4 self-start h-fit">
-                        {/* HEADER */}
                         <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-primary to-primary-shade overflow-hidden flex text-slate-100 relative">
                             <h3 className="text-xl font-semibold mt-auto z-10">Resep Favorit Kamu</h3>
                             <img
@@ -266,7 +308,6 @@ const Page = () => {
                             />
                         </div>
 
-                        {/* FAVORITE LIST */}
                         <div className="border p-2 rounded-2xl flex flex-col gap-2 max-h-[52vh] overflow-y-auto">
                             {menus.filter(m => m.liked).length > 0 ? (
                                 menus
@@ -290,22 +331,16 @@ const Page = () => {
                                     ))
                             ) : (
                                 <div className="flex flex-col items-center justify-center p-4 bg-slate-100 rounded-xl">
-                                    <span className="font-medium text-gray-700 text-sm">
-                                        Belum ada resep favorit
-                                    </span>
-                                    <span className="text-gray-500 text-xs">
-                                        Klik “Tambahkan Suka” pada resep untuk menyimpan.
-                                    </span>
+                                    <span className="font-medium text-gray-700 text-sm">Belum ada resep favorit</span>
+                                    <span className="text-gray-500 text-xs">Klik “Tambahkan Suka” pada resep untuk menyimpan.</span>
                                 </div>
                             )}
                         </div>
 
-                        {/* CTA */}
                         <Button className="mt-2 text-base" onClick={() => router.push('/cook')}>
                             Jelajahi Resep
                         </Button>
                     </div>
-
                 </div>
 
                 <Footer />

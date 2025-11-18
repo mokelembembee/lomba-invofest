@@ -3,7 +3,6 @@
 import Footer from "@/components/footer"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { ChevronDown } from "iconest-react"
 import { Search } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -13,6 +12,13 @@ import SportCard from "@/components/dashboard/sportCard"
 import LongFeaturedSportCard from "@/components/dashboard/LongFeaturedSportCard"
 import { useRouter } from "next/navigation"
 import { useUser } from "@stackframe/stack"
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter
+} from "@/components/ui/dialog"
 
 const Page = () => {
     const router = useRouter()
@@ -22,30 +28,40 @@ const Page = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
-    const [activeDifficulty, setActiveDifficulty] = useState('Semua')
-    const difficultyFilters = ['Semua', 'Mudah', 'Sedang', 'Sulit']
+    const [search, setSearch] = useState("")
+    const [area, setArea] = useState("")
+    const [duration, setDuration] = useState("")
+    const [calories, setCalories] = useState("")
+    const [activeDifficulty, setActiveDifficulty] = useState("Semua")
+
+    const [openDayDialog, setOpenDayDialog] = useState(false)
+    const [selectedDay, setSelectedDay] = useState<any | null>(null)
+
+    const difficultyFilters = ["Semua", "Mudah", "Sedang", "Sulit"]
+    const areaFilters = ["Semua", "Upper Body", "Lower Body", "Full Body", "Core", "Cardio"]
+    const durationFilters = ["Semua", "< 20", "20–40", "> 40"]
+    const calorieFilters = ["Semua", "< 200", "200–400", "> 400"]
 
     useEffect(() => {
-        if (!user) router.replace('/handler/sign-in')
+        if (!user) router.replace("/handler/sign-in")
     }, [user, router])
 
     useEffect(() => {
         const fetchSports = async () => {
-            try {
-                const res = await fetch('/api/sports')
-                const json = await res.json()
+            setLoading(true)
+            const params = new URLSearchParams()
+            if (search) params.append("search", search)
+            if (area) params.append("area", area)
+            if (duration) params.append("duration", duration)
+            if (calories) params.append("calories", calories)
 
-                if (!res.ok) throw new Error(json.error || 'Gagal memuat data')
-                setSports(json.data || [])
-            } catch (e: any) {
-                setError(e.message)
-            } finally {
-                setLoading(false)
-            }
+            const res = await fetch(`/api/sports?${params.toString()}`)
+            const json = await res.json()
+            setSports(json.data || [])
+            setLoading(false)
         }
-
         fetchSports()
-    }, [])
+    }, [search, area, duration, calories])
 
     if (!user) return null
 
@@ -64,8 +80,8 @@ const Page = () => {
     const mainRecommendation = sports[0] || null
     const secondRecommendation = sports[0] || null
 
-    const filteredSports = sports.filter(sport =>
-        activeDifficulty === 'Semua' || sport.difficulty === activeDifficulty
+    const filteredSports = sports.filter(
+        s => activeDifficulty === "Semua" || s.difficulty === activeDifficulty
     )
 
     return (
@@ -86,9 +102,10 @@ const Page = () => {
                                             <Search className="text-gray-400 ml-6" />
                                             <input
                                                 type="text"
-                                                id="search"
                                                 placeholder="Cari latihan..."
                                                 className="px-4 py-2 pr-6 outline-none w-full"
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
                                             />
                                             <AccordionTrigger className="mr-4 !space-y-0 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
                                                 <span className="text-gray-600 font-medium">Filter tambahan</span>
@@ -98,36 +115,49 @@ const Page = () => {
                                 </div>
 
                                 <AccordionContent>
-                                    <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex">
-                                        <div className="p-5 border rounded-lg flex w-full gap-4">
-                                            <div className="w-full border-r pr-4 flex flex-col">
-                                                <h2 className="font-medium text-xl">Area Tubuh</h2>
-                                                <span className="text-gray-600">Pilih area fokus</span>
-                                                <Button className="w-full mt-auto">Terapkan</Button>
+                                    <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex flex-col gap-6">
+                                        <div className="flex flex-col gap-2">
+                                            <h2 className="font-medium text-xl">Area Tubuh</h2>
+                                            <div className="flex flex-wrap gap-2">
+                                                {areaFilters.map(a => (
+                                                    <button
+                                                        key={a}
+                                                        onClick={() => setArea(a === "Semua" ? "" : a)}
+                                                        className={`px-4 py-1.5 rounded-full text-xs font-medium ${area === a ? "bg-purple-600 text-white" : "bg-gray-200 text-gray-700"}`}
+                                                    >
+                                                        {a}
+                                                    </button>
+                                                ))}
                                             </div>
+                                        </div>
 
-                                            <div className="w-full flex flex-col gap-4">
-                                                <div className="flex items-center">
-                                                    <div>
-                                                        <h2 className="font-medium text-xl">Durasi (Menit)</h2>
-                                                        <span className="text-gray-600">Durasi latihan maksimum</span>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center ml-auto">
-                                                        <Input className="w-16 text-center" defaultValue="30" />
-                                                        <span>menit</span>
-                                                    </div>
-                                                </div>
+                                        <div className="flex flex-col gap-2">
+                                            <h2 className="font-medium text-xl">Durasi</h2>
+                                            <div className="flex flex-wrap gap-2">
+                                                {durationFilters.map(d => (
+                                                    <button
+                                                        key={d}
+                                                        onClick={() => setDuration(d === "Semua" ? "" : d)}
+                                                        className={`px-4 py-1.5 rounded-full text-xs font-medium ${duration === d ? "bg-purple-600 text-white" : "bg-gray-200 text-gray-700"}`}
+                                                    >
+                                                        {d}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
 
-                                                <div className="flex items-center">
-                                                    <div>
-                                                        <h2 className="font-medium text-xl">Kalori (kkal)</h2>
-                                                        <span className="text-gray-600">Target pembakaran kalori</span>
-                                                    </div>
-                                                    <div className="flex gap-2 items-center ml-auto">
-                                                        <Input className="w-16 text-center" defaultValue="300" />
-                                                        <span>kkal</span>
-                                                    </div>
-                                                </div>
+                                        <div className="flex flex-col gap-2">
+                                            <h2 className="font-medium text-xl">Kalori</h2>
+                                            <div className="flex flex-wrap gap-2">
+                                                {calorieFilters.map(c => (
+                                                    <button
+                                                        key={c}
+                                                        onClick={() => setCalories(c === "Semua" ? "" : c)}
+                                                        className={`px-4 py-1.5 rounded-full text-xs font-medium ${calories === c ? "bg-purple-600 text-white" : "bg-gray-200 text-gray-700"}`}
+                                                    >
+                                                        {c}
+                                                    </button>
+                                                ))}
                                             </div>
                                         </div>
                                     </div>
@@ -161,25 +191,24 @@ const Page = () => {
 
                             <div className="flex justify-between items-center mb-4 px-4">
                                 <div className="flex gap-2">
-                                    {difficultyFilters.map((filter) => {
-                                        const isActive = activeDifficulty === filter
-                                        let color = isActive
-                                            ? filter === 'Mudah'
-                                                ? 'bg-primary text-white'
-                                                : filter === 'Sedang'
-                                                    ? 'bg-btn-medium text-white'
-                                                    : filter === 'Sulit'
-                                                        ? 'bg-btn-hard text-white'
-                                                        : 'bg-gray-800 text-white'
-                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-
+                                    {difficultyFilters.map(f => {
+                                        const active = activeDifficulty === f
+                                        const color = active
+                                            ? f === "Mudah"
+                                                ? "bg-primary text-white"
+                                                : f === "Sedang"
+                                                    ? "bg-btn-medium text-white"
+                                                    : f === "Sulit"
+                                                        ? "bg-btn-hard text-white"
+                                                        : "bg-gray-800 text-white"
+                                            : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                         return (
                                             <button
-                                                key={filter}
-                                                onClick={() => setActiveDifficulty(filter)}
-                                                className={`px-4 py-1.5 rounded-full text-xs font-medium transition-colors duration-200 ${color}`}
+                                                key={f}
+                                                onClick={() => setActiveDifficulty(f)}
+                                                className={`px-4 py-1.5 rounded-full text-xs font-medium ${color}`}
                                             >
-                                                {filter}
+                                                {f}
                                             </button>
                                         )
                                     })}
@@ -198,7 +227,6 @@ const Page = () => {
                                 {filteredSports.map((sport, i) => (
                                     <SportCard key={i} sport={sport} />
                                 ))}
-
                                 {filteredSports.length === 0 && (
                                     <div className="flex flex-col items-center justify-center p-10 bg-gray-100 rounded-lg">
                                         <span className="font-semibold text-gray-700">Tidak ada latihan ditemukan</span>
@@ -209,49 +237,157 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col col-span-2 gap-3 sticky top-4 self-start h-fit">
-                        {/* HEADER */}
-                        <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-purple-500 to-purple-700 overflow-hidden flex text-slate-100 relative">
-                            <h3 className="text-xl font-semibold mt-auto">Jadwal Latihan Minggu Ini</h3>
+                    <div className="flex flex-col col-span-2 gap-4 sticky top-4 self-start h-fit">
+                        <div className="p-6 rounded-2xl h-40 bg-gradient-to-r from-purple-500 to-purple-700 overflow-hidden flex flex-col justify-end text-white relative shadow-md">
+                            <h3 className="text-xl font-semibold leading-tight">Jadwal Latihan Minggu Ini</h3>
                             <img
-                                className="absolute top-0 -right-16 size-48 rotate-24"
+                                className="absolute top-0 -right-12 size-40 rotate-24 opacity-80"
                                 src="https://cdn2.iconfinder.com/data/icons/fitness-vol-2-1/512/exercise-time-fitness-weightlifting-workout-gym-barbell-3d.png"
                             />
                         </div>
 
-                        {/* LIST PER HARI */}
-                        <div className="border p-3 rounded-2xl flex flex-col gap-2 max-h-[52vh] overflow-y-auto">
-                            {mainRecommendation?.programs?.days?.map((day, index) => (
-                                <div key={index} className="bg-slate-100 rounded-xl p-4">
-                                    <div className="flex justify-between items-center mb-2">
-                                        <span className="font-semibold text-gray-800">{day.day}</span>
-                                        <span className="text-xs bg-purple-200 text-purple-600 px-2 py-1 rounded-full">
+                        <div className="border p-3 rounded-2xl flex flex-col gap-3 max-h-[50vh] overflow-y-auto shadow-sm bg-white">
+                            {mainRecommendation?.programs?.days?.map((day: any, index: number) => (
+                                <button
+                                    key={index}
+                                    onClick={() => {
+                                        setSelectedDay(day)
+                                        setOpenDayDialog(true)
+                                    }}
+                                    className="bg-slate-100 rounded-xl p-4 flex flex-col gap-3 hover:bg-slate-200 transition text-left"
+                                >
+                                    <div className="flex justify-between items-center">
+                                        <span className="font-semibold text-gray-800 text-sm">{day.day}</span>
+                                        <span className="text-xs bg-purple-200 text-purple-700 px-2 py-0.5 rounded-full font-medium">
                                             {day.exercises.length} latihan
                                         </span>
                                     </div>
 
-                                    <div className="flex flex-col gap-2">
-                                        {day.exercises.map((ex, i) => (
-                                            <div
-                                                key={i}
-                                                className="flex justify-between items-center bg-white rounded-lg border p-2 text-sm"
-                                            >
-                                                <span className="font-medium text-gray-700">{ex.name}</span>
-                                                <span className="text-gray-500">
+                                    <div className="flex flex-col gap-1.5">
+                                        {day.exercises
+                                            .filter((_: any, i: number) => !(day.done ?? []).includes(i))
+                                            .map((ex: any, i: number) => {
+                                                const originalIndex = day.exercises.indexOf(ex);
+                                                return (
+                                                    <div
+                                                        key={originalIndex}
+                                                        className="flex justify-between items-center bg-white rounded-lg border p-2 text-xs"
+                                                    >
+                                                        <span className="font-medium text-gray-700 truncate">{ex.name}</span>
+                                                        <span className="text-gray-500 whitespace-nowrap">
+                                                            {ex.sets} × {ex.reps}
+                                                        </span>
+                                                    </div>
+                                                );
+                                            })}
+
+                                        {(day.done?.length ?? 0) === day.exercises?.length && day.exercises.length > 0 && (
+                                            <div className="text-center text-gray-500 text-xs bg-white rounded-lg border p-2">
+                                                Semua latihan hari ini selesai!
+                                            </div>
+                                        )}
+                                    </div>
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                <Dialog open={openDayDialog} onOpenChange={setOpenDayDialog}>
+                    <DialogContent className="max-w-lg bg-white rounded-xl">
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-semibold">
+                                {selectedDay?.day}
+                            </DialogTitle>
+                        </DialogHeader>
+
+                        <div className="flex flex-col gap-3 max-h-[60vh] overflow-y-auto pr-2 mt-3">
+                            {selectedDay && selectedDay.exercises
+                                .filter((_: any, i: number) => !(selectedDay.done ?? []).includes(i))
+                                .map((ex: any, i: number) => {
+                                    const originalIndex = selectedDay.exercises.indexOf(ex)
+
+                                    return (
+                                        <div
+                                            key={originalIndex}
+                                            className="flex justify-between items-center bg-slate-100 p-3 rounded-lg border"
+                                        >
+                                            <div className="flex flex-col">
+                                                <span className="font-semibold text-gray-800">
+                                                    {ex.name}
+                                                </span>
+                                                <span className="text-gray-600 text-sm">
                                                     {ex.sets} × {ex.reps}
                                                 </span>
                                             </div>
-                                        ))}
-                                    </div>
+
+                                            <Button
+                                                className="bg-purple-600 text-white hover:bg-purple-700"
+                                                onClick={() => {
+                                                    const updatedDay = ((prev) => {
+                                                        if (!prev) return prev;
+                                                        const doneList = prev.done ? [...prev.done] : [];
+                                                        if (!doneList.includes(originalIndex)) {
+                                                            doneList.push(originalIndex);
+                                                        }
+                                                        return { ...prev, done: doneList };
+                                                    })(selectedDay);
+
+                                                    setSelectedDay(updatedDay);
+
+                                                    setSports((currentSports) => {
+                                                        if (currentSports.length === 0 || !currentSports[0]?.programs?.days) {
+                                                            return currentSports;
+                                                        }
+
+                                                        const dayIndex = currentSports[0].programs.days.findIndex(
+                                                            (d: any) => d.day === updatedDay.day
+                                                        );
+
+                                                        if (dayIndex === -1) {
+                                                            return currentSports;
+                                                        }
+
+                                                        const newSports = [...currentSports];
+                                                        const newDays = [...newSports[0].programs.days];
+
+                                                        newDays[dayIndex] = updatedDay;
+
+                                                        newSports[0] = {
+                                                            ...newSports[0],
+                                                            programs: {
+                                                                ...newSports[0].programs,
+                                                                days: newDays,
+                                                            },
+                                                        };
+
+                                                        return newSports;
+                                                    });
+                                                }}
+                                            >
+                                                Selesai
+                                            </Button>
+                                        </div>
+                                    )
+                                })
+                            }
+
+                            {(selectedDay?.done?.length ?? 0) === selectedDay?.exercises?.length && (
+                                <div className="text-center text-gray-700 font-medium bg-slate-100 p-4 rounded-lg">
+                                    Semua latihan selesai 🎉
                                 </div>
-                            ))}
+                            )}
                         </div>
 
-                        {/* FOOTER */}
-                        <Button className="mt-1 w-full">Lihat Progress Latihan</Button>
-                    </div>
+                        <DialogFooter className="mt-6">
+                            <Button className="w-full" onClick={() => setOpenDayDialog(false)}>
+                                Tutup
+                            </Button>
+                        </DialogFooter>
+                    </DialogContent>
+                </Dialog>
 
-                </div>
+
 
                 <Footer />
             </main>

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 "use client"
 
 import { format } from "date-fns"
@@ -12,7 +10,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { Slider } from "@/components/ui/slider"
-// import { MultiSelect } from "@/components/ui/multi-select"
+import { MultiSelect } from "@/components/multi-select"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useUser } from '@stackframe/stack'
 import { useRouter } from "next/navigation"
@@ -38,14 +36,14 @@ const BodyInfo = ({ formData, setFormData }: { formData: any; setFormData: any }
           <div className="flex w-full gap-2.5">
             <Toggle
               pressed={formData.gender === "male"}
-              className="w-full"
+              className="w-full border"
               onClick={() => setFormData({ ...formData, gender: "male" })}
             >
               Laki-laki
             </Toggle>
             <Toggle
               pressed={formData.gender === "female"}
-              className="w-full"
+              className="w-full border"
               onClick={() => setFormData({ ...formData, gender: "female" })}
             >
               Perempuan
@@ -448,8 +446,8 @@ const Quiz = () => {
 
   const CurrentStep = steps[step]
   return (
-    <main className="w-screen min-h-screen grid lg:grid-cols-6 lg:p-6 gap-8">
-      <div className="col-span-4 bg-white rounded-md max-w-xl w-full m-auto p-6">
+    <main className="w-screen min-h-screen flex items-center justify-center gap-8">
+      <div className="bg-white rounded-md max-w-xl w-full p-12 border absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
         {step === steps.length - 1 ? (
           <SummaryStep
             formData={formData}

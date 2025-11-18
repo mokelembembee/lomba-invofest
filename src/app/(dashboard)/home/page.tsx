@@ -10,16 +10,55 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useUser } from "@stackframe/stack";
 import { useRouter } from "next/navigation";
+import { Article } from "@/types"
+import {
+    Dialog,
+    DialogTrigger,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogFooter,
+    DialogClose,
+} from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button"
 
 const Page = () => {
     const router = useRouter()
     const user = useUser()
+
+    const [articles, setArticles] = useState<Article[]>([])
+    const [loadingArticles, setLoadingArticles] = useState(true)
+
+    // const formatDate = (date: string) =>
+    //     new Date(date).toLocaleDateString("id-ID", {
+    //         day: "numeric",
+    //         month: "long",
+    //         year: "numeric"
+    // })
 
     useEffect(() => {
         if (!user) {
             router.replace('/handler/sign-in')
         }
     }, [user, router])
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            try {
+                setLoadingArticles(true)
+                const res = await fetch("/api/article", { method: "GET" })
+                const json = await res.json()
+                const data: Article[] = json.data ?? []
+                setArticles(data)
+            } catch (error) {
+                console.error("Failed to fetch articles:", error)
+            } finally {
+                setLoadingArticles(false)
+            }
+        }
+        fetchArticles()
+    }, [])
+
 
     if (!user) {
         return null
@@ -29,17 +68,17 @@ const Page = () => {
         {
             title: "Umum",
             route: "umum",
-            content: "<StatUmum />",
+            content: "/images/stats/weightstat.png",
         },
         {
             title: "Pola Makan",
             route: "pola-makan",
-            content: "<StatPolaMakan />",
+            content: "/images/stats/caloriesstat.png",
         },
         {
             title: "Olahraga",
             route: "olahraga",
-            content: "<StatOlahraga />",
+            content: "/images/stats/sportstat.png",
         },
     ];
 
@@ -49,16 +88,16 @@ const Page = () => {
         <div className="flex w-full">
             <main className="relative flex flex-col w-full h-full p-8 pt-0 gap-8 justify-between">
                 <div className="flex flex-col gap-8">
-                <div className="relative flex w-full items-center px-8 border-b min-h-50 overflow-hidden">
-                    <div className="absolute inset-0 bg-[url('/images/rhone.svg')] bg-left  bg-no-repeat opacity-75 pointer-events-none select-none">
+                    <div className="relative flex w-full items-center px-8 border-b min-h-50 overflow-hidden">
+                        <div className="absolute inset-0 bg-[url('/images/Rhone3.svg')] bg-left  bg-no-repeat opacity-75 pointer-events-none select-none">
+                        </div>
+                        <div className="flex flex-col space-y-2 relative z-10">
+                            <span className="text-xl font-medium text-gray-500">Beranda</span>
+                            <h2 className="text-4xl font-semibold text-gray-700">
+                                Halo, {user.displayName}. Sudah siap hidup sehat?
+                            </h2>
+                        </div>
                     </div>
-                    <div className="flex flex-col space-y-2 relative z-10">
-                        <span className="text-xl font-medium text-gray-500">Beranda</span>
-                        <h2 className="text-4xl font-semibold text-gray-700">
-                        Halo, {user.displayName}. Sudah siap hidup sehat?
-                        </h2>
-                    </div>
-                </div>
 
 
 
@@ -97,11 +136,10 @@ const Page = () => {
                                     <div
                                         key={tab.route}
                                         onClick={() => setSelectedStat(tab.route)}
-                                        className={`flex px-4 pb-2.5 font-semibold cursor-pointer transition-colors ${
-                                            selectedStat === tab.route
+                                        className={`flex px-4 pb-2.5 font-semibold cursor-pointer transition-colors ${selectedStat === tab.route
                                                 ? "border-b-3 border-primary text-gray-800"
                                                 : "text-gray-500 hover:text-gray-700"
-                                        }`}
+                                            }`}
                                     >
                                         <span className="font-medium">{tab.title}</span>
                                     </div>
@@ -112,12 +150,11 @@ const Page = () => {
                                 <span className="font-semibold text-gray-700">
                                     Kamu sudah melakukan hal yang baik. Pertahankan ya!
                                 </span>
-                                {statsTab.find((tab) => tab.route === selectedStat)?.content}
+                                <img src={statsTab.find((tab) => tab.route === selectedStat)?.content} className="w-full h-full object-contain" alt="stats" />
                             </div>
                         </div>
                     </div>
 
-                    {/* ARTIKEL */}
                     <div className="space-y-1 px-8">
                         <h2 className="text-2xl font-semibold text-gray-800">
                             Fakta kesehatan
@@ -128,34 +165,73 @@ const Page = () => {
                     </div>
 
                     <div className="grid grid-cols-3 gap-2 px-8">
-                        {Array.from({ length: 3 }).map((_, i) => (
-                            <div key={i} className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1" >
-                                <div className="bg-gray-900 w-full h-48 rounded-md relative overflow-hidden flex">
-                                    <img src="https://media.tenor.com/j2zxNjGok-oAAAAe/squidward-ass.png" className="absolute w-full h-full object-cover mask-b-from-50%" />
-                                    <h3 className="font-semibold text-gray-700 text-white relative p-4 mt-auto">
-                                        Manfaat Konsumsi Salman Goreng
-                                    </h3>
-                                    <div className="rounded-full bg-white flex size-10 text-gray-700 absolute top-4 right-4">
-                                        <Dumbbell className="m-auto size-5" />
+                        {loadingArticles ? (
+                            Array.from({ length: 3 }).map((_, i) => (
+                                <div key={i} className="flex flex-col gap-2 p-1 border border-border rounded-lg gap-1 animate-pulse">
+                                    <div className="bg-gray-300 w-full h-48 rounded-md" />
+                                    <div className="px-4 py-2 bg-gray-200 h-10 rounded-md" />
+                                    <div className="p-3 pt-1 space-y-2">
+                                        <div className="bg-gray-300 h-4 rounded-md" />
+                                        <div className="bg-gray-300 h-4 w-5/6 rounded-md" />
                                     </div>
                                 </div>
-                                <div className="px-4 py-2 bg-slate-100 text-gray-600 text-sm flex gap-2 items-center">
-                                    <User className="size-4" />
-                                    <span className="font-medium">Salmanicus Javanicus</span>
-                                    <Calendar className="size-4 ml-2" />
-                                    <span className="font-medium whitespace-nowrap">
-                                        26 Sept 2025
-                                    </span>
-                                </div>
+                            ))
+                        ) : (
+                            articles.slice(0, 3).map((article, i) => (
+                                <Dialog key={article.id}>
+                                    <DialogTrigger asChild>
+                                        <div className="flex flex-col gap-2 p-1 border border-border text-justify rounded-lg gap-1 cursor-pointer transition hover:shadow-md" >
+                                            <div className="bg-gray-900 w-full h-48 rounded-md relative overflow-hidden flex">
+                                                <img src={article.image} className="absolute w-full h-full object-cover" />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                                <h3 className="font-semibold text-white relative p-4 mt-auto z-10">
+                                                    {article.title}
+                                                </h3>
+                                                <div className="rounded-full bg-white flex size-10 text-gray-700 absolute top-4 right-4 z-10">
+                                                    <Flame className="m-auto size-5 text-orange-500" />
+                                                </div>
+                                            </div>
+                                            <div className="px-4 py-2 bg-slate-50 text-gray-500 text-sm flex gap-3 items-center">
+                                                <User className="size-4 text-gray-400" />
+                                                <span className="font-semibold text-gray-700">{article.author}</span>
+                                                <span>•</span>
+                                                <span className="whitespace-nowrap">
+                                                    {new Date(article.created_at).toLocaleDateString("id-ID", {
+                                                        day: "numeric",
+                                                        month: "long",
+                                                        year: "numeric"
+                                                    })}
+                                                </span>
+                                            </div>
+                                            <div className="p-3 pt-1">
+                                                <p className="text-sm text-gray-600 line-clamp-3">
+                                                    {article.description}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </DialogTrigger>
 
-                                <div className="p-3 pt-1">
-                                    <p className="text-sm text-gray-600">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    </p>
-                                </div>
-                            </div>
-                        ))}
+                                    <DialogContent className="max-w-3xl p-8 bg-white rounded-xl">
+                                        <DialogHeader>
+                                            <DialogTitle className="text-2xl font-bold text-gray-800">{article.title}</DialogTitle>
+                                        </DialogHeader>
+
+                                        <div className="space-y-4 max-h-[75vh] overflow-y-auto pr-2">
+                                            <img src={article.image} className="rounded-lg w-full h-80 object-cover" />
+                                            <div className="text-gray-700 text-[15px] leading-relaxed space-y-3"
+                                                dangerouslySetInnerHTML={{ __html: article.content }}
+                                            />
+                                        </div>
+
+                                        <DialogFooter className="flex justify-end mt-4">
+                                            <DialogClose asChild>
+                                                <Button variant="outline">Tutup</Button>
+                                            </DialogClose>
+                                        </DialogFooter>
+                                    </DialogContent>
+                                </Dialog>
+                            ))
+                        )}
                     </div>
                 </div>
 

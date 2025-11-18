@@ -22,6 +22,7 @@ export interface SportProgram {
 }
 
 export interface Sport {
+    id: number;
     title: string;
     image: string;
     difficulty: 'Mudah' | 'Sedang' | 'Sulit';
@@ -53,4 +54,6 @@ export interface Article {
     category: "health" | "sports" | "food";
     read_time: number;
     liked: boolean;
+    created_at: string;
+    author: string;
 }

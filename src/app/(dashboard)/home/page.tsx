@@ -130,7 +130,7 @@ const Page = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col w-full md:w-3/5 items-center gap-2 p-4 pt-0">
+                        <div className="flex flex-col w-full  md:w-3/5 items-center gap-2 p-4 pt-0">
                             <div className="flex gap-2 w-full border-b items-center justify-center">
                                 {statsTab.map((tab) => (
                                     <div
@@ -146,7 +146,7 @@ const Page = () => {
                                 ))}
                             </div>
 
-                            <div className="flex w-full h-64 bg-slate-100 rounded-xl mt-2 p-6 flex-col gap-4">
+                            <div className="flex w-full h-full bg-slate-100 rounded-xl mt-2 p-6 flex-col gap-4">
                                 <span className="font-semibold text-gray-700">
                                     Kamu sudah melakukan hal yang baik. Pertahankan ya!
                                 </span>

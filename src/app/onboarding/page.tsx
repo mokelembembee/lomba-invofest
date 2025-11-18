@@ -432,7 +432,7 @@ const Quiz = () => {
           clientMetadata: { ...user.clientMetadata, statistic: formData },
         })
       }
-      router.push("/dashboard")
+      router.push("/home")
       return
     }
 

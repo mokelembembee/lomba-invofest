@@ -141,29 +141,30 @@ const Page = () => {
                     <Input className = "rounded-full text-base h-auto py-2 px-4 shadow-nonde"/>
                 </div>
 
-                <div className = "flex flex-col gap-2">
-                    <div className = "flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-                        <div className = "rounded-full h-12 aspect-square bg-red-500">
-
+                <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
+                        <div className="rounded-full size-12 overflow-hidden bg-gray-200">
+                        <img src="/images/users/1.png" alt="" className="object-cover w-full h-full" />
                         </div>
 
-                        <div className = "flex flex-col">
-                            <span className = "text-sm font-medium tracing-wide text-gray-800">Suka Suka Salman</span>
-                            <span className = "text-xs text-gray-600">Salman: BLEBLEBLE...</span>
+                        <div className="flex flex-col">
+                        <span className="text-sm font-medium tracking-wide text-gray-800">Suka Suka Salman</span>
+                        <span className="text-xs text-gray-600">Salman: BLEBLEBLE...</span>
                         </div>
                     </div>
 
-                    <div className = "flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
-                        <div className = "rounded-full h-12 aspect-square bg-red-500">
-
+                    <div className="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl">
+                        <div className="rounded-full size-12 overflow-hidden bg-gray-200">
+                        <img src="/images/users/2.png" alt="" className="object-cover w-full h-full" />
                         </div>
 
-                        <div className = "flex flex-col">
-                            <span className = "text-sm font-medium tracing-wide text-gray-800">Suka Suka Salman</span>
-                            <span className = "text-xs text-gray-600">Salman: BLEBLEBLE...</span>
+                        <div className="flex flex-col">
+                        <span className="text-sm font-medium tracking-wide text-gray-800">Suka Suka Salman</span>
+                        <span className="text-xs text-gray-600">Salman: BLEBLEBLE...</span>
                         </div>
                     </div>
                 </div>
+
 
                 {/*
                 <div className="space-y-2">
@@ -232,12 +233,32 @@ const Page = () => {
                     </p>
                 </div>
 
-                <div className = "flex">
-                    <div className = "bg-red-500 aspect-square w-12 rounded-full outline-4 outline-white translate-x-12 z-20"></div>
-                    <div className = "bg-red-500 aspect-square w-12 rounded-full outline-4 outline-white translate-x-8 z-10"></div>
-                    <div className = "bg-red-500 aspect-square w-12 rounded-full outline-4 outline-white translate-x-4"></div>
-                    <div className = "bg-red-500 aspect-square w-12 rounded-full outline-4 outline-white"></div>
+                <div className="flex items-center">
+                    <div className="w-12 h-12 rounded-full bg-white p-0.5 -ml-0 z-40">
+                        <div className="w-full h-full rounded-full overflow-hidden">
+                        <img src="/images/users/1.png" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+
+                    <div className="w-12 h-12 rounded-full bg-white p-0.5 -ml-4 z-30">
+                        <div className="w-full h-full rounded-full overflow-hidden">
+                        <img src="/images/users/2.png" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+
+                    <div className="w-12 h-12 rounded-full bg-white p-0.5 -ml-4 z-20">
+                        <div className="w-full h-full rounded-full overflow-hidden">
+                        <img src="/images/users/3.png" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+
+                    <div className="w-12 h-12 rounded-full bg-white p-0.5 -ml-4 z-10">
+                        <div className="w-full h-full rounded-full overflow-hidden">
+                        <img src="/images/users/4.png" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
                 </div>
+
 
                 </header>
 

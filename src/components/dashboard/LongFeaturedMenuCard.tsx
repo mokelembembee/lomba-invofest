@@ -18,9 +18,10 @@ import { ProgressiveBlur } from "../ui/progressive-blur";
 
 interface RecipeCardProps {
     menu: Menu;
+    onToggleLike: (title: string) => void;
 }
 
-const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
+const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
     return (
         <div className="w-full col-span-2 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
             <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
@@ -79,7 +80,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
                             <Clock size={16} className="text-blue-500" />
                             <div className="flex flex-col">
                                 <span className="text-gray-500 text-xs">Durasi</span>
-                                <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
+                                <span className="font-medium text-gray-800 text-sm">{menu.duration} menit</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-3 rounded-lg">
@@ -139,7 +140,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
                                             <Clock size={16} className="text-blue-500" />
                                             <div className="flex flex-col">
                                                 <span className="text-gray-500 text-xs">Durasi</span>
-                                                <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
+                                                <span className="font-medium text-gray-800 text-sm">{menu.duration} menit</span>
                                             </div>
                                         </div>
                                     </div>   
@@ -159,21 +160,21 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu }) => {
 
                             <h2 className = "text-2xl font-medium my-4">Langkah Memasak</h2>
 
-                            <ul className = "p-4 bg-slate-100 rounded-2xl flex flex-col gap-1">
-                                {menu.steps.map((step: string, index) => (
-                                    <div className = "flex text-center gap-3 items-center" key={index}>
-                                        <span className = "text-gray-500 text-sm select-none">{index + 1}.</span>
-                                        <li key={index}>{step}</li>
-                                    </div>
+                            <ol className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-3 list-decimal list-inside text-left">
+                                {menu.steps.map((step, index) => (
+                                    <li key={index} className="text-gray-800 text-sm leading-relaxed">
+                                        {step}
+                                    </li>
                                 ))}
-                            </ul>
+                            </ol>
                         </div>
 
                         <DialogFooter className = "w-full px-6 pb-4 pt-0 w-full">
-                            <div className = "flex w-full gap-2">
-                                <Button type="button" className="!text-base w-1/2 h-auto !bg-red-400 hover:!bg-red-500"><Heart size={16} className="text-base mr-1" fill="currentColor" />Tambahkan Suka</Button>
-                                <Button type="button" className = "!text-base w-1/2 h-auto">Mulai Memasak</Button>
-                            </div>
+                        <div className="flex w-full gap-2">
+                            <Button type="button" className="!text-base w-1/2 h-auto ml-auto">
+                            Mulai Program
+                            </Button>
+                        </div>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>

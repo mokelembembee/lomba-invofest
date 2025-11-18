@@ -17,9 +17,10 @@ import { DialogDescription } from "@radix-ui/react-dialog";
 
 interface FeaturedMenuCardProps {
     menu: Menu;
+    onToggleLike: (title: string) => void;
 }
 
-const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
+const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu, onToggleLike }) => {
     return (
         <div className="col-span-1 bg-slate-100 rounded-xl flex flex-col h-full p-2 gap-2">
             <div className="relative w-full h-48 bg-gray-200 rounded-xl overflow-hidden">
@@ -38,11 +39,11 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                 <h3 className="text-xl font-semibold text-gray-800 leading-tight">
                     {menu.title}
                 </h3>
-
                 <div className="flex items-center text-sm text-gray-600">
                     <Star size={16} className="text-yellow-400 mr-1" fill="currentColor" />
                     <span>{menu.rating}/10</span>
                 </div>
+                
 
                 <div className="grid grid-cols-2 gap-3 text-sm bg-white rounded-lg p-4 my-2">
                     <div className="flex items-center gap-3">
@@ -65,7 +66,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                         <Clock size={16} className="text-blue-500" />
                         <div className="flex flex-col">
                             <span className="text-gray-500 text-xs">Durasi</span>
-                            <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
+                            <span className="font-medium text-gray-800 text-sm">{menu.duration} menit</span>
                         </div>
                     </div>
 
@@ -130,7 +131,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                                         <Clock size={16} className="text-blue-500" />
                                         <div className="flex flex-col">
                                             <span className="text-gray-500 text-xs">Durasi</span>
-                                            <span className="font-medium text-gray-800 text-sm">{menu.prepTime} menit</span>
+                                            <span className="font-medium text-gray-800 text-sm">{menu.duration} menit</span>
                                         </div>
                                     </div>
                                 </div>
@@ -149,25 +150,25 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu }) => {
                             </div>
 
                             <h2 className="text-2xl font-medium my-4">Langkah Memasak</h2>
-                            <ul className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-1">
+                            <ol className="p-4 bg-slate-100 rounded-2xl flex flex-col gap-3 list-decimal list-inside text-left">
                                 {menu.steps.map((step, index) => (
-                                    <div key={index} className="flex text-center gap-3 items-center">
-                                        <span className="text-gray-500 text-sm select-none">{index + 1}.</span>
-                                        <li>{step}</li>
-                                    </div>
+                                    <li key={index} className="text-gray-800 text-sm leading-relaxed">
+                                        {step}
+                                    </li>
                                 ))}
-                            </ul>
+                            </ol>
+
                         </div>
 
                         <DialogFooter className="w-full px-6 pb-4 pt-0">
                             <div className="flex w-full gap-2">
-                                <Button
-                                    type="button"
-                                    className="!text-base w-1/2 h-auto !bg-red-400 hover:!bg-red-500"
+                            <Button
+                                className={`w-1/2 text-base ${menu.liked ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
+                                onClick={() => onToggleLike(menu.title)}
                                 >
-                                    <Heart size={16} className="mr-1" fill="currentColor" />
-                                    Tambahkan Suka
-                                </Button>
+                                <Heart size={16} className="mr-1" fill="currentColor" />
+                                {menu.liked ? "Disukai" : "Tambahkan Suka"}
+                            </Button>
                                 <Button type="button" className="!text-base w-1/2 h-auto">
                                     Mulai Memasak
                                 </Button>

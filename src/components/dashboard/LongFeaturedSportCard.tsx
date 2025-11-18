@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 
+const formatDuration = (d: string) => d.includes("menit") ? d : `${d} menit`;
+
 interface SportCardLongProps {
     sport: Sport;
 }
@@ -72,7 +74,7 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
 
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button className="bg-primary hover:bg-primary-shade text-white text-sm px-3 py-2 h-auto rounded-md">
+                    <Button className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-3 py-2 h-auto rounded-md">
                     Lihat Detail
                     </Button>
                 </DialogTrigger>
@@ -118,7 +120,9 @@ const SportCardLong: React.FC<SportCardLongProps> = ({ sport }) => {
                             {day.exercises.map((ex, i) => (
                                 <div key={i} className="flex justify-between text-gray-700 text-sm border-b pb-1">
                                 <span className="font-medium">{ex.name}</span>
-                                <span>{ex.sets} set × {ex.reps} • {ex.duration}</span>
+                                <span>
+                                    {ex.sets} set × {ex.reps} • {formatDuration(ex.duration)}
+                                </span>
                                 </div>
                             ))}
                             </div>

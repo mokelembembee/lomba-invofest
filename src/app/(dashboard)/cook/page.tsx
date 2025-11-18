@@ -69,7 +69,7 @@ const Page = () => {
                     rating: item.rating,
                     calories: item.calories,
                     steps: Array.isArray(item.steps) ? item.steps : [],
-                    prepTime: item.prepTime,
+                    duration: item.duration,
                     ingredients: item.ingredients ?? {},
                     liked: item.liked ?? false
                 }))
@@ -98,6 +98,14 @@ const Page = () => {
 
     const mainRecommendation = menus[8]
     const secondRecommendation = menus[9]
+
+    const toggleLikeGlobal = (title: string) => {
+        setMenus(prev =>
+            prev.map(menu =>
+            menu.title === title ? { ...menu, liked: !menu.liked } : menu
+            )
+        );
+    };
 
     return (
         <div className="w-full h-full flex">
@@ -210,8 +218,8 @@ const Page = () => {
                             <div className="grid grid-cols-3 gap-2">
                                 {mainRecommendation && (
                                     <>
-                                        <FeaturedMenuCard menu={mainRecommendation} />
-                                        <MenuCardLong menu={secondRecommendation} />
+                                        <FeaturedMenuCard menu={mainRecommendation} onToggleLike={toggleLikeGlobal} />
+                                        <MenuCardLong menu={secondRecommendation} onToggleLike={toggleLikeGlobal} />
                                     </>
                                 )}
                             </div>
@@ -268,7 +276,7 @@ const Page = () => {
 
                             <div className="flex flex-col gap-2">
                                 {paginatedMenus.map((menu, i) => (
-                                    <MenuCard key={i} menu={menu} />
+                                    <MenuCard key={i} menu={menu} onToggleLike={toggleLikeGlobal} />
                                 ))}
 
                                 {filteredMenus.length === 0 && (
@@ -286,7 +294,7 @@ const Page = () => {
                                             key={num}
                                             onClick={() => setPage(num)}
                                             className={`px-4 py-1.5 rounded-md text-sm font-medium transition ${page === num
-                                                    ? "bg-purple-600 text-white shadow-md"
+                                                    ? "bg-green-400 text-white shadow-md"
                                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                                 }`}
                                         >
@@ -325,7 +333,7 @@ const Page = () => {
                                             />
                                             <div className="flex flex-col">
                                                 <span className="font-semibold text-gray-800">{fav.title}</span>
-                                                <span className="text-gray-500 text-xs">{fav.calories} kkal • {fav.prepTime} menit</span>
+                                                <span className="text-gray-500 text-xs">{fav.calories} kkal • {fav.duration} menit</span>
                                             </div>
                                         </button>
                                     ))
@@ -338,8 +346,9 @@ const Page = () => {
                         </div>
 
                         <Button className="mt-2 text-base" onClick={() => router.push('/cook')}>
-                            Jelajahi Resep
+                            Cari Resep Baru
                         </Button>
+
                     </div>
                 </div>
 

@@ -11,7 +11,7 @@ export interface Menu {
     rating: number;
     calories: number;
     steps: string[];
-    prepTime: number;
+    duration: number;
     ingredients: Record<string, Ingredient>;
     liked: boolean;
 }

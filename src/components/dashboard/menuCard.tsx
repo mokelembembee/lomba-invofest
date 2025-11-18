@@ -16,7 +16,6 @@ import {
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 
-const formatDuration = (d: string) => d.includes("menit") ? d : `${d} menit`;
 
 interface MenuCardProps {
     menu: Menu;
@@ -71,9 +70,7 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
                         <div className="w-px h-full bg-gray-300" />
                         <div className="flex items-center gap-1">
                             <Clock size={12} />
-                            <span>
-                                {ex.sets} set × {ex.reps} • {formatDuration(ex.duration)}
-                            </span>
+                            <span className="text-xs">{menu.duration} menit</span>
                         </div>
                     </div>
 
@@ -145,13 +142,13 @@ const MenuCard: React.FC<MenuCardProps> = ({ menu, onToggleLike }) => {
                             </div>
 
                             <DialogFooter className="px-6 pb-4 gap-2">
-                            <Button
-                            className={`w-1/2 text-base ${menu.liked ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
-                            onClick={() => onToggleLike(menu.title)}
-                            >
-                            <Heart size={16} className="mr-1" fill="currentColor" />
-                            {menu.liked ? "Disukai" : "Tambahkan Suka"}
-                            </Button>
+                                <Button
+                                className={`w-1/2 text-base ${menu.liked ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
+                                onClick={() => onToggleLike(menu.title)}
+                                >
+                                <Heart size={16} className="mr-1" fill="currentColor" />
+                                {menu.liked ? "Disukai" : "Tambahkan Suka"}
+                                </Button>
 
 
                                 <Button className="w-1/2 text-base">

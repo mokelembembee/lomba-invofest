@@ -169,12 +169,19 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
                             </ol>
                         </div>
 
-                        <DialogFooter className = "w-full px-6 pb-4 pt-0 w-full">
-                        <div className="flex w-full gap-2">
-                            <Button type="button" className="!text-base w-1/2 h-auto ml-auto">
-                            Mulai Program
+                        <DialogFooter className="w-full px-6 pb-4 pt-0">
+                            <div className="flex w-full gap-2">
+                            <Button
+                                className={`w-1/2 text-base ${menu.liked ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
+                                onClick={() => onToggleLike(menu.title)}
+                                >
+                                <Heart size={16} className="mr-1" fill="currentColor" />
+                                {menu.liked ? "Disukai" : "Tambahkan Suka"}
                             </Button>
-                        </div>
+                                <Button type="button" className="!text-base w-1/2 h-auto">
+                                    Mulai Memasak
+                                </Button>
+                            </div>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>

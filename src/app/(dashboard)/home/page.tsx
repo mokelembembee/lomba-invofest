@@ -93,10 +93,22 @@ const Page = () => {
                         </div>
                         <div className="flex flex-col space-y-2 relative z-10">
                             <span className="text-xl font-medium text-gray-500">Beranda</span>
+                            <div className="flex items-center gap-3">
+                                <h2 className="text-4xl font-semibold text-gray-700">
+                                    Halo, {user.displayName}.
+                                </h2>
+
+                                <div className="flex items-center gap-2 bg-gradient-to-r from-red-500 to-orange-500 px-3 py-1 rounded-full">
+                                    <Flame size={18} className="text-zinc-100" />
+                                    <span className="font-semibold text-zinc-100 text-lg">7</span>
+                                </div>
+
+                            </div>
                             <h2 className="text-4xl font-semibold text-gray-700">
-                                Halo, {user.displayName}. Sudah siap hidup sehat?
+                                Sudah siap hidup sehat?
                             </h2>
                         </div>
+
                     </div>
 
 

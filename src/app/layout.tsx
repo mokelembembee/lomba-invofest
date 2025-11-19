@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-screen w-screen">
+    <html lang="en" className="h-screen w-screen overflow-x-hidden">
       <body
         className={`${lexend.variable} antialiased`}
       ><StackProvider app={stackClientApp}><StackTheme>

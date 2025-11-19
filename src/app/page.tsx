@@ -159,7 +159,7 @@ const GenZHealthLanding = () => {
 
             <div className="relative z-10">
               <h3 className="text-2xl font-medium mb-2 text-gray-800">Sehat dan Menyenangkan</h3>
-              <p className="text-neutral-400 max-w-sm">Gamifikasi kesehatanmu. Pilih avatar unik-mu dan raih streak dengan mengunjungi MyHolo setiap hari.</p>
+              <p className="text-gray-500 max-w-md">Gamifikasi kesehatanmu. Pilih avatar unik-mu dan raih streak dengan mengunjungi MyHolo setiap hari.</p>
             </div>
 
             <div className="mt-2 bg-slate-300/30 backdrop-blur rounded-2xl p-2 group-hover:bg-orange-400/30  w-full max-w-sm self-start md:self-auto ">
@@ -209,7 +209,7 @@ const GenZHealthLanding = () => {
               <Smile size={120} className="text-yellow-400 opacity-30 group-hover:opacity-80 transition-opacity" />
             </div>
                 <h3 className="text-2xl font-medium mb-1 text-gray-800">The Guild</h3>
-                <p className="text-neutral-400 max-w-xs text-base">
+                <p className="text-gray-500 max-w-md text-base">
                   Bergabung bersama teman. Dapatkan motivasi, berbagi pengetahuan, dukungan, tantangan seru, dan capai tujuan kesehatan bersama-sama!
                 </p>
                 <div className="relative mt-4 z-10 flex -space-x-3">
@@ -233,7 +233,7 @@ const GenZHealthLanding = () => {
         <div className="max-w-6xl mx-auto px-6">
             <div className="text-center mb-16">
                 <h2 className="text-4xl font-medium mb-2 text-gray-800">Cuma butuh <span className="text-primary">3 langkah.</span></h2>
-                <p className="text-neutral-400 text-lg">Nggak perlu set-up ribet. Login, Isi Data, Glow Up.</p>
+                <p className="text-gray-500 text-lg">Nggak perlu set-up ribet. Login, Isi Data, Glow Up.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -273,7 +273,7 @@ const GenZHealthLanding = () => {
                   <p className="font-medium text-sm text-gray-800">{testimonial.name}</p>
                   <p className="text-xs text-gray-500">{testimonial.username}</p>
                 </div>
-                <MessageCircle className="ml-auto text-neutral-600 w-4 h-4" />
+                <MessageCircle className="ml-auto text-gray-700 w-4 h-4" />
               </div>
               <p className="text-gray-600 text-sm leading-relaxed">"{testimonial.text}"</p>
             </div>
@@ -288,12 +288,12 @@ const GenZHealthLanding = () => {
           {faqList.map((item, index) => (
             <div key={index} className="rounded-xl border border-white/10 bg-neutral-900/40 hover:bg-neutral-800 transition">
               <button onClick={() => setOpenFAQ(openFAQ === index ? null : index)} className="w-full flex justify-between items-center p-4">
-                <span className="text-neutral-300 text-left">{item.q}</span>
+                <span className="text-white text-left">{item.q}</span>
                 <ArrowRight className={`w-4 h-4 text-neutral-500 transition-transform ${openFAQ === index ? "rotate-90" : ""}`}/>
               </button>
 
               {openFAQ === index && (
-                <div className="px-4 pb-4 text-sm text-neutral-400 leading-relaxed">
+                <div className="px-4 pb-4 text-sm text-primary leading-relaxed">
                   {item.a}
                 </div>
               )}
@@ -307,7 +307,7 @@ const GenZHealthLanding = () => {
       <footer className="py-20 mt-10 border-t border-white/10 text-center bg-gradient-to-b from-neutral-950 to-neutral-900">
         <div className="max-w-3xl mx-auto px-6">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Ready to level up?</h2>
-            <p className="text-neutral-400 mb-8">Gabung sama 10,000+ user lain yang udah mulai perjalanan sehat mereka.</p>
+            <p className="text-gray-500 mb-8">Gabung sama 10,000+ user lain yang udah mulai perjalanan sehat mereka.</p>
 
             <p className="mt-10 text-neutral-600 text-xs">© 2025 MyHolo Inc. All rights reserved. No vibes were harmed in the making of this app.</p>
         </div>

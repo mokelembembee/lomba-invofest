@@ -30,7 +30,7 @@ const FeaturedMenuCard: React.FC<FeaturedMenuCardProps> = ({ menu, onToggleLike 
             </div>
 
             <div className="flex flex-col gap-2 p-2">
-                <h3 className="text-xl font-semibold text-gray-800 leading-tight whitespace-nowrap flex items-start h-[3.1rem]">
+                <h3 className="text-xl font-semibold text-gray-800 leading-tight md:whitespace-nowrap flex items-start h-[3.1rem]">
                     {menu.title}
                 </h3>
 

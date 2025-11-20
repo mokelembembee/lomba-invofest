@@ -33,7 +33,7 @@ const MenuCardLong: React.FC<RecipeCardProps> = ({ menu, onToggleLike }) => {
             </div>
 
             <div className="p-2 flex flex-col gap-2">
-                <h3 className="text-xl font-semibold text-gray-800 leading-tight whitespace-nowrap flex items-start h-[3.1rem]">
+                <h3 className="text-xl font-semibold text-gray-800 leading-tight md:whitespace-nowrap flex items-start h-[3.1rem]">
                     {menu.title}
                 </h3>
                 <div className="flex items-center text-sm text-gray-600">

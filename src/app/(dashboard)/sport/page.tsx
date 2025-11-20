@@ -82,30 +82,30 @@ const Page = () => {
     const paginatedSports = filteredSports.slice(startIndex, startIndex + itemsPerPage)
 
     return (
-        <div className="w-full h-full flex">
-            <main className="flex flex-col w-full h-full gap-8 justify-between p-8">
+        <div className="w-full h-full flex flex-col md:flex-row">
+            <main className="flex flex-col w-full h-full gap-6 md:gap-8 justify-between p-4 md:p-8 pb-24 md:pb-8">
 
-                <div className="flex w-full items-center p-8 border-b pb-16">
-                    <div className="flex flex-col space-y-2">
-                        <span className="text-xl font-medium text-gray-500">Olahraga</span>
-                        <h2 className="text-4xl font-semibold text-gray-700">Jelajahi latihan-latihan menarik disini</h2>
+                <div className="flex flex-col lg:flex-row w-full items-start lg:items-center p-4 md:p-8 border-b pb-8 md:pb-16 gap-4 lg:gap-0">
+                    <div className="flex flex-col space-y-2 w-full lg:w-auto">
+                        <span className="text-lg md:text-xl font-medium text-gray-500">Olahraga</span>
+                        <h2 className="text-2xl md:text-4xl font-semibold text-gray-700">Jelajahi latihan-latihan menarik disini</h2>
                     </div>
 
-                    <div className="bg-slate-100 w-full rounded-3xl p-4 flex flex-col h-fit ml-auto">
-                        <Accordion type="single" collapsible>
+                    <div className="bg-slate-100 w-full lg:w-auto rounded-3xl p-2 md:p-4 flex flex-col h-fit lg:ml-auto">
+                        <Accordion type="single" collapsible className="w-full">
                             <AccordionItem value="item-1">
                                 <div className="w-full flex gap-2 items-center">
                                     <div className="flex gap-2 bg-white p-1 rounded-full h-fit w-full">
                                         <div className="flex bg-white items-center border border-gray-300 rounded-full w-full">
-                                            <Search className="text-gray-400 ml-6" />
+                                            <Search className="text-gray-400 ml-3 md:ml-6 shrink-0" />
                                             <input
                                                 type="text"
                                                 placeholder="Cari latihan..."
-                                                className="px-4 py-2 pr-6 outline-none w-full"
+                                                className="px-3 md:px-4 py-2 pr-2 md:pr-6 outline-none w-full min-w-0"
                                                 value={search}
                                                 onChange={e => { setSearch(e.target.value); setPage(1) }}
                                             />
-                                            <AccordionTrigger className="mr-4 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                            <AccordionTrigger className="mr-2 md:mr-4 ml-auto text-xs md:text-sm mx-2 md:mx-8 flex items-center gap-1 md:gap-2 whitespace-nowrap shrink-0">
                                                 <span className="text-gray-600 font-medium">Filter tambahan</span>
                                             </AccordionTrigger>
                                         </div>
@@ -113,9 +113,9 @@ const Page = () => {
                                 </div>
 
                                 <AccordionContent>
-                                    <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex flex-col gap-6">
+                                    <div className="bg-white p-1 mt-2 rounded-xl mx-0 md:mx-6 flex flex-col gap-6">
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="font-medium text-xl">Area Tubuh</h2>
+                                            <h2 className="font-medium text-lg md:text-xl">Area Tubuh</h2>
                                             <div className="flex flex-wrap gap-2">
                                                 {areaFilters.map(a => (
                                                     <button
@@ -128,7 +128,7 @@ const Page = () => {
                                         </div>
 
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="font-medium text-xl">Durasi</h2>
+                                            <h2 className="font-medium text-lg md:text-xl">Durasi</h2>
                                             <div className="flex flex-wrap gap-2">
                                                 {durationFilters.map(d => (
                                                     <button
@@ -141,7 +141,7 @@ const Page = () => {
                                         </div>
 
                                         <div className="flex flex-col gap-2">
-                                            <h2 className="font-medium text-xl">Kalori</h2>
+                                            <h2 className="font-medium text-lg md:text-xl">Kalori</h2>
                                             <div className="flex flex-wrap gap-2">
                                                 {calorieFilters.map(c => (
                                                     <button
@@ -159,15 +159,15 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-7 p-4 pt-0 gap-4 relative">
-                    <div className="flex flex-col gap-8 col-span-5">
+                <div className="grid grid-cols-1 lg:grid-cols-7 p-0 md:p-4 pt-0 gap-8 md:gap-4 relative">
+                    <div className="flex flex-col gap-6 md:gap-8 col-span-1 lg:col-span-5">
                         <div className="space-y-1 px-4">
-                            <h2 className="text-2xl font-semibold text-gray-800">Rekomendasi</h2>
-                            <span className="font-medium text-gray-600">Latihan yang kami sarankan khusus untuk anda</span>
+                            <h2 className="text-xl md:text-2xl font-semibold text-gray-800">Rekomendasi</h2>
+                            <span className="font-medium text-sm md:text-base text-gray-600">Latihan yang kami sarankan khusus untuk anda</span>
                         </div>
 
                         <div className="flex flex-col w-full p-2 border rounded-2xl gap-4">
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                                 {mainRecommendation && <FeaturedSportCard sport={mainRecommendation} onStartProgram={startProgram} />}
                                 {secondRecommendation && <LongFeaturedSportCard sport={secondRecommendation} onStartProgram={startProgram} />}
                             </div>
@@ -176,29 +176,31 @@ const Page = () => {
                         <div className="flex flex-col w-full gap-2">
                             <div className="flex justify-between items-center">
                                 <div className="space-y-1 px-4">
-                                    <h2 className="text-2xl font-semibold text-gray-800">Semua Latihan</h2>
-                                    <span className="text-gray-600 text-sm">Temukan latihan yang tepat untuk anda</span>
+                                    <h2 className="text-xl md:text-2xl font-semibold text-gray-800">Semua Latihan</h2>
+                                    <span className="text-gray-600 text-sm md:text-base">Temukan latihan yang tepat untuk anda</span>
                                 </div>
                             </div>
 
-                            <div className="flex gap-2 mb-4 px-4">
-                                {difficultyFilters.map(d => (
-                                    <button
-                                        key={d}
-                                        onClick={() => { setActiveDifficulty(d); setPage(1) }}
-                                        className={`px-4 py-1.5 rounded-full text-xs font-medium ${
-                                            activeDifficulty === d
-                                                ? d === "Mudah"
-                                                    ? "bg-primary text-white"
-                                                    : d === "Sedang"
-                                                        ? "bg-btn-medium text-white"
-                                                        : d === "Sulit"
-                                                            ? "bg-btn-hard text-white"
-                                                            : "bg-gray-800 text-white"
-                                                : "bg-gray-200 text-gray-700"
-                                        }`}
-                                    >{d}</button>
-                                ))}
+                            <div className="flex gap-2 mb-4 px-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                                <div className="flex gap-2 shrink-0">
+                                    {difficultyFilters.map(d => (
+                                        <button
+                                            key={d}
+                                            onClick={() => { setActiveDifficulty(d); setPage(1) }}
+                                            className={`px-4 py-1.5 rounded-full text-xs font-medium whitespace-nowrap ${
+                                                activeDifficulty === d
+                                                    ? d === "Mudah"
+                                                        ? "bg-primary text-white"
+                                                        : d === "Sedang"
+                                                            ? "bg-btn-medium text-white"
+                                                            : d === "Sulit"
+                                                                ? "bg-btn-hard text-white"
+                                                                : "bg-gray-800 text-white"
+                                                    : "bg-gray-200 text-gray-700"
+                                            }`}
+                                        >{d}</button>
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="flex flex-col gap-2">
@@ -226,7 +228,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col col-span-2 gap-4 sticky top-4 self-start h-fit">
+                    <div className="flex flex-col col-span-1 lg:col-span-2 gap-4 relative lg:sticky lg:top-4 self-start h-fit w-full">
                         <div className="p-6 rounded-2xl h-40 bg-gradient-to-r from-purple-500 to-purple-700 overflow-hidden flex flex-col justify-end text-white relative shadow-md">
                             <h3 className="text-xl font-semibold leading-tight z-10">Jadwal Latihan Minggu Ini</h3>
                             <img className="absolute top-0 -right-12 size-40 rotate-24 opacity-80" src="https://cdn2.iconfinder.com/data/icons/fitness-vol-2-1/512/exercise-time-fitness-weightlifting-workout-gym-barbell-3d.png" />
@@ -283,14 +285,14 @@ const Page = () => {
                             }
 
                             {programDaysWithDate.length === 0 && (
-                                <span className="text-gray-500 p-6 text-center">Program belum dimulai.</span>
+                                <span className="text-gray-500 p-6 text-center text-sm">Program belum dimulai.</span>
                             )}
                         </div>
                     </div>
                 </div>
 
                 <Dialog open={openDayDialog} onOpenChange={setOpenDayDialog}>
-                    <DialogContent className="max-w-lg bg-white rounded-xl">
+                    <DialogContent className="w-[95vw] max-w-lg bg-white rounded-xl">
                         <DialogHeader>
                             <DialogTitle className="text-xl font-semibold">{selectedDay?.day}</DialogTitle>
                         </DialogHeader>
@@ -303,12 +305,12 @@ const Page = () => {
                                     return (
                                         <div key={originalIndex} className="flex justify-between items-center p-4 rounded-lg bg-white">
                                             <div className="flex flex-col">
-                                                <span className="font-semibold text-gray-800">{ex.name}</span>
-                                                <span className="text-gray-600 text-sm">{ex.sets} × {ex.reps}</span>
+                                                <span className="font-semibold text-gray-800 text-sm md:text-base">{ex.name}</span>
+                                                <span className="text-gray-600 text-xs md:text-sm">{ex.sets} × {ex.reps}</span>
                                             </div>
 
                                             <Button
-                                                className="bg-purple-600 text-white hover:bg-purple-500"
+                                                className="bg-purple-600 text-white hover:bg-purple-500 text-xs md:text-sm h-8 md:h-10 px-3"
                                                 onClick={() => {
                                                     const updatedDay = ((prev) => {
                                                         if (!prev) return prev
@@ -334,7 +336,7 @@ const Page = () => {
                             }
 
                             {(selectedDay?.done?.length ?? 0) === selectedDay?.exercises?.length && (
-                                <div className="text-center text-gray-700 bg-slate-100 p-4 rounded-lg">
+                                <div className="text-center text-gray-700 bg-slate-100 p-4 rounded-lg text-sm">
                                     Semua latihan selesai.
                                 </div>
                             )}

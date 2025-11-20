@@ -24,12 +24,6 @@ const Page = () => {
     const [likedArticles, setLikedArticles] = useState<number[]>([])
     const [activeCategory, setActiveCategory] = useState("Semua")
     const [categories, setCategories] = useState<string[]>([])
-    // const formatDate = (date: string) =>
-    //     new Date(date).toLocaleDateString("id-ID", {
-    //         day: "numeric",
-    //         month: "long",
-    //         year: "numeric"
-    // })
     
     useEffect(() => {
         const fetchArticles = async () => {
@@ -67,29 +61,29 @@ const Page = () => {
     }
 
     return (
-        <div className="w-full h-full flex">
-            <main className="flex flex-col w-full h-full p-8 gap-8 justify-between">
-                <div className="flex flex-col gap-8">
+        <div className="w-full h-full flex flex-col md:flex-row">
+            <main className="flex flex-col w-full h-full p-4 md:p-8 gap-6 md:gap-8 justify-between">
+                <div className="flex flex-col gap-6 md:gap-8">
 
-                    <div className="flex w-full items-center p-8 border-b pb-16">
-                        <div className="flex flex-col space-y-2">
-                            <span className="text-xl font-medium text-gray-500">Artikel</span>
-                            <h2 className="text-4xl font-semibold text-gray-700">
+                    <div className="flex flex-col lg:flex-row w-full items-start lg:items-center p-4 md:p-8 border-b pb-8 md:pb-16 gap-4 lg:gap-0">
+                        <div className="flex flex-col space-y-2 w-full lg:w-auto">
+                            <span className="text-lg md:text-xl font-medium text-gray-500">Artikel</span>
+                            <h2 className="text-2xl md:text-4xl font-semibold text-gray-700">
                                 Jelajahi fakta & tips menarik disini
                             </h2>
                         </div>
 
-                        <div className="bg-slate-100 w-full rounded-3xl p-4 flex flex-col gap-2 h-fit ml-auto">
-                            <Accordion type="single" collapsible>
+                        <div className="bg-slate-100 w-full lg:w-auto min-w-[300px] rounded-3xl p-2 md:p-4 flex flex-col gap-2 h-fit lg:ml-auto">
+                            <Accordion type="single" collapsible className="w-full">
                                 <AccordionItem value="item-1">
                                     <div className="w-full flex gap-2 items-center">
                                         <div className="flex gap-2 bg-white p-1 rounded-full h-fit w-full">
                                             <div className="flex bg-white items-center border border-gray-300 rounded-full w-full">
-                                                <Search className="text-gray-400 ml-6" />
+                                                <Search className="text-gray-400 ml-3 md:ml-6 shrink-0" />
                                                 <input type="text" id="search" placeholder="Cari artikel menarik"
-                                                    className="px-4 py-2 pr-6 outline-none w-full"
+                                                    className="px-3 md:px-4 py-2 pr-2 md:pr-6 outline-none w-full min-w-0 text-sm md:text-base"
                                                 />
-                                                <AccordionTrigger className="mr-4 !space-y-0 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                                <AccordionTrigger className="mr-2 md:mr-4 !space-y-0 ml-auto text-xs md:text-sm mx-2 md:mx-8 flex items-center gap-1 md:gap-2 whitespace-nowrap shrink-0">
                                                     <span className="text-gray-600 font-medium">Filter tambahan</span>
                                                 </AccordionTrigger>
                                             </div>
@@ -97,16 +91,16 @@ const Page = () => {
                                     </div>
 
                                     <AccordionContent>
-                                        <div className="bg-white p-1 mt-2 rounded-xl mx-6 flex">
-                                            <div className="p-5 border rounded-lg flex w-full gap-4">
-                                                <div className="w-full pr-4 flex flex-col gap-4">
-                                                    <h2 className="font-medium text-xl">Kategori</h2>
+                                        <div className="bg-white p-1 mt-2 rounded-xl mx-0 md:mx-6 flex">
+                                            <div className="p-3 md:p-5 border rounded-lg flex w-full gap-4">
+                                                <div className="w-full pr-0 md:pr-4 flex flex-col gap-4">
+                                                    <h2 className="font-medium text-lg md:text-xl">Kategori</h2>
                                                     <div className="flex flex-wrap gap-2">
                                                         {categories.map(cat => (
                                                             <button
                                                                 key={cat}
                                                                 onClick={() => setActiveCategory(prev => prev === cat ? "Semua" : cat)}
-                                                                className={`px-4 py-1.5 rounded-full text-xs font-medium transition ${activeCategory === cat
+                                                                className={`px-3 md:px-4 py-1.5 rounded-full text-xs font-medium transition ${activeCategory === cat
                                                                     ? "bg-pink-600 text-white"
                                                                     : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                                                     }`}
@@ -124,35 +118,35 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-7 gap-8 relative">
-                        <div className="flex flex-col gap-8 col-span-5">
+                    <div className="grid grid-cols-1 lg:grid-cols-7 gap-8 relative">
+                        <div className="flex flex-col gap-8 col-span-1 lg:col-span-5">
 
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                                 {filteredArticles.map((article, i) => (
                                 <Dialog key={article.id}>
                                     <DialogTrigger asChild>
-                                        <div className={`relative flex-shrink-0 h-60 overflow-hidden rounded-lg bg-black cursor-pointer col-span-${(i % 4 == 1 || i % 4 == 2) ? 2 : 1}`}>
+                                        <div className={`relative flex-shrink-0 h-48 md:h-60 overflow-hidden rounded-lg bg-black cursor-pointer col-span-1 lg:col-span-${(i % 4 == 1 || i % 4 == 2) ? 2 : 1}`}>
                                         <img src={article.image} alt={article.title}
                                             className="object-cover w-full h-full hover:scale-105 transition duration-300"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
                                         <div className="absolute bottom-0 left-0 p-4 text-white z-10 flex flex-col justify-end">
-                                            <h3 className="text-lg font-semibold">{article.title}</h3>
-                                            <p className="text-sm text-gray-300 line-clamp-2 h-10">{article.description}</p>
+                                            <h3 className="text-base md:text-lg font-semibold line-clamp-2">{article.title}</h3>
+                                            <p className="text-xs md:text-sm text-gray-300 line-clamp-2 h-8 md:h-10">{article.description}</p>
                                         </div>
                                         </div>
                                     </DialogTrigger>
                                     
-                                    <DialogContent className="max-h-[82vh] overflow-y-auto rounded-3xl p-0 !border-0 max-w-3xl">
+                                    <DialogContent className="w-[95vw] max-h-[85vh] overflow-y-auto rounded-3xl p-0 !border-0 max-w-3xl flex flex-col">
                                         
-                                        <div className="h-80 w-full bg-black relative rounded-t-3xl overflow-hidden">
+                                        <div className="h-48 md:h-80 w-full bg-black relative rounded-t-3xl overflow-hidden shrink-0">
                                         <img src={article.image} alt={article.title}
                                             className="absolute w-full h-full object-cover top-0 left-0 mask-b-from-50%"
                                         />
                                         <div className="absolute inset-0 mask-t-to-50% mask-t-from-5% backdrop-blur-[2px] bg-black/20" />
-                                        <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
-                                            <DialogTitle className="text-3xl font-bold leading-tight">{article.title}</DialogTitle>
-                                            <p className="text-slate-100/75 text-[15px]">
+                                        <div className="absolute w-full bottom-0 left-0 p-4 md:p-6 z-20 text-white">
+                                            <DialogTitle className="text-xl md:text-3xl font-bold leading-tight">{article.title}</DialogTitle>
+                                            <p className="text-slate-100/75 text-xs md:text-[15px]">
                                             Ditulis oleh {article.author} • {new Date(article.created_at).toLocaleDateString("id-ID",
                                                 { day: "numeric", month: "long", year: "numeric" })}
                                             </p>
@@ -160,17 +154,17 @@ const Page = () => {
                                         </div>
                                     
                                     
-                                        <div className="px-6 py-6 space-y-4 text-gray-700 text-[15px] leading-relaxed">
+                                        <div className="px-4 md:px-6 py-4 md:py-6 space-y-4 text-gray-700 text-sm md:text-[15px] leading-relaxed">
                                         <div className="prose prose-sm max-w-none"
                                             dangerouslySetInnerHTML={{ __html: article.content }}
                                         />
                                         </div>
                                     
                                     
-                                        <DialogFooter className="w-full px-6 pb-6 pt-0">
+                                        <DialogFooter className="w-full px-4 md:px-6 pb-6 pt-0">
                                         <div className="flex gap-2 w-full">
                                             <Button
-                                            className={`flex-1 text-base ${likedArticles.includes(article.id)
+                                            className={`flex-1 text-sm md:text-base ${likedArticles.includes(article.id)
                                                 ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
                                             onClick={() => toggleLike(article.id)}
                                             >
@@ -179,7 +173,7 @@ const Page = () => {
                                             </Button>
                                     
                                             <DialogClose asChild>
-                                            <Button className="flex-1 text-base bg-gray-200 text-gray-800 hover:bg-gray-300">
+                                            <Button className="flex-1 text-sm md:text-base bg-gray-200 text-gray-800 hover:bg-gray-300">
                                                 Tutup
                                             </Button>
                                             </DialogClose>
@@ -191,9 +185,9 @@ const Page = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col col-span-2 gap-2 sticky top-8 self-start h-fit">
+                        <div className="flex flex-col col-span-1 lg:col-span-2 gap-2 relative lg:sticky lg:top-8 self-start h-fit w-full">
                             <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-pink-500 to-pink-700 overflow-hidden flex text-slate-100 relative">
-                                <h3 className="text-xl font-semibold mt-auto">Artikel Disukai</h3>
+                                <h3 className="text-xl font-semibold mt-auto z-10">Artikel Disukai</h3>
                                 <img src = "https://cdn3d.iconscout.com/3d/premium/thumb/like-notification-3d-icon-png-download-3811156.png" className = "absolute w-56 h-auto bottom-8 translate-y-1/3 -right-6 -rotate-32"/>
                             </div>
 
@@ -203,25 +197,25 @@ const Page = () => {
                                         <Dialog key={fav.id}>
                                             <DialogTrigger asChild>
                                                 <div className="bg-slate-100 p-3 rounded-xl flex items-center gap-3 cursor-pointer hover:bg-slate-200 transition">
-                                                    <img src={fav.image} className="rounded-lg object-cover size-12" alt={fav.title} />
-                                                    <div className="flex flex-col">
-                                                        <span className="font-semibold text-gray-800">{fav.title}</span>
+                                                    <img src={fav.image} className="rounded-lg object-cover size-12 min-w-[3rem]" alt={fav.title} />
+                                                    <div className="flex flex-col overflow-hidden">
+                                                        <span className="font-semibold text-gray-800 truncate">{fav.title}</span>
                                                         <span className="text-gray-500 text-xs">{fav.category}</span>
                                                     </div>
                                                 </div>
                                             </DialogTrigger>
 
                                             
-                                            <DialogContent className="max-h-[82vh] overflow-y-auto rounded-3xl p-0 !border-0 max-w-3xl">
+                                            <DialogContent className="w-[95vw] max-h-[85vh] overflow-y-auto rounded-3xl p-0 !border-0 max-w-3xl flex flex-col">
 
-                                                <div className="h-80 w-full bg-black relative rounded-t-3xl overflow-hidden">
+                                                <div className="h-48 md:h-80 w-full bg-black relative rounded-t-3xl overflow-hidden shrink-0">
                                                     <img src={fav.image} alt={fav.title}
                                                         className="absolute w-full h-full object-cover top-0 left-0 mask-b-from-50%"
                                                     />
                                                     <div className="absolute inset-0 mask-t-to-50% mask-t-from-5% backdrop-blur-[2px] bg-black/20" />
-                                                    <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
-                                                        <DialogTitle className="text-3xl font-bold leading-tight">{fav.title}</DialogTitle>
-                                                        <p className="text-slate-100/75 text-[15px]">
+                                                    <div className="absolute w-full bottom-0 left-0 p-4 md:p-6 z-20 text-white">
+                                                        <DialogTitle className="text-xl md:text-3xl font-bold leading-tight">{fav.title}</DialogTitle>
+                                                        <p className="text-slate-100/75 text-xs md:text-[15px]">
                                                             Ditulis oleh {fav.author} • {new Date(fav.created_at).toLocaleDateString("id-ID",
                                                                 { day: "numeric", month: "long", year: "numeric" })}
                                                         </p>
@@ -229,17 +223,17 @@ const Page = () => {
                                                 </div>
 
 
-                                                <div className="px-6 py-6 space-y-4 text-gray-700 text-[15px] leading-relaxed">
+                                                <div className="px-4 md:px-6 py-4 md:py-6 space-y-4 text-gray-700 text-sm md:text-[15px] leading-relaxed">
                                                     <div className="prose prose-sm max-w-none"
                                                         dangerouslySetInnerHTML={{ __html: fav.content }}
                                                     />
                                                 </div>
 
 
-                                                <DialogFooter className="w-full px-6 pb-6 pt-0">
+                                                <DialogFooter className="w-full px-4 md:px-6 pb-6 pt-0">
                                                     <div className="flex gap-2 w-full">
                                                         <Button
-                                                            className={`flex-1 text-base ${likedArticles.includes(fav.id)
+                                                            className={`flex-1 text-sm md:text-base ${likedArticles.includes(fav.id)
                                                                 ? "bg-red-500 hover:bg-red-600" : "bg-red-400 hover:bg-red-500"}`}
                                                             onClick={() => toggleLike(fav.id)}
                                                         >
@@ -248,7 +242,7 @@ const Page = () => {
                                                         </Button>
 
                                                         <DialogClose asChild>
-                                                            <Button className="flex-1 text-base bg-gray-200 text-gray-800 hover:bg-gray-300">
+                                                            <Button className="flex-1 text-sm md:text-base bg-gray-200 text-gray-800 hover:bg-gray-300">
                                                                 Tutup
                                                             </Button>
                                                         </DialogClose>

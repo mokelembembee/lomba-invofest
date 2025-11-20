@@ -40,30 +40,17 @@ const Page = () => {
     const itemsPerPage = 7
 
     const referenceIngredients = [
-        // Awal
         "Salmon", "Tuna", "Bayam", "Wortel", "Brokoli", "Tomat", "Kubis", "Telur", "Ayam", "Daging", "Kentang",
         "Keju", "Bawang Putih", "Bawang Merah", "Cabai", "Minyak Zaitun", "Mentega", "Garam", "Merica","Apel",
-
-        // Tambahan Protein & Daging
         "Udang", "Cumi-cumi", "Kerang", "Gurame", "Bandeng", "Kakap", "Kepiting", "Lobster", "Sarden",
         "Bebek", "Kalkun", "Puyuh", "Sapi", "Kambing", "Iga", "Sosis", "Bacon", "Ham",
-
-        // Tambahan Sayuran
         "Sawi", "Selada", "Pakcoy", "Kangkung", "Daun Bawang", "Seledri", "Daun Singkong",
         "Ubi Jalar", "Singkong", "Lobak", "Bit", "Terong", "Labu Siam", "Timun", "Zukini", "Paprika", "Jagung", "Jamur Kancing", "Jamur Tiram",
         "Buncis", "Kacang Panjang", "Edamame", "Kacang Polong",
-
-        // Biji-bijian & Karbohidrat
         "Nasi Putih", "Beras Ketan", "Mie Telor", "Pasta Spaghetti", "Roti", "Gandum", "Oatmeal", "Quinoa",
-
-        // Produk Susu & Alternatif
         "Susu Sapi", "Yoghurt", "Krim", "Santan", "Tahu", "Tempe",
-
-        // Rempah-rempah, Bumbu Dasar, & Perasa
         "Jahe", "Kunyit", "Lengkuas", "Kencur", "Serai", "Daun Salam", "Ketumbar", "Jintan", "Kayu Manis", "Cengkeh", "Pala", "Kapulaga",
         "Kecap Manis", "Kecap Asin", "Saus Tiram", "Saus Sambal", "Cuka", "Gula Pasir", "MSG",
-
-        // Minyak & Lemak
         "Minyak Kelapa", "Minyak Sayur", "Margarin", "Minyak Wijen"
     ]
 
@@ -131,29 +118,29 @@ const Page = () => {
     };
 
     return (
-        <div className="w-full h-full flex">
-            <main className="flex flex-col w-full h-full gap-8 justify-between p-8">
-                <div className="flex w-full items-center p-8 border-b pb-16">
-                    <div className="flex flex-col space-y-2">
-                        <span className="text-xl font-medium text-gray-500">Menu</span>
-                        <h2 className="text-4xl font-semibold text-gray-700">Jelajahi resep-resep menarik disini</h2>
+        <div className="w-full h-full flex flex-col md:flex-row">
+            <main className="flex flex-col w-full h-full gap-6 md:gap-8 justify-between p-4 md:p-8 pb-24 md:pb-8">
+                <div className="flex flex-col lg:flex-row w-full items-start lg:items-center p-4 md:p-8 border-b pb-8 md:pb-16 gap-4 lg:gap-0">
+                    <div className="flex flex-col space-y-2 w-full lg:w-auto">
+                        <span className="text-lg md:text-xl font-medium text-gray-500">Menu</span>
+                        <h2 className="text-2xl md:text-4xl font-semibold text-gray-700">Jelajahi resep-resep menarik disini</h2>
                     </div>
 
-                    <div className="bg-slate-100 w-full rounded-3xl flex flex-col gap-2 h-fit ml-auto">
-                        <Accordion type="single" collapsible className = "p-4">
+                    <div className="bg-slate-100 w-full lg:w-auto rounded-3xl flex flex-col gap-2 h-fit lg:ml-auto">
+                        <Accordion type="single" collapsible className = "p-2 md:p-4 w-full">
                             <AccordionItem value="item-1">
                                 <div className="w-full flex gap-2 items-center">
                                     <div className="flex gap-2 bg-white p-1 rounded-full h-fit w-full">
                                         <div className="flex bg-white items-center border border-gray-300 rounded-full w-full">
-                                            <Search className="text-gray-400 ml-6" />
+                                            <Search className="text-gray-400 ml-3 md:ml-6 shrink-0" />
                                             <input
                                                 type="text"
                                                 placeholder="Cari resep..."
-                                                className="px-4 py-2 pr-6 outline-none w-full"
+                                                className="px-3 md:px-4 py-2 pr-2 md:pr-6 outline-none w-full min-w-0"
                                                 value={search}
                                                 onChange={e => setSearch(e.target.value)}
                                             />
-                                            <AccordionTrigger className="mr-4 ml-auto text-sm mx-8 flex items-center gap-2 whitespace-nowrap">
+                                            <AccordionTrigger className="mr-2 md:mr-4 ml-auto text-xs md:text-sm mx-2 md:mx-8 flex items-center gap-1 md:gap-2 whitespace-nowrap shrink-0">
                                                 <span className="text-gray-600 font-medium">Filter tambahan</span>
                                             </AccordionTrigger>
                                         </div>
@@ -162,7 +149,7 @@ const Page = () => {
 
                                 <AccordionContent>
                                     <div className="bg-white p-1 mt-2 rounded-xl flex">
-                                        <div className="p-5 border rounded-lg flex w-full gap-4">
+                                        <div className="p-3 md:p-5 border rounded-lg flex w-full gap-4 flex-col md:flex-row">
                                             <div className="w-full flex flex-col gap-4">
                                                 <h2 className="font-medium text-xl">Bahan</h2>
                                                 <div className="flex flex-wrap gap-2">
@@ -181,7 +168,7 @@ const Page = () => {
                                                     <DialogTrigger asChild>
                                                         <Button className="w-full">Tambah Bahan</Button>
                                                     </DialogTrigger>
-                                                    <DialogContent className="rounded-xl">
+                                                    <DialogContent className="rounded-xl w-[90vw] max-w-lg">
                                                         <DialogHeader><DialogTitle className="text-xl font-semibold">Tambah Bahan</DialogTitle></DialogHeader>
                                                         <div className="flex flex-col gap-3 relative">
                                                             <Input
@@ -230,15 +217,15 @@ const Page = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-7 p-4 pt-0 gap-4 relative">
-                    <div className="flex flex-col gap-8 col-span-5">
+                <div className="grid grid-cols-1 lg:grid-cols-7 p-0 md:p-4 pt-0 gap-8 md:gap-4 relative">
+                    <div className="flex flex-col gap-6 md:gap-8 col-span-1 lg:col-span-5">
                         <div className="space-y-1 px-4">
-                            <h2 className="text-2xl font-semibold text-gray-800">Rekomendasi</h2>
-                            <span className="font-medium text-gray-600">Menu-menu yang kami sarankan khusus untuk anda</span>
+                            <h2 className="text-xl md:text-2xl font-semibold text-gray-800">Rekomendasi</h2>
+                            <span className="font-medium text-sm md:text-base text-gray-600">Menu-menu yang kami sarankan khusus untuk anda</span>
                         </div>
 
                         <div className="flex flex-col w-full p-2 border rounded-2xl gap-4">
-                            <div className="grid grid-cols-3 gap-2">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                                 {mainRecommendation && (
                                     <>
                                         <FeaturedMenuCard menu={mainRecommendation} onToggleLike={toggleLikeGlobal} />
@@ -251,13 +238,13 @@ const Page = () => {
                         <div className="flex flex-col w-full gap-2">
                             <div className="flex justify-between items-center">
                                 <div className="space-y-1 px-4">
-                                    <h2 className="text-2xl font-semibold text-gray-800">Semua Menu</h2>
-                                    <span className="font-medium text-gray-600">Menu-menu berdasarkan preferensi anda</span>
+                                    <h2 className="text-xl md:text-2xl font-semibold text-gray-800">Semua Menu</h2>
+                                    <span className="font-medium text-sm md:text-base text-gray-600">Menu-menu berdasarkan preferensi anda</span>
                                 </div>
                             </div>
 
-                            <div className="flex justify-between items-center mb-4 px-4">
-                                <div className="flex gap-2">
+                            <div className="flex justify-between items-center mb-4 px-4 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                                <div className="flex gap-2 shrink-0">
                                     {difficultyFilters.map(filter => {
                                         const isActive = activeDifficulty === filter
                                         let colorClasses = ''
@@ -322,7 +309,7 @@ const Page = () => {
                         </div>
                     </div>
 
-                    <div className="flex flex-col col-span-2 gap-2 sticky top-4 self-start h-fit">
+                    <div className="flex flex-col col-span-1 lg:col-span-2 gap-2 relative lg:sticky lg:top-4 self-start h-fit w-full">
                         <div className="p-6 h-40 rounded-2xl bg-gradient-to-r from-primary to-primary-shade overflow-hidden flex text-slate-100 relative">
                             <h3 className="text-xl font-semibold mt-auto z-10">Resep Favorit Kamu</h3>
                             <img
@@ -343,11 +330,11 @@ const Page = () => {
                                         >
                                             <img
                                                 src={fav.image}
-                                                className="rounded-lg object-cover size-12"
+                                                className="rounded-lg object-cover size-12 min-w-12"
                                                 alt={fav.title}
                                             />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold text-gray-800">{fav.title}</span>
+                                                <span className="font-semibold text-gray-800 line-clamp-1">{fav.title}</span>
                                                 <span className="text-gray-500 text-xs">{fav.calories} kkal • {fav.duration} menit</span>
                                             </div>
                                         </button>

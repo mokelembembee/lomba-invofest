@@ -5,7 +5,7 @@ import Link from "next/link"
 
 const Footer = () => {
     return (
-        <footer className = "flex w-full border-t pt-4 text-xs justify-between items-center">
+        <footer className = "w-full border-t pt-4 hidden md:flex text-xs justify-between items-center">
             <div className = "flex gap-3">
                 <span className = "font-bold">
                     Copyright © 2025 MyHolo

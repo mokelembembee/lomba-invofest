@@ -23,9 +23,9 @@ interface SportCardProps {
 
 const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
     return (
-        <div className="flex p-3 text-justify bg-slate-100 rounded-lg gap-4 w-full">
-            {/* === IMAGE SECTION (Disamakan h-32) === */}
-            <div className="rounded-xl w-1/3 h-32 overflow-hidden">
+        <div className="flex flex-col sm:flex-row p-3 text-justify bg-slate-100 rounded-lg gap-3 sm:gap-4 w-full">
+            {/* === IMAGE SECTION === */}
+            <div className="rounded-xl w-full sm:w-1/3 h-48 sm:h-32 overflow-hidden shrink-0">
                 <img
                     src={sport.image}
                     alt={sport.title}
@@ -52,7 +52,7 @@ const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
                         <span className="text-xs">{sport.difficulty}</span>
                     </div>
 
-                    {/* Area Badge (Tetap ada tapi styling disesuaikan sedikit agar rapi) */}
+                    {/* Area Badge */}
                     <div className="flex items-center gap-1.5 px-2 py-1 bg-white rounded-full text-xs font-semibold text-gray-700 border border-slate-200/50">
                         <Target size={12} className="text-purple-500" />
                         <span>{sport.area}</span>
@@ -60,13 +60,13 @@ const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-1">
+                <h3 className="text-lg font-semibold text-gray-800 mb-2 mt-2 sm:mt-1">
                     {sport.title}
                 </h3>
 
                 {/* Footer: Stats & Button */}
-                <div className="flex justify-between items-center mt-2">
-                    {/* Stats (Padding disamakan dengan MenuCard) */}
+                <div className="flex flex-wrap sm:flex-nowrap justify-between items-center mt-2 gap-3 sm:gap-0">
+                    {/* Stats */}
                     <div className="flex px-2 py-1.5 bg-white rounded font-semibold text-gray-700 items-center gap-1.5">
                         <div className="flex items-center gap-2">
                             <Flame size={12} className="text-yellow-500" />
@@ -81,13 +81,13 @@ const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
 
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-3 py-2 h-auto rounded-md">
+                            <Button className="bg-purple-600 hover:bg-purple-500 text-white text-sm px-3 py-2 h-auto rounded-md w-full sm:w-auto">
                                 Lihat Detail
                             </Button>
                         </DialogTrigger>
 
-                        <DialogContent className="rounded-3xl p-0 !border-0 max-w-2xl max-h-[85vh] overflow-y-auto">
-                            <DialogHeader className="p-4 h-72 bg-black relative">
+                        <DialogContent className="rounded-3xl p-0 !border-0 w-[95vw] max-w-2xl max-h-[85vh] overflow-y-auto">
+                            <DialogHeader className="p-4 h-48 sm:h-72 bg-black relative">
                                 <img
                                     src={sport.image}
                                     alt={sport.title}
@@ -95,34 +95,34 @@ const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
                                 />
                                 <div className="absolute inset-0 mask-t-to-50% mask-t-from-5% backdrop-blur-md bg-black-10" />
                                 
-                                <div className="absolute w-full bottom-0 left-0 p-6 z-20 text-white">
-                                    <DialogTitle className="text-2xl font-bold">
+                                <div className="absolute w-full bottom-0 left-0 p-4 sm:p-6 z-20 text-white">
+                                    <DialogTitle className="text-xl sm:text-2xl font-bold">
                                         {sport.title}
                                     </DialogTitle>
-                                    <DialogDescription className="text-slate-100/70 max-w-3/4 text-base">
+                                    <DialogDescription className="text-slate-100/70 max-w-full sm:max-w-[75%] text-sm sm:text-base line-clamp-2 sm:line-clamp-none">
                                         Latihan fokus area {sport.area} tingkat {sport.difficulty}
                                     </DialogDescription>
                                 </div>
                             </DialogHeader>
 
-                            <div className="px-6 py-4 space-y-6">
-                                <div className="grid grid-cols-3 gap-2">
-                                    <div className="bg-slate-100 p-4 rounded-lg">
+                            <div className="px-4 sm:px-6 py-4 space-y-6">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                    <div className="bg-slate-100 p-3 sm:p-4 rounded-lg flex sm:block justify-between items-center sm:items-start">
                                         <span className="text-xs text-gray-500">Kesulitan</span>
                                         <p className="font-medium text-gray-800">{sport.difficulty}</p>
                                     </div>
-                                    <div className="bg-slate-100 p-4 rounded-lg">
+                                    <div className="bg-slate-100 p-3 sm:p-4 rounded-lg flex sm:block justify-between items-center sm:items-start">
                                         <span className="text-xs text-gray-500">Kalori</span>
                                         <p className="font-medium text-gray-800">{sport.calories} kkal</p>
                                     </div>
-                                    <div className="bg-slate-100 p-4 rounded-lg">
+                                    <div className="bg-slate-100 p-3 sm:p-4 rounded-lg flex sm:block justify-between items-center sm:items-start">
                                         <span className="text-xs text-gray-500">Durasi</span>
                                         <p className="font-medium text-gray-800">{sport.duration} menit</p>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <h2 className="text-xl font-semibold mb-2">Program Latihan</h2>
+                                    <h2 className="text-lg sm:text-xl font-semibold mb-2">Program Latihan</h2>
                                     <div className="space-y-2">
                                         {sport.programs?.days?.map((day, index) => (
                                             <div key={index} className="bg-slate-100 p-4 rounded-2xl">
@@ -153,7 +153,7 @@ const SportCard: React.FC<SportCardProps> = ({ sport, onStartProgram }) => {
                                 </div>
                             </div>
 
-                            <DialogFooter className="px-6 pb-4 gap-2">
+                            <DialogFooter className="px-4 sm:px-6 pb-4 gap-2">
                                 <DialogClose asChild>
                                     <Button
                                         type="button"

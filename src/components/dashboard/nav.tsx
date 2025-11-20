@@ -32,12 +32,20 @@ const DashboardNav = () => {
     const pathname = usePathname()
     return (
         <TooltipProvider delayDuration = { 100 }>
-            <div className = "w-[85px]"/>
-            <div className = {`fixed px-4 py-8 bg-white shadow flex flex-col items-center justify-between h-full z-50`}>
-                <button>
+            <div className="h-[85px] w-full md:h-full md:w-[85px] shrink-0" />
+            
+            <div className={`fixed bg-white shadow flex items-center z-50
+                /* Mobile Styles: Bawah, Horizontal, Full Width */
+                bottom-0 left-0 right-0 w-full h-[85px] flex-row justify-evenly border-t
+                /* Desktop Styles: Samping Kiri, Vertikal, Fixed Width */
+                md:top-0 md:border-t-0 md:h-full md:w-[85px] md:flex-col md:justify-between md:py-8 md:px-4 
+            `}>
+                {/* Logo: Hidden on Mobile, Visible on Desktop */}
+                <button className="hidden md:block">
                     <img className={`rounded-full size-12 object-cover`} src={`/images/Logo.jpeg`} />
                 </button>
-                <nav className = {`flex flex-col gap-4`}>
+
+                <nav className={`flex w-full justify-evenly md:w-auto md:flex-col md:gap-4`}>
                     {navigations.map((nav) => {
                         const isActive = pathname === nav.url
 
@@ -70,11 +78,12 @@ const DashboardNav = () => {
                                     </button>
                                     </Link>
                                 </TooltipTrigger>
+                                {/* Tooltip content hidden on mobile to prevent visual clutter */}
                                 <TooltipContent 
                                     side="right" 
                                     align="center" 
                                     sideOffset={32}
-                                    className="z-10 bg-white text-sm text-gray-800 px-4 py-1.5 rounded-full"
+                                    className="hidden md:block z-10 bg-white text-sm text-gray-800 px-4 py-1.5 rounded-full shadow-lg border"
                                 >
                                     <p>{nav.title}</p>
                                 </TooltipContent>
@@ -82,7 +91,8 @@ const DashboardNav = () => {
                         )
                     })}
                 </nav>
-                <button>
+
+                <button className="hidden md:block">
                     <img className={`rounded-full size-12`} src={`/images/users/1.png`}/>    
                 </button> 
             </div>
